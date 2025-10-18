@@ -1,0 +1,71 @@
+/* Import Tailwind (v4 style, no PostCSS needed) */
+@import "tailwindcss";
+
+/* Define your design tokens with @theme (v4) */
+@theme {
+  /* colors */
+  --color-primary: #8ec1ff;
+
+  --color-background-dark: #12161d;
+  --color-text-primary-dark: #e8edf2;
+  --color-text-secondary-dark: #a9b4c0;
+  --color-card-dark: #111418;
+  --color-divider-dark: #232a33;
+
+  /* fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+
+  /* radii */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* Base app glue (optional) */
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  color-scheme: dark;
+} /* helps form controls */
+body {
+  background: var(--color-background-dark);
+  color: var(--color-text-primary-dark);
+  font-family: var(--font-sans);
+}
+
+/* Example utilities you mentioned in your Stitch */
+.main-container {
+  display: flex;
+  overflow-x: auto; /* keep auto (not hidden) */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
+  height: 100vh;
+}
+.section {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    height: 100%;
+    width: 100%;
+  }
+  .section {
+    min-height: 600px;
+  }
+}
