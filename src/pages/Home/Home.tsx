@@ -1,39 +1,39 @@
+// Home.tsx
 import { useEffect } from "react";
 import { useSectionPager } from "../../hooks/useSectionPager";
 import { Section } from "./Section";
 import { projects } from "./const";
 
 export const Home = () => {
-  const { goToIndex } = useSectionPager({
-    enableControls: true,
-    infinite: true,
-    loopSeamless: true,
-  });
+  const { goToIndex, ready } = useSectionPager();
 
   useEffect(() => {
-    goToIndex(1, "auto");
-  }, [goToIndex]);
+    if (ready) goToIndex(1, "auto");
+  }, [ready, goToIndex]);
 
   const head = projects[0];
   const tail = projects[projects.length - 1];
 
   return (
-    <main id="mainContainer" className="main-container">
+    <div
+      id="mainContainer"
+      className="main-container"
+      role="region"
+      aria-label="Projects carousel"
+    >
       <Section
         project={tail}
         dataClone="tail"
         idOverride={`${tail.id}-clone-tail`}
       />
-
-      {projects.map((project) => (
-        <Section key={project.id} project={project} />
+      {projects.map((p) => (
+        <Section key={p.id} project={p} />
       ))}
-
       <Section
         project={head}
         dataClone="head"
         idOverride={`${head.id}-clone-head`}
       />
-    </main>
+    </div>
   );
 };

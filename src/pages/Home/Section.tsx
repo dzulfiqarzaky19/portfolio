@@ -36,7 +36,7 @@ export const Section = React.memo(function Section({
   return (
     <section
       id={domId}
-      data-clone={dataClone ?? ""}
+      {...(dataClone ? { "data-clone": dataClone } : {})}
       className="section relative z-0"
       role="region"
       aria-labelledby={headingId}
@@ -45,13 +45,13 @@ export const Section = React.memo(function Section({
         {!isAbout && (
           <div
             className="
-    relative z-10 
-    rounded-xl bg-amber-300 overflow-hidden
-    aspect-[4/3] md:aspect-[16/9]
-    grid place-items-center
-    p-5 md:p-4
-    mt-[calc(env(safe-area-inset-top)+var(--header-h,64px)+8px)] md:mt-0
-  "
+              relative z-10 
+              rounded-xl bg-amber-300 overflow-hidden
+              aspect-[4/3] md:aspect-[16/9]
+              grid place-items-center
+              p-5 md:p-4
+              mt-[calc(env(safe-area-inset-top)+var(--header-h,64px)+8px)] md:mt-0
+            "
           >
             <Link
               to={link}
@@ -95,8 +95,7 @@ export const Section = React.memo(function Section({
           <div className="row-start-2 row-end-2 flex items-end justify-center pb-[calc(env(safe-area-inset-bottom)+24px)]">
             <Link
               to={link}
-              className=" inline-flex items-center justify-center gap-2 h-12 min-h-[44px] px-5 rounded-lg
-                         font-bold text-text-primary-dark "
+              className="inline-flex items-center justify-center gap-2 h-12 min-h-[44px] px-5 rounded-lg font-bold text-text-primary-dark"
               aria-label="Learn more about me"
               data-pager-exempt
               onPointerDownCapture={(e) => e.stopPropagation()}

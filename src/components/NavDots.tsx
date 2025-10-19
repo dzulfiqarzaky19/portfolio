@@ -2,11 +2,7 @@ import { useSectionPager } from "../hooks/useSectionPager";
 import { projects } from "../pages/Home/const";
 
 export const NavDots = () => {
-  const { index, goToIndex, realCount } = useSectionPager({
-    enableControls: false,
-    infinite: true,
-    loopSeamless: true,
-  });
+  const { index, goToIndex, realCount } = useSectionPager();
 
   const total = realCount;
   const logical = (() => {

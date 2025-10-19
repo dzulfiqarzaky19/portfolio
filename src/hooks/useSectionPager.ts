@@ -2,35 +2,48 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { animate, type AnimationPlaybackControls } from "framer-motion";
 
-type Options = {
-  enableControls?: boolean; // default true
-  infinite?: boolean; // default true
-  loopSeamless?: boolean; // default true
-};
+export function useSectionPager() {
+  const SWIPE_PX = 60;
+  const SWIPE_VEL = 0.5;
 
-const COOLDOWN_MS = 650;
-const WHEEL_THRESHOLD = 10; // min deltaY to trigger
-const SWIPE_THRESHOLD = 60; // px
-const SWIPE_VEL = 0.5; // px/ms
-const DURATION_MS = 600;
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-export function useSectionPager({
-  enableControls = true,
-  infinite = true,
-  loopSeamless = true,
-}: Options = {}) {
   const [index, setIndex] = useState(0);
+  const [ready, setReady] = useState(false);
   const indexRef = useRef(0);
   const anim = useRef<AnimationPlaybackControls | null>(null);
-  const busy = useRef(false);
+  const isJumping = useRef(false);
+
+  const containerRef = useRef<HTMLElement | null>(null);
 
   const getEls = useCallback(() => {
-    const container = document.getElementById("mainContainer");
+    if (!containerRef.current) {
+      containerRef.current = document.getElementById(
+        "mainContainer"
+      ) as HTMLElement | null;
+    }
+    const container = containerRef.current;
     const sections = container
       ? Array.from(container.querySelectorAll<HTMLElement>(".section"))
       : [];
     return { container, sections };
+  }, []);
+
+  // mark ready when sections mount
+  useEffect(() => {
+    const container = document.getElementById("mainContainer");
+    if (!container) return;
+
+    const check = () => {
+      const has = container.querySelectorAll(".section").length > 0;
+      if (has) setReady(true);
+      return has;
+    };
+
+    if (check()) return;
+    const mo = new MutationObserver(() => {
+      if (check()) mo.disconnect();
+    });
+    mo.observe(container, { childList: true, subtree: true });
+    return () => mo.disconnect();
   }, []);
 
   const cancelAnim = useCallback(() => {
@@ -38,11 +51,31 @@ export function useSectionPager({
     anim.current = null;
   }, []);
 
+  // Disable snap, jump instantly, re-enable after 2 RAFs to avoid resnap/flicker
+  const disableSnapJump = useCallback(
+    (container: HTMLElement, toX: number) => {
+      const prevSnap = container.style.scrollSnapType;
+      container.style.scrollSnapType = "none";
+      isJumping.current = true;
+
+      cancelAnim();
+      container.scrollLeft = toX;
+
+      requestAnimationFrame(() => {
+        // extra frame gives layout a moment to settle
+        requestAnimationFrame(() => {
+          container.style.scrollSnapType = prevSnap || "";
+          isJumping.current = false;
+        });
+      });
+    },
+    [cancelAnim]
+  );
+
   const tweenScrollLeft = useCallback(
-    (container: HTMLElement, toX: number, behavior: ScrollBehavior) => {
-      if (behavior === "auto") {
-        cancelAnim();
-        container.scrollLeft = toX;
+    (container: HTMLElement, toX: number, instant = false) => {
+      if (instant) {
+        disableSnapJump(container, toX);
         return;
       }
       cancelAnim();
@@ -52,14 +85,15 @@ export function useSectionPager({
         return;
       }
       anim.current = animate(fromX, toX, {
-        duration: DURATION_MS / 1000,
-        ease: EASE,
+        type: "spring",
+        stiffness: 220,
+        damping: 26,
         onUpdate: (v) => (container.scrollLeft = v),
         onStop: () => (anim.current = null),
         onComplete: () => (anim.current = null),
       });
     },
-    [cancelAnim]
+    [cancelAnim, disableSnapJump]
   );
 
   const goToIndex = useCallback(
@@ -68,54 +102,50 @@ export function useSectionPager({
       if (!container || sections.length === 0) return;
 
       const total = sections.length;
-      let idx = rawIdx;
-
-      if (loopSeamless) {
-        if (idx < 0) idx = 0;
-        if (idx > total - 1) idx = total - 1;
-      } else if (infinite) {
-        idx = (rawIdx + total) % total;
-      } else {
-        idx = Math.max(0, Math.min(rawIdx, total - 1));
-      }
-
+      const idx = Math.max(0, Math.min(rawIdx, total - 1));
       indexRef.current = idx;
       setIndex(idx);
 
       const target = sections[idx];
-      tweenScrollLeft(container, target.offsetLeft, behavior);
+      tweenScrollLeft(container, target.offsetLeft, behavior === "auto");
     },
-    [getEls, infinite, loopSeamless, tweenScrollLeft]
+    [getEls, tweenScrollLeft]
   );
 
+  // scroll tracking + seamless clone jumps
   useEffect(() => {
+    if (!ready) return;
     const { container, sections } = getEls();
     if (!container || sections.length === 0) return;
 
     const total = sections.length;
-    const lastReal = loopSeamless ? total - 2 : total - 1;
-
-    let jumpTimer: number | undefined;
 
     const onScroll = () => {
-      const size = Math.max(1, container.clientWidth);
-      const cur = Math.round(container.scrollLeft / size);
+      if (isJumping.current) return;
 
-      if (loopSeamless) {
-        if (cur === total - 1) {
-          setIndex(1);
-          indexRef.current = total - 1;
-          window.clearTimeout(jumpTimer);
-          jumpTimer = window.setTimeout(() => goToIndex(1, "auto"), 40);
-          return;
-        }
-        if (cur === 0) {
-          setIndex(lastReal);
-          indexRef.current = 0;
-          window.clearTimeout(jumpTimer);
-          jumpTimer = window.setTimeout(() => goToIndex(lastReal, "auto"), 40);
-          return;
-        }
+      // Use actual step between sections to avoid rounding glitches
+      const step =
+        sections.length > 1
+          ? sections[1].offsetLeft - sections[0].offsetLeft
+          : container.clientWidth;
+
+      const EPS = 0.5;
+      const cur = Math.round((container.scrollLeft + EPS) / Math.max(1, step));
+
+      if (cur === total - 1) {
+        // head clone → first real
+        indexRef.current = 1;
+        setIndex(1);
+        goToIndex(1, "auto");
+        return;
+      }
+      if (cur === 0) {
+        // tail clone → last real
+        const lastReal = total - 2;
+        indexRef.current = lastReal;
+        setIndex(lastReal);
+        goToIndex(lastReal, "auto");
+        return;
       }
 
       if (cur !== indexRef.current) {
@@ -124,68 +154,65 @@ export function useSectionPager({
       }
     };
 
-    const onResize = () => goToIndex(indexRef.current, "auto");
+    const ro = new ResizeObserver(() => goToIndex(indexRef.current, "auto"));
 
     container.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    ro.observe(container);
     onScroll();
 
     return () => {
       container.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      window.clearTimeout(jumpTimer);
+      ro.disconnect();
     };
-  }, [getEls, goToIndex, loopSeamless]);
+  }, [ready, getEls, goToIndex]);
 
+  // wheel: native feel — map vertical wheel to horizontal scroll (no paging)
+  // wheel: discrete paging (no native scroll). Keeps seamless looping intact.
   useEffect(() => {
-    if (!enableControls) return;
+    if (!ready) return;
     const { container } = getEls();
     if (!container) return;
 
-    let cooldownTimer: number | undefined;
-
-    const trigger = (dir: 1 | -1) => {
-      if (busy.current) return;
-      busy.current = true;
-      cancelAnim();
-      goToIndex(indexRef.current + dir, "smooth");
-      window.clearTimeout(cooldownTimer);
-      cooldownTimer = window.setTimeout(
-        () => (busy.current = false),
-        COOLDOWN_MS
-      );
-    };
+    const THRESH = 10; // min px to trigger
+    const COOLDOWN = 450; // ms to avoid rapid repeats
+    let cooling = false;
 
     const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
-      e.preventDefault();
-      trigger(e.deltaY > 0 ? 1 : -1);
-    };
+      // normalize deltas (line → px)
+      const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+      const dx = e.deltaMode === 1 ? e.deltaX * 16 : e.deltaX;
+      const delta = Math.abs(dx) > Math.abs(dy) ? dx : dy;
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") trigger(1);
-      if (e.key === "ArrowLeft") trigger(-1);
+      // ignore tiny moves or while we're doing the clone jump
+      if (isJumping.current || Math.abs(delta) < THRESH) return;
+
+      // page by page
+      e.preventDefault();
+      if (cooling) return;
+
+      cooling = true;
+      cancelAnim();
+      const dir: 1 | -1 = delta > 0 ? 1 : -1;
+      goToIndex(indexRef.current + dir, "smooth");
+
+      // small cooldown to avoid multiple pages per scroll tick
+      window.setTimeout(() => (cooling = false), COOLDOWN);
     };
 
     container.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("keydown", onKey);
+    return () => container.removeEventListener("wheel", onWheel);
+  }, [ready, getEls, cancelAnim, goToIndex]);
 
-    return () => {
-      container.removeEventListener("wheel", onWheel);
-      window.removeEventListener("keydown", onKey);
-      window.clearTimeout(cooldownTimer);
-    };
-  }, [enableControls, getEls, goToIndex, cancelAnim]);
-
+  // swipe (pointer)
   useEffect(() => {
-    if (!enableControls) return;
+    if (!ready) return;
     const { container } = getEls();
     if (!container) return;
 
-    let startX = 0;
-    let lastX = 0;
-    let startT = 0;
-    let dragging = false;
+    let startX = 0,
+      lastX = 0,
+      startT = 0,
+      dragging = false;
 
     const onPointerDown = (e: PointerEvent) => {
       dragging = true;
@@ -194,47 +221,41 @@ export function useSectionPager({
       cancelAnim();
       container.setPointerCapture?.(e.pointerId);
     };
-
     const onPointerMove = (e: PointerEvent) => {
       if (!dragging) return;
       lastX = e.clientX;
     };
-
     const onPointerUp = () => {
       if (!dragging) return;
       dragging = false;
-      const dx = lastX - startX; // +dx → previous
+      const dx = lastX - startX;
       const dt = Math.max(1, performance.now() - startT);
       const vel = Math.abs(dx) / dt;
-
-      if (Math.abs(dx) > SWIPE_THRESHOLD || vel > SWIPE_VEL) {
-        const dir: 1 | -1 = dx < 0 ? 1 : -1; // left → next
+      if (Math.abs(dx) > SWIPE_PX || vel > SWIPE_VEL) {
+        const dir: 1 | -1 = dx < 0 ? 1 : -1;
         goToIndex(indexRef.current + dir, "smooth");
       } else {
-        goToIndex(indexRef.current, "smooth"); // snap back
+        goToIndex(indexRef.current, "smooth");
       }
     };
 
     container.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-    window.addEventListener("pointercancel", onPointerUp);
+    container.addEventListener("pointermove", onPointerMove);
+    container.addEventListener("pointerup", onPointerUp);
+    container.addEventListener("pointercancel", onPointerUp);
 
     return () => {
       container.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-      window.removeEventListener("pointercancel", onPointerUp);
+      container.removeEventListener("pointermove", onPointerMove);
+      container.removeEventListener("pointerup", onPointerUp);
+      container.removeEventListener("pointercancel", onPointerUp);
     };
-  }, [enableControls, getEls, goToIndex, cancelAnim]);
+  }, [ready, getEls, goToIndex, cancelAnim]);
 
   const realCount = useMemo(() => {
     const { sections } = getEls();
-    return loopSeamless ? Math.max(0, sections.length - 2) : sections.length;
-  }, [getEls, loopSeamless]);
+    return Math.max(0, sections.length - 2);
+  }, [getEls, ready]);
 
-  return useMemo(
-    () => ({ index, goToIndex, realCount }),
-    [index, goToIndex, realCount]
-  );
+  return { index, goToIndex, realCount, ready };
 }
