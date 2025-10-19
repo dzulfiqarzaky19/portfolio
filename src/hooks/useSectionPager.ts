@@ -1,49 +1,66 @@
-// useSectionPager.ts
+// src/hooks/useSectionPager.ts
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { animate, type AnimationPlaybackControls } from "framer-motion";
 
 type Options = {
-  containerId?: string;
-  sectionSelector?: string;
-  cooldownMs?: number;
-  threshold?: number;
-  infinite?: boolean; // wheel/keys logical loop
-  loopSeamless?: boolean; // clone-based seamless loop
-  mobileBreakpoint?: number;
-  enableControls?: boolean;
+  enableControls?: boolean; // default true
+  infinite?: boolean; // default true
+  loopSeamless?: boolean; // default true
 };
 
+const COOLDOWN_MS = 650;
+const WHEEL_THRESHOLD = 10; // min deltaY to trigger
+const SWIPE_THRESHOLD = 60; // px
+const SWIPE_VEL = 0.5; // px/ms
+const DURATION_MS = 600;
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export function useSectionPager({
-  containerId = "mainContainer",
-  sectionSelector = ".section",
-  cooldownMs = 650,
-  threshold = 10,
-  infinite = true,
-  loopSeamless = false,
-  mobileBreakpoint = 768,
   enableControls = true,
+  infinite = true,
+  loopSeamless = true,
 }: Options = {}) {
   const [index, setIndex] = useState(0);
-  const busy = useRef(false);
   const indexRef = useRef(0);
+  const anim = useRef<AnimationPlaybackControls | null>(null);
+  const busy = useRef(false);
 
   const getEls = useCallback(() => {
-    const container = document.getElementById(containerId);
+    const container = document.getElementById("mainContainer");
     const sections = container
-      ? Array.from(container.querySelectorAll<HTMLElement>(sectionSelector))
+      ? Array.from(container.querySelectorAll<HTMLElement>(".section"))
       : [];
     return { container, sections };
-  }, [containerId, sectionSelector]);
+  }, []);
 
-  const isMobile = useCallback(
-    () => window.innerWidth <= mobileBreakpoint,
-    [mobileBreakpoint]
+  const cancelAnim = useCallback(() => {
+    anim.current?.stop();
+    anim.current = null;
+  }, []);
+
+  const tweenScrollLeft = useCallback(
+    (container: HTMLElement, toX: number, behavior: ScrollBehavior) => {
+      if (behavior === "auto") {
+        cancelAnim();
+        container.scrollLeft = toX;
+        return;
+      }
+      cancelAnim();
+      const fromX = container.scrollLeft;
+      if (Math.abs(toX - fromX) < 1) {
+        container.scrollLeft = toX;
+        return;
+      }
+      anim.current = animate(fromX, toX, {
+        duration: DURATION_MS / 1000,
+        ease: EASE,
+        onUpdate: (v) => (container.scrollLeft = v),
+        onStop: () => (anim.current = null),
+        onComplete: () => (anim.current = null),
+      });
+    },
+    [cancelAnim]
   );
-
-  const realCount = useCallback(() => {
-    const { sections } = getEls();
-    // when using clones: total = N + 2
-    return loopSeamless ? Math.max(0, sections.length - 2) : sections.length;
-  }, [getEls, loopSeamless]);
 
   const goToIndex = useCallback(
     (rawIdx: number, behavior: ScrollBehavior = "smooth") => {
@@ -54,7 +71,6 @@ export function useSectionPager({
       let idx = rawIdx;
 
       if (loopSeamless) {
-        // allow targeting 0..total-1 (includes clones)
         if (idx < 0) idx = 0;
         if (idx > total - 1) idx = total - 1;
       } else if (infinite) {
@@ -67,19 +83,11 @@ export function useSectionPager({
       setIndex(idx);
 
       const target = sections[idx];
-      const left = target.offsetLeft;
-      const top = target.offsetTop;
-
-      container.scrollTo(
-        isMobile()
-          ? ({ top, behavior } as ScrollToOptions)
-          : ({ left, behavior } as ScrollToOptions)
-      );
+      tweenScrollLeft(container, target.offsetLeft, behavior);
     },
-    [getEls, infinite, isMobile, loopSeamless]
+    [getEls, infinite, loopSeamless, tweenScrollLeft]
   );
 
-  // Sync and seamless jump when hitting clones
   useEffect(() => {
     const { container, sections } = getEls();
     if (!container || sections.length === 0) return;
@@ -90,23 +98,19 @@ export function useSectionPager({
     let jumpTimer: number | undefined;
 
     const onScroll = () => {
-      const size = isMobile() ? window.innerHeight : window.innerWidth;
-      const pos = isMobile() ? container.scrollTop : container.scrollLeft;
-      const cur = Math.round(pos / Math.max(1, size));
+      const size = Math.max(1, container.clientWidth);
+      const cur = Math.round(container.scrollLeft / size);
 
-      // Seamless wrap handling
       if (loopSeamless) {
-        // If on head clone (last index), jump to real first (1)
         if (cur === total - 1) {
-          setIndex(1); // logical active for dots (first real)
+          setIndex(1);
           indexRef.current = total - 1;
           window.clearTimeout(jumpTimer);
           jumpTimer = window.setTimeout(() => goToIndex(1, "auto"), 40);
           return;
         }
-        // If on tail clone (0), jump to real last (lastReal)
         if (cur === 0) {
-          setIndex(lastReal); // logical active for dots (last real)
+          setIndex(lastReal);
           indexRef.current = 0;
           window.clearTimeout(jumpTimer);
           jumpTimer = window.setTimeout(() => goToIndex(lastReal, "auto"), 40);
@@ -131,35 +135,34 @@ export function useSectionPager({
       window.removeEventListener("resize", onResize);
       window.clearTimeout(jumpTimer);
     };
-  }, [getEls, goToIndex, isMobile, loopSeamless]);
+  }, [getEls, goToIndex, loopSeamless]);
 
   useEffect(() => {
     if (!enableControls) return;
-    const { container, sections } = getEls();
-    if (!container || sections.length === 0) return;
+    const { container } = getEls();
+    if (!container) return;
 
     let cooldownTimer: number | undefined;
+
     const trigger = (dir: 1 | -1) => {
       if (busy.current) return;
       busy.current = true;
-      const next = indexRef.current + dir;
-      goToIndex(next);
+      cancelAnim();
+      goToIndex(indexRef.current + dir, "smooth");
       window.clearTimeout(cooldownTimer);
       cooldownTimer = window.setTimeout(
         () => (busy.current = false),
-        cooldownMs
+        COOLDOWN_MS
       );
     };
 
     const onWheel = (e: WheelEvent) => {
-      if (isMobile()) return;
-      if (Math.abs(e.deltaY) < threshold) return;
+      if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
       e.preventDefault();
       trigger(e.deltaY > 0 ? 1 : -1);
     };
 
     const onKey = (e: KeyboardEvent) => {
-      if (isMobile()) return;
       if (e.key === "ArrowRight") trigger(1);
       if (e.key === "ArrowLeft") trigger(-1);
     };
@@ -172,10 +175,66 @@ export function useSectionPager({
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(cooldownTimer);
     };
-  }, [enableControls, getEls, goToIndex, isMobile, cooldownMs, threshold]);
+  }, [enableControls, getEls, goToIndex, cancelAnim]);
+
+  useEffect(() => {
+    if (!enableControls) return;
+    const { container } = getEls();
+    if (!container) return;
+
+    let startX = 0;
+    let lastX = 0;
+    let startT = 0;
+    let dragging = false;
+
+    const onPointerDown = (e: PointerEvent) => {
+      dragging = true;
+      startX = lastX = e.clientX;
+      startT = performance.now();
+      cancelAnim();
+      container.setPointerCapture?.(e.pointerId);
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      lastX = e.clientX;
+    };
+
+    const onPointerUp = () => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = lastX - startX; // +dx → previous
+      const dt = Math.max(1, performance.now() - startT);
+      const vel = Math.abs(dx) / dt;
+
+      if (Math.abs(dx) > SWIPE_THRESHOLD || vel > SWIPE_VEL) {
+        const dir: 1 | -1 = dx < 0 ? 1 : -1; // left → next
+        goToIndex(indexRef.current + dir, "smooth");
+      } else {
+        goToIndex(indexRef.current, "smooth"); // snap back
+      }
+    };
+
+    container.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
+
+    return () => {
+      container.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
+    };
+  }, [enableControls, getEls, goToIndex, cancelAnim]);
+
+  const realCount = useMemo(() => {
+    const { sections } = getEls();
+    return loopSeamless ? Math.max(0, sections.length - 2) : sections.length;
+  }, [getEls, loopSeamless]);
 
   return useMemo(
-    () => ({ index, goToIndex, realCount: realCount() }),
+    () => ({ index, goToIndex, realCount }),
     [index, goToIndex, realCount]
   );
 }

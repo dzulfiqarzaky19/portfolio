@@ -1,5 +1,5 @@
 import { useSectionPager } from "../hooks/useSectionPager";
-const ids = ["about", "shopstream", "fittrack", "webnovel", "lastproject"];
+import { projects } from "../pages/Home/const";
 
 export const NavDots = () => {
   const { index, goToIndex, realCount } = useSectionPager({
@@ -16,17 +16,20 @@ export const NavDots = () => {
   })();
 
   return (
-    <div className="hidden md:flex flex-col gap-6 fixed top-1/2 -translate-y-1/2 right-8 z-10">
-      {ids.map((id, i) => (
+    <div
+      className="hidden md:flex flex-col gap-6 fixed top-1/2 -translate-y-1/2 right-8 z-10
+                 pointer-events-none"
+    >
+      {projects.map((project, i) => (
         <button
-          key={id}
-          onClick={() => goToIndex(i + 1)} // +1 because of leading clone
-          className={`w-3 h-3 rounded-full border-2 transition-all ${
+          key={project.id}
+          onClick={() => goToIndex(i + 1)}
+          className={`pointer-events-auto w-3 h-3 rounded-full border-2 transition-all ${
             i === logical
               ? "border-primary bg-primary"
               : "border-text-secondary-dark"
-          }`}
-          aria-label={`Go to ${id}`}
+          }`} // ⬅️ only the buttons are interactive
+          aria-label={`Go to ${project.id}`}
         />
       ))}
     </div>

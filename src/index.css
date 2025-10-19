@@ -10,6 +10,7 @@
   --color-text-primary-dark: #e8edf2;
   --color-text-secondary-dark: #a9b4c0;
   --color-card-dark: #111418;
+  --color-card-white: #e8edf2;
   --color-divider-dark: #232a33;
 
   /* fonts */
@@ -23,7 +24,6 @@
   --radius-full: 9999px;
 }
 
-/* Base app glue (optional) */
 html,
 body,
 #root {
@@ -31,21 +31,24 @@ body,
 }
 html {
   color-scheme: dark;
-} /* helps form controls */
+}
 body {
   background: var(--color-background-dark);
   color: var(--color-text-primary-dark);
   font-family: var(--font-sans);
 }
 
-/* Example utilities you mentioned in your Stitch */
 .main-container {
   display: flex;
-  overflow-x: auto; /* keep auto (not hidden) */
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   width: 100vw;
   height: 100vh;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .section {
   flex: 0 0 100vw;
@@ -56,16 +59,10 @@ body {
   align-items: center;
   justify-content: center;
 }
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    height: 100%;
-    width: 100%;
-  }
-  .section {
-    min-height: 600px;
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover > span[aria-hidden="true"],
+  .group:focus-visible > span[aria-hidden="true"] {
+    transition: none !important;
   }
 }
