@@ -48,9 +48,7 @@ export const PressAnimatedButton = React.memo(
             });
           }
         } finally {
-          // ✅ dev-only logs without relying on Node's `process`
           if (import.meta.env.DEV) {
-            // eslint-disable-next-line no-console
             console.log("PressAnimatedButton navigate", { to });
           }
           navigate(to);

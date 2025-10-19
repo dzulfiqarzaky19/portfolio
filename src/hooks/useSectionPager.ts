@@ -1,4 +1,3 @@
-// src/hooks/useSectionPager.ts
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { animate, type AnimationPlaybackControls } from "framer-motion";
 
@@ -27,7 +26,6 @@ export function useSectionPager() {
     return { container, sections };
   }, []);
 
-  // mark ready when sections mount
   useEffect(() => {
     const container = document.getElementById("mainContainer");
     if (!container) return;
@@ -51,7 +49,6 @@ export function useSectionPager() {
     anim.current = null;
   }, []);
 
-  // Disable snap, jump instantly, re-enable after 2 RAFs to avoid resnap/flicker
   const disableSnapJump = useCallback(
     (container: HTMLElement, toX: number) => {
       const prevSnap = container.style.scrollSnapType;
@@ -62,7 +59,6 @@ export function useSectionPager() {
       container.scrollLeft = toX;
 
       requestAnimationFrame(() => {
-        // extra frame gives layout a moment to settle
         requestAnimationFrame(() => {
           container.style.scrollSnapType = prevSnap || "";
           isJumping.current = false;
@@ -112,7 +108,6 @@ export function useSectionPager() {
     [getEls, tweenScrollLeft]
   );
 
-  // scroll tracking + seamless clone jumps
   useEffect(() => {
     if (!ready) return;
     const { container, sections } = getEls();
@@ -166,27 +161,22 @@ export function useSectionPager() {
     };
   }, [ready, getEls, goToIndex]);
 
-  // wheel: native feel — map vertical wheel to horizontal scroll (no paging)
-  // wheel: discrete paging (no native scroll). Keeps seamless looping intact.
   useEffect(() => {
     if (!ready) return;
     const { container } = getEls();
     if (!container) return;
 
-    const THRESH = 10; // min px to trigger
-    const COOLDOWN = 450; // ms to avoid rapid repeats
+    const THRESH = 10;
+    const COOLDOWN = 450;
     let cooling = false;
 
     const onWheel = (e: WheelEvent) => {
-      // normalize deltas (line → px)
       const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
       const dx = e.deltaMode === 1 ? e.deltaX * 16 : e.deltaX;
       const delta = Math.abs(dx) > Math.abs(dy) ? dx : dy;
 
-      // ignore tiny moves or while we're doing the clone jump
       if (isJumping.current || Math.abs(delta) < THRESH) return;
 
-      // page by page
       e.preventDefault();
       if (cooling) return;
 
@@ -195,7 +185,6 @@ export function useSectionPager() {
       const dir: 1 | -1 = delta > 0 ? 1 : -1;
       goToIndex(indexRef.current + dir, "smooth");
 
-      // small cooldown to avoid multiple pages per scroll tick
       window.setTimeout(() => (cooling = false), COOLDOWN);
     };
 
@@ -203,7 +192,6 @@ export function useSectionPager() {
     return () => container.removeEventListener("wheel", onWheel);
   }, [ready, getEls, cancelAnim, goToIndex]);
 
-  // swipe (pointer)
   useEffect(() => {
     if (!ready) return;
     const { container } = getEls();
@@ -253,6 +241,8 @@ export function useSectionPager() {
   }, [ready, getEls, goToIndex, cancelAnim]);
 
   const realCount = useMemo(() => {
+    if (!ready) return 0;
+
     const { sections } = getEls();
     return Math.max(0, sections.length - 2);
   }, [getEls, ready]);
