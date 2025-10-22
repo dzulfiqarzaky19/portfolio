@@ -1,4 +1,5 @@
 import { Button } from "../components/Button";
+import { ScrollSnapNextOnBottom } from "../components/animation/ScrollToNext";
 
 const FitTrack = () => {
   return (
@@ -14,6 +15,8 @@ const FitTrack = () => {
         <Button>Case Study</Button>
       </div>
       <div className="w-full h-96 rounded-xl bg-card-dark" />
+
+      <ScrollSnapNextOnBottom />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Button } from "../components/Button";
+import { ScrollSnapNextOnBottom } from "../components/animation/ScrollToNext";
 
 const WebNovel = () => {
   return (
@@ -14,6 +15,8 @@ const WebNovel = () => {
         </p>
         <Button>Case Study</Button>
       </div>
+
+      <ScrollSnapNextOnBottom />
     </div>
   );
 };

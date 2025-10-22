@@ -192,6 +192,9 @@ export function useSectionPager() {
     return () => container.removeEventListener("wheel", onWheel);
   }, [ready, getEls, cancelAnim, goToIndex]);
 
+  const isExempt = (t: EventTarget | null) =>
+    t instanceof Element && !!t.closest("[data-pager-exempt]");
+
   useEffect(() => {
     if (!ready) return;
     const { container } = getEls();
@@ -203,17 +206,22 @@ export function useSectionPager() {
       dragging = false;
 
     const onPointerDown = (e: PointerEvent) => {
+      if (isExempt(e.target)) return;
+
       dragging = true;
       startX = lastX = e.clientX;
       startT = performance.now();
       cancelAnim();
       container.setPointerCapture?.(e.pointerId);
     };
+
     const onPointerMove = (e: PointerEvent) => {
       if (!dragging) return;
       lastX = e.clientX;
     };
-    const onPointerUp = () => {
+    const onPointerUp = (e: PointerEvent) => {
+      if (isExempt(e.target)) return;
+
       if (!dragging) return;
       dragging = false;
       const dx = lastX - startX;

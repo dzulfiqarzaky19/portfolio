@@ -1,20 +1,63 @@
-import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
+// Layout.tsx
+import { ScrollRestoration, useLocation, useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { NavDots } from "../components/NavDots";
 import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { RouteCurtain } from "../components/animation/RouteTransition";
+import { TransitionOverlay } from "../components/animation/TransitionOverlay";
 
 export default function Layout() {
   const mainRef = React.useRef<HTMLElement>(null);
-  const { pathname } = useLocation();
-  const isHome = pathname === "/";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
+
+  const [isOverlayActive, setIsOverlayActive] = React.useState(false);
+  const [targetPath, setTargetPath] = React.useState<string | null>(null);
+
+  const [displayedLocation, setDisplayedLocation] = React.useState(location);
 
   React.useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      mainRef.current?.focus();
-    });
-    return () => cancelAnimationFrame(id);
-  }, [pathname]);
+    if (!isOverlayActive && !targetPath) {
+      const id = requestAnimationFrame(() => {
+        mainRef.current?.focus();
+      });
+      return () => cancelAnimationFrame(id);
+    }
+  }, [location.pathname, isOverlayActive, targetPath]);
+
+  const handleNavigateWithTransition = React.useCallback(
+    (path: string) => {
+      if (location.pathname === path) return;
+
+      setTargetPath(path);
+      setIsOverlayActive(true);
+    },
+    [location.pathname]
+  );
+
+  const onOverlayFullyIn = React.useCallback(() => {
+    if (targetPath) {
+      if (location.pathname !== targetPath) {
+        navigate(targetPath);
+      }
+    }
+  }, [targetPath, navigate, location.pathname]);
+
+  const onNewPageReadyToReveal = React.useCallback(() => {
+    setIsOverlayActive(false);
+  }, []);
+
+  const onOverlayFullyOut = React.useCallback(() => {
+    setTargetPath(null);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isOverlayActive && location.pathname !== displayedLocation.pathname) {
+      setDisplayedLocation(location);
+    }
+  }, [location, isOverlayActive, displayedLocation]);
 
   return (
     <>
@@ -24,26 +67,32 @@ export default function Layout() {
       >
         Skip to content
       </a>
-      <AnimatePresence mode="wait">
-        <motion.main
-          id="main"
-          ref={mainRef}
-          tabIndex={-1}
-          className="outline-none min-h-dvh"
-          role="main"
-          aria-label="Main content"
-          key={pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Header />
-          {isHome && <NavDots />}
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
+
+      <TransitionOverlay
+        isVisible={isOverlayActive}
+        onOverlayFullyIn={onOverlayFullyIn}
+        onOverlayFullyOut={onOverlayFullyOut}
+      />
+
+      <div
+        id="pageScroll"
+        className={`main-content-wrapper ${
+          location.pathname !== "/" ? "overflow-auto" : "overflow-hidden"
+        }`}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <RouteCurtain
+            key={displayedLocation.key}
+            location={displayedLocation}
+            onPageReady={onNewPageReadyToReveal}
+          />
+        </AnimatePresence>
+      </div>
       <ScrollRestoration />
+
+      {isHome && <Header onNavigate={handleNavigateWithTransition} />}
+
+      {isHome && <NavDots />}
     </>
   );
 }

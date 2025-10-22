@@ -1,10 +1,28 @@
-import { HeaderLayout } from "../components/HeaderLayout";
-import { ScrollSnapNextOnBottom } from "../components/animation/ScrollToNext";
-import { ABOUT_CONST } from "../libs/const/About";
+import { useRef } from "react";
+import { HeaderLayout } from "../../components/HeaderLayout";
+import { ABOUT_CONST } from "../../libs/const/About";
+import { useInView, motion } from "framer-motion";
+import { router } from "../../app/router";
+import { HOME_CONST } from "../../libs/const/Home";
 
-const Shopstream = () => {
+const About = () => {
+  const footerRef = useRef<HTMLDivElement | null>(null);
+  const footerInView = useInView(footerRef, { initial: false });
+
+  if (footerInView) {
+    console.log("Footer is in view");
+
+    router.navigate("/?section=" + encodeURIComponent(HOME_CONST[1].id), {
+      replace: true,
+    });
+  }
+
   return (
-    <div>
+    <motion.div
+      exit={{
+        background: "red",
+      }}
+    >
       <HeaderLayout
         title={ABOUT_CONST.header.title}
         description={ABOUT_CONST.header.description}
@@ -26,10 +44,10 @@ const Shopstream = () => {
               <article key={item.title} className="flex flex-col gap-3">
                 <div
                   className="
-                        w-full h-64 md:h-72 rounded-xl 
-                        bg-[color:var(--color-card)]
-                        shadow-sm
-                      "
+                    w-full h-64 md:h-72 rounded-xl 
+                    bg-[color:var(--color-card)]
+                    shadow-sm
+                  "
                   aria-hidden="true"
                 />
 
@@ -58,10 +76,10 @@ const Shopstream = () => {
                         <span
                           key={stack}
                           className="
-                                px-2 py-1 text-sm
-                                bg-slate-500
-                                text-[color:var(--color-card-inverse)]
-                              "
+                            px-2 py-1 text-sm
+                            bg-slate-500
+                            text-[color:var(--color-card-inverse)]
+                          "
                         >
                           {stack}
                         </span>
@@ -79,13 +97,11 @@ const Shopstream = () => {
         </section>
       )}
 
-      <div className="mb-96" />
+      <div className="p-72 bg-(--color-bg) mt-24" />
 
-      <ScrollSnapNextOnBottom />
-
-      <div className="mb-24 bg-(--color-bg)" />
-    </div>
+      <div ref={footerRef} className="pt-29" />
+    </motion.div>
   );
 };
 
-export default Shopstream;
+export default About;

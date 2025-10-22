@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import { Home } from "../pages/Home/Home";
-import About from "../pages/About";
+import About from "../pages/About/About";
 import FitTrack from "../pages/FitTrack";
 import Shopstream from "../pages/Shopstream";
 import WebNovel from "../pages/WebNovel";

@@ -1,4 +1,4 @@
-export const projects = [
+export const HOME_CONST = [
   {
     id: "about",
     title: "Hello, I’m Zaky, let's be friends",

@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import { PulseButton } from "../../components/animation/PulseAnimation";
 
 export type Project = {
   id: string;
@@ -57,6 +56,7 @@ export const Section = React.memo(function Section({
               to={link}
               aria-label={`Open ${title} case study`}
               className="block pointer-events-auto"
+              data-pager-exempt
             >
               <img
                 src={image}
@@ -88,23 +88,32 @@ export const Section = React.memo(function Section({
             {description}
           </p>
 
-          {!isAbout && <PulseButton to={link}>Case Study</PulseButton>}
+          {!isAbout && (
+            <div className="row-start-2 row-end-2 flex items-end justify-center pb-[calc(env(safe-area-inset-bottom)+24px)]">
+              <Link
+                to={link}
+                className="inline-flex items-center justify-center gap-2 h-12 min-h-[44px] px-5 rounded-lg font-bold text-text-primary-dark"
+                aria-label="Learn more about me"
+                data-pager-exempt
+              >
+                <span>Case Study</span>
+                <ChevronDown width={20} aria-hidden="true" />
+              </Link>
+            </div>
+          )}
         </div>
 
         {isAbout && (
           <div className="row-start-2 row-end-2 flex items-end justify-center pb-[calc(env(safe-area-inset-bottom)+24px)]">
-            <Link
+            <NavLink
               to={link}
               className="inline-flex items-center justify-center gap-2 h-12 min-h-[44px] px-5 rounded-lg font-bold text-text-primary-dark"
               aria-label="Learn more about me"
               data-pager-exempt
-              onPointerDownCapture={(e) => e.stopPropagation()}
-              onPointerUpCapture={(e) => e.stopPropagation()}
-              onClickCapture={(e) => e.stopPropagation()}
             >
               <span>Knows me</span>
               <ChevronDown width={20} aria-hidden="true" />
-            </Link>
+            </NavLink>
           </div>
         )}
       </div>

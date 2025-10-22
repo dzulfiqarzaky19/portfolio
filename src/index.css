@@ -1,47 +1,124 @@
-/* Import Tailwind (v4 style, no PostCSS needed) */
 @import "tailwindcss";
 
-/* Define your design tokens with @theme (v4) */
-@theme {
-  /* colors */
-  --color-primary: #8ec1ff;
+/* theme.css (loaded once, after Tailwind) */
 
-  --color-background-dark: #12161d;
+/* Base design tokens (do not flip) */
+@theme {
+  /* Brand */
+  --color-primary-50: #eef6ff;
+  --color-primary-100: #d9ebff;
+  --color-primary-200: #b7d8ff;
+  --color-primary-300: #8ec1ff; /* your current primary */
+  --color-primary-400: #5aa5ff;
+  --color-primary-500: #2b8aff;
+  --color-primary-600: #186de0;
+  --color-primary-700: #1557b3;
+  --color-primary-800: #134a93;
+  --color-primary-900: #113f7a;
+
+  /* Radii & fonts */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+
+  --color-bg-light: #f7f9fc;
+  --color-text-primary-light: #0f1722;
+  --color-text-secondary-light: #495466;
+  --color-card-light: #ffffff;
+  --color-card-contrast: #0f1722;
+  --color-divider-light: #d6dde6;
+
+  --color-bg-dark: #12161d;
   --color-text-primary-dark: #e8edf2;
   --color-text-secondary-dark: #a9b4c0;
   --color-card-dark: #111418;
   --color-card-white: #e8edf2;
   --color-divider-dark: #232a33;
+}
 
-  /* fonts */
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Playfair Display", serif;
+/* Default: follow system preference */
+:root {
+  color-scheme: light dark; /* advertise both */
+}
 
-  /* radii */
-  --radius: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-full: 9999px;
+/* Semantic aliases (LIGHT) */
+:root:not([data-theme="dark"]) {
+  color-scheme: light;
+
+  --color-bg: var(--color-bg-light);
+  --color-text-primary: var(--color-text-primary-light);
+  --color-text-secondary: var(--color-text-secondary-light);
+  --color-card: var(--color-card-light);
+  --color-card-inverse: var(--color-card-contrast);
+  --color-divider: var(--color-divider-light);
+
+  --color-primary: var(--color-primary-500);
+  --color-primary-foreground: #ffffff;
+}
+
+/* Semantic aliases (DARK) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: var(--color-bg-dark);
+  --color-text-primary: var(--color-text-primary-dark);
+  --color-text-secondary: var(--color-text-secondary-dark);
+  --color-card: var(--color-card-dark);
+  --color-card-inverse: var(--color-card-white);
+  --color-divider: var(--color-divider-dark);
+
+  --color-primary: var(--color-primary-300); /* softer on dark */
+  --color-primary-foreground: #0b1220;
+}
+
+/* (Optional) If you want to *default* to system without data-theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+    --color-bg: var(--color-bg-dark);
+    --color-text-primary: var(--color-text-primary-dark);
+    --color-text-secondary: var(--color-text-secondary-dark);
+    --color-card: var(--color-card-dark);
+    --color-card-inverse: var(--color-card-white);
+    --color-divider: var(--color-divider-dark);
+    --color-primary: var(--color-primary-300);
+    --color-primary-foreground: #0b1220;
+  }
 }
 
 html,
 body,
 #root {
   height: 100%;
+  /* Important: Set a background color that matches your overlay or current theme */
+  /* This prevents showing a default browser white background */
+  background-color: var(
+    --color-bg-dark
+  ); /* Or var(--color-bg) if you want it theme-aware */
+  overflow: hidden; /* Prevent body scrollbars during transition */
 }
-html {
-  color-scheme: dark;
-}
+
 body {
-  background: var(--color-background-dark);
-  color: var(--color-text-primary-dark);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
   font-family: var(--font-sans);
+}
+
+.main-content-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
 }
 
 .main-container {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 100vw;
+  background: var(--color-bg-dark);
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -57,6 +134,7 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 .main-container::-webkit-scrollbar {
   display: none;
 }

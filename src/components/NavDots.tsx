@@ -1,5 +1,5 @@
 import { useSectionPager } from "../hooks/useSectionPager";
-import { projects } from "../pages/Home/const";
+import { HOME_CONST } from "../libs/const/Home";
 
 export const NavDots = () => {
   const { index, goToIndex, realCount } = useSectionPager();
@@ -16,7 +16,7 @@ export const NavDots = () => {
       className="hidden md:flex flex-col gap-6 fixed top-1/2 -translate-y-1/2 right-8 z-10
                  pointer-events-none"
     >
-      {projects.map((project, i) => (
+      {HOME_CONST.map((project, i) => (
         <button
           key={project.id}
           onClick={() => goToIndex(i + 1)}
