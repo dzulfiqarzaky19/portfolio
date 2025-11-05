@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+:root {
+  /* font tokens */
+  --font-sans:
+    'Inter var', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans';
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --font-display: 'Cal Sans';
+
+  /* Neutral */
+  --surface-1: 0 0% 100%; /* #ffffff */
+  --surface-2: 0 0% 98%; /* #fafafa */
+  --border: 0 0% 89%; /* #e5e5e5 */
+  --ink: 0 0% 8%; /* #0d0d0d → 5.2:1 */
+  --muted: 0 0% 38%; /* #616161 → 4.8:1 */
+
+  /* Brand */
+  --primary: 255 80% 48%; /* Indigo */
+  --primary-fg: 255 80% 48%;
+  --primary-bg: 255 80% 48%;
+  --primary-hover: 255 80% 44%;
+
+  --accent: 190 85% 40%; /* Teal */
+  --accent-fg: 190 85% 40%;
+
+  /* Feedback */
+  --success: 152 68% 38%;
+  --warning: 38 92% 50%;
+  --danger: 0 84% 60%;
+
+  /* Focus */
+  --focus: 255 80% 48%;
+  --focus-ring: 0 0% 0% / 0.2;
+}
+
+[data-theme='dark'] {
+  --surface-1: 0 0% 8%;
+  --surface-2: 0 0% 12%;
+  --border: 0 0% 20%;
+  --ink: 0 0% 94%; /* #f0f0f0 → 5.1:1 */
+  --muted: 0 0% 70%; /* #b3b3b3 → 4.7:1 */
+
+  --primary: 255 85% 65%;
+  --primary-hover: 255 85% 70%;
+  --accent: 190 80% 60%;
+}
+
+@font-face {
+  font-family: 'Cal Sans';
+  src: url('/fonts/Cal_Sans/CalSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-synthesis-weight: none;
+  font-synthesis-style: none;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url('/fonts/inter/Inter-VariableFont_opsz,wght.woff2')
+    format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url('/fonts/inter/Inter-Italic-VariableFont_opsz,wght.woff2')
+    format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.woff2')
+    format('woff2-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.woff2')
+    format('woff2-variations');
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply m-0;
+}
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}
