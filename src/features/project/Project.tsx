@@ -1,15 +1,16 @@
 import { DeviceFrame } from '@/components/DeviceFrame'
+import { InViewTransition } from '@/components/motion/InViewAnimation'
+import { TextWithIntro } from '@/components/motion/TextWithIntro'
 import { Section } from '@/components/Section'
-import { Text } from '@/components/ui/Text'
 import { cn } from '@/lib/cn'
 import { PROJECTS } from '@/lib/constant/project.constant'
 
 const Project = () => {
   return (
     <Section>
-      <Text variant="hero" color="primary">
+      <TextWithIntro variant="hero" color="primary">
         Featured Projects.
-      </Text>
+      </TextWithIntro>
 
       <div
         className="grid w-full grid-cols-1 lg:grid-cols-2 
@@ -36,33 +37,35 @@ const Project = () => {
             />
 
             <div className="mx-auto w-full max-w-4xl grid gap-8">
-              <div className="text-center">
-                <Text variant="display" color="surface">
+              <InViewTransition>
+                <TextWithIntro
+                  variant="h2"
+                  color="surface"
+                  className="text-center"
+                >
                   {p.title}
-                </Text>
-              </div>
+                </TextWithIntro>
 
-              <DeviceFrame aspectRatio={(i + 1) % 3 === 0 ? '16/9' : '9/16'}>
-                <img
-                  src={p.imgUrl}
-                  alt={`${p.title} mobile app`}
-                  className="h-full w-full object-top object-cover"
-                  loading="lazy"
-                />
-              </DeviceFrame>
+                <DeviceFrame aspectRatio={(i + 1) % 3 === 0 ? '16/9' : '9/16'}>
+                  <img
+                    src={p.imgUrl}
+                    alt={`${p.title} mobile app`}
+                    className="h-full w-full object-top object-cover"
+                    loading="lazy"
+                  />
+                </DeviceFrame>
 
-              <div className="mx-auto w-full text-center">
-                <Text variant="h4" color="surface">
+                <TextWithIntro variant="lead" color="surface">
                   {p.description}
-                </Text>
-              </div>
+                </TextWithIntro>
 
-              <div className="text-center">
-                <a className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]">
-                  View Case Study
-                  <span aria-hidden>↗</span>
-                </a>
-              </div>
+                <div className="text-center">
+                  <a className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]">
+                    View Case Study
+                    <span aria-hidden>↗</span>
+                  </a>
+                </div>
+              </InViewTransition>
             </div>
           </article>
         ))}
