@@ -1,8 +1,10 @@
 import { AnimatePresence } from 'motion/react'
+import { Link } from '@tanstack/react-router'
 import type { Experience } from '@/lib/constant/experience.constant'
-import { MotionDeviceFrame } from '@/components/DeviceFrame'
+import { DeviceFrame } from '@/components/DeviceFrame'
 import { cn } from '@/lib/cn'
-import { TextWithIntro } from '@/components/motion/TextWithIntro'
+import { InViewTransition } from '@/components/motion/InViewAnimation'
+import { Text } from '@/components/ui/Text'
 
 type Props = {
   experience: Partial<Experience>
@@ -26,42 +28,41 @@ export const Article = ({ experience, i }: Props) => {
         <div
           className={cn(
             `w-full lg:w-1/2 flex flex-col gap-4`,
-            i % 2 === 0 ? `justify-end` : `justify-start`,
+            i % 2 === 0 ? 'lg:items-end' : 'lg:items-start',
           )}
         >
-          <TextWithIntro variant="display" color="surface">
-            {experience.title}
-          </TextWithIntro>
+          <InViewTransition>
+            <Text variant="display" color="surface">
+              {experience.title}
+            </Text>
 
-          <TextWithIntro variant="h3" color="surface">
-            {experience.role}
-          </TextWithIntro>
+            <Text variant="h3" color="surface">
+              {experience.role}
+            </Text>
 
-          <TextWithIntro variant="lead" color="surface">
-            {experience.highlight}
-          </TextWithIntro>
+            <Text variant="lead" color="surface">
+              {experience.highlight}
+            </Text>
 
-          <button
-            className={`border border-amber-400 p-2 w-2xs ${i % 2 === 0 ? 'self-center lg:self-end' : 'self-center lg:self-start'}`}
-          >
-            <TextWithIntro>Learn more</TextWithIntro>
-          </button>
+            <Link
+              to={experience.detailUrl || '/'}
+              className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
+            >
+              Learn More
+              <span aria-hidden>↗</span>
+            </Link>
+          </InViewTransition>
         </div>
 
         <div className="w-full lg:w-1/2">
-          <MotionDeviceFrame
-            transition={{
-              type: 'tween',
-              delay: 1,
-            }}
-          >
+          <DeviceFrame>
             <img
               src={experience.imgUrl}
               alt={`${experience.title} mobile app`}
               className="h-full w-full object-top object-cover cursor-pointer "
               loading="lazy"
             />
-          </MotionDeviceFrame>
+          </DeviceFrame>
         </div>
       </article>
     </AnimatePresence>

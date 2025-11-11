@@ -22,9 +22,16 @@
   --primary-fg: 255 80% 48%;
   --primary-bg: 255 80% 48%;
   --primary-hover: 255 80% 44%;
+  --primary-slider: 255 80% 65%;
 
   --accent: 190 85% 40%; /* Teal */
   --accent-fg: 190 85% 40%;
+  --accent--slider: 190 85% 65%;
+
+  /* --color--slider: 40 95% 55%; */
+
+  /* --color--slider: 85 78% 53%; */
+  --color--slider: 0 0% 98%;
 
   /* Feedback */
   --success: 152 68% 38%;

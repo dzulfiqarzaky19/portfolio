@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjectsWebNovelRouteImport } from './routes/projects/web-novel'
+import { Route as ProjectsPradaCloneRouteImport } from './routes/projects/prada-clone'
+import { Route as ProjectsOtherRouteImport } from './routes/projects/other'
+import { Route as ProjectsGoMankRouteImport } from './routes/projects/go-mank'
+import { Route as ProjectsChatSnapRouteImport } from './routes/projects/chat-snap'
+import { Route as ExperienceRaizRouteImport } from './routes/experience/raiz'
+import { Route as ExperienceMandiriRouteImport } from './routes/experience/mandiri'
+import { Route as ExperienceEdotRouteImport } from './routes/experience/edot'
+import { Route as ExperienceConsistechRouteImport } from './routes/experience/consistech'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsWebNovelRoute = ProjectsWebNovelRouteImport.update({
+  id: '/projects/web-novel',
+  path: '/projects/web-novel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsPradaCloneRoute = ProjectsPradaCloneRouteImport.update({
+  id: '/projects/prada-clone',
+  path: '/projects/prada-clone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsOtherRoute = ProjectsOtherRouteImport.update({
+  id: '/projects/other',
+  path: '/projects/other',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsGoMankRoute = ProjectsGoMankRouteImport.update({
+  id: '/projects/go-mank',
+  path: '/projects/go-mank',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsChatSnapRoute = ProjectsChatSnapRouteImport.update({
+  id: '/projects/chat-snap',
+  path: '/projects/chat-snap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceRaizRoute = ExperienceRaizRouteImport.update({
+  id: '/experience/raiz',
+  path: '/experience/raiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceMandiriRoute = ExperienceMandiriRouteImport.update({
+  id: '/experience/mandiri',
+  path: '/experience/mandiri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceEdotRoute = ExperienceEdotRouteImport.update({
+  id: '/experience/edot',
+  path: '/experience/edot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceConsistechRoute = ExperienceConsistechRouteImport.update({
+  id: '/experience/consistech',
+  path: '/experience/consistech',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/experience/consistech': typeof ExperienceConsistechRoute
+  '/experience/edot': typeof ExperienceEdotRoute
+  '/experience/mandiri': typeof ExperienceMandiriRoute
+  '/experience/raiz': typeof ExperienceRaizRoute
+  '/projects/chat-snap': typeof ProjectsChatSnapRoute
+  '/projects/go-mank': typeof ProjectsGoMankRoute
+  '/projects/other': typeof ProjectsOtherRoute
+  '/projects/prada-clone': typeof ProjectsPradaCloneRoute
+  '/projects/web-novel': typeof ProjectsWebNovelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/experience/consistech': typeof ExperienceConsistechRoute
+  '/experience/edot': typeof ExperienceEdotRoute
+  '/experience/mandiri': typeof ExperienceMandiriRoute
+  '/experience/raiz': typeof ExperienceRaizRoute
+  '/projects/chat-snap': typeof ProjectsChatSnapRoute
+  '/projects/go-mank': typeof ProjectsGoMankRoute
+  '/projects/other': typeof ProjectsOtherRoute
+  '/projects/prada-clone': typeof ProjectsPradaCloneRoute
+  '/projects/web-novel': typeof ProjectsWebNovelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/experience/consistech': typeof ExperienceConsistechRoute
+  '/experience/edot': typeof ExperienceEdotRoute
+  '/experience/mandiri': typeof ExperienceMandiriRoute
+  '/experience/raiz': typeof ExperienceRaizRoute
+  '/projects/chat-snap': typeof ProjectsChatSnapRoute
+  '/projects/go-mank': typeof ProjectsGoMankRoute
+  '/projects/other': typeof ProjectsOtherRoute
+  '/projects/prada-clone': typeof ProjectsPradaCloneRoute
+  '/projects/web-novel': typeof ProjectsWebNovelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/experience/consistech'
+    | '/experience/edot'
+    | '/experience/mandiri'
+    | '/experience/raiz'
+    | '/projects/chat-snap'
+    | '/projects/go-mank'
+    | '/projects/other'
+    | '/projects/prada-clone'
+    | '/projects/web-novel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/experience/consistech'
+    | '/experience/edot'
+    | '/experience/mandiri'
+    | '/experience/raiz'
+    | '/projects/chat-snap'
+    | '/projects/go-mank'
+    | '/projects/other'
+    | '/projects/prada-clone'
+    | '/projects/web-novel'
+  id:
+    | '__root__'
+    | '/'
+    | '/experience/consistech'
+    | '/experience/edot'
+    | '/experience/mandiri'
+    | '/experience/raiz'
+    | '/projects/chat-snap'
+    | '/projects/go-mank'
+    | '/projects/other'
+    | '/projects/prada-clone'
+    | '/projects/web-novel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExperienceConsistechRoute: typeof ExperienceConsistechRoute
+  ExperienceEdotRoute: typeof ExperienceEdotRoute
+  ExperienceMandiriRoute: typeof ExperienceMandiriRoute
+  ExperienceRaizRoute: typeof ExperienceRaizRoute
+  ProjectsChatSnapRoute: typeof ProjectsChatSnapRoute
+  ProjectsGoMankRoute: typeof ProjectsGoMankRoute
+  ProjectsOtherRoute: typeof ProjectsOtherRoute
+  ProjectsPradaCloneRoute: typeof ProjectsPradaCloneRoute
+  ProjectsWebNovelRoute: typeof ProjectsWebNovelRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/web-novel': {
+      id: '/projects/web-novel'
+      path: '/projects/web-novel'
+      fullPath: '/projects/web-novel'
+      preLoaderRoute: typeof ProjectsWebNovelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/prada-clone': {
+      id: '/projects/prada-clone'
+      path: '/projects/prada-clone'
+      fullPath: '/projects/prada-clone'
+      preLoaderRoute: typeof ProjectsPradaCloneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/other': {
+      id: '/projects/other'
+      path: '/projects/other'
+      fullPath: '/projects/other'
+      preLoaderRoute: typeof ProjectsOtherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/go-mank': {
+      id: '/projects/go-mank'
+      path: '/projects/go-mank'
+      fullPath: '/projects/go-mank'
+      preLoaderRoute: typeof ProjectsGoMankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/chat-snap': {
+      id: '/projects/chat-snap'
+      path: '/projects/chat-snap'
+      fullPath: '/projects/chat-snap'
+      preLoaderRoute: typeof ProjectsChatSnapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience/raiz': {
+      id: '/experience/raiz'
+      path: '/experience/raiz'
+      fullPath: '/experience/raiz'
+      preLoaderRoute: typeof ExperienceRaizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience/mandiri': {
+      id: '/experience/mandiri'
+      path: '/experience/mandiri'
+      fullPath: '/experience/mandiri'
+      preLoaderRoute: typeof ExperienceMandiriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience/edot': {
+      id: '/experience/edot'
+      path: '/experience/edot'
+      fullPath: '/experience/edot'
+      preLoaderRoute: typeof ExperienceEdotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience/consistech': {
+      id: '/experience/consistech'
+      path: '/experience/consistech'
+      fullPath: '/experience/consistech'
+      preLoaderRoute: typeof ExperienceConsistechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExperienceConsistechRoute: ExperienceConsistechRoute,
+  ExperienceEdotRoute: ExperienceEdotRoute,
+  ExperienceMandiriRoute: ExperienceMandiriRoute,
+  ExperienceRaizRoute: ExperienceRaizRoute,
+  ProjectsChatSnapRoute: ProjectsChatSnapRoute,
+  ProjectsGoMankRoute: ProjectsGoMankRoute,
+  ProjectsOtherRoute: ProjectsOtherRoute,
+  ProjectsPradaCloneRoute: ProjectsPradaCloneRoute,
+  ProjectsWebNovelRoute: ProjectsWebNovelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,14 +2,17 @@ import { motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Text } from '../ui/Text'
 import type { TextProps } from '../ui/Text'
+import { cn } from '@/lib/cn'
 
 interface ITextIntroProps extends TextProps {
   origin?: 'left' | 'right'
+  introColor?: string
 }
 
 export const TextWithIntro = ({
   children,
   origin = 'left',
+  introColor = 'var(--color--slider)',
   asChild,
   className,
   ...rest
@@ -42,8 +45,10 @@ export const TextWithIntro = ({
       ? children.split('\n').filter(Boolean)
       : ['']
 
+  console.log(introColor, 999)
+
   return (
-    <span className="relative inline-block leading-none">
+    <span className="relative w-fit inline-block leading-none">
       <Text
         asChild={asChild}
         ref={textRef}
@@ -56,8 +61,8 @@ export const TextWithIntro = ({
               <motion.span
                 key={i}
                 className="block"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
                   duration: 0.4,
                   delay: i * 0.2 + 0.3,
@@ -65,7 +70,7 @@ export const TextWithIntro = ({
                 }}
                 viewport={{ once: true }}
               >
-                {line || '\u00A0'} {/* preserves empty lines */}
+                {line || '\u00A0'}
               </motion.span>
             ))}
       </Text>
@@ -73,7 +78,9 @@ export const TextWithIntro = ({
       {Array.from({ length: lineCount }, (_, i) => (
         <motion.div
           key={`${children}-${i}`}
-          className="absolute inset-0 z-10 bg-(--color--lime,#d2ff00) pointer-events-none will-change-transform"
+          className={cn(
+            `absolute inset-0 z-10 bg-[hsl(${introColor})] pointer-events-none will-change-transform`,
+          )}
           initial={{ scaleX: 0, originX: originX.initial }}
           whileInView={{ scaleX: [0, 1, 1, 0], originX: originX.whileInView }}
           transition={{

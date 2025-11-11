@@ -1,16 +1,17 @@
+import { Link } from '@tanstack/react-router'
 import { DeviceFrame } from '@/components/DeviceFrame'
 import { InViewTransition } from '@/components/motion/InViewAnimation'
-import { TextWithIntro } from '@/components/motion/TextWithIntro'
 import { Section } from '@/components/Section'
 import { cn } from '@/lib/cn'
 import { PROJECTS } from '@/lib/constant/project.constant'
+import { Text } from '@/components/ui/Text'
 
 const Project = () => {
   return (
     <Section>
-      <TextWithIntro variant="hero" color="primary">
+      <Text variant="hero" color="primary" className="mb-16 l:mb-18">
         Featured Projects.
-      </TextWithIntro>
+      </Text>
 
       <div
         className="grid w-full grid-cols-1 lg:grid-cols-2 
@@ -36,15 +37,11 @@ const Project = () => {
               }}
             />
 
-            <div className="mx-auto w-full max-w-4xl grid gap-8">
+            <div className="mx-auto w-full max-w-4xl grid gap-8 justify-items-center">
               <InViewTransition>
-                <TextWithIntro
-                  variant="h2"
-                  color="surface"
-                  className="text-center"
-                >
+                <Text variant="h2" color="surface" className="text-center">
                   {p.title}
-                </TextWithIntro>
+                </Text>
 
                 <DeviceFrame aspectRatio={(i + 1) % 3 === 0 ? '16/9' : '9/16'}>
                   <img
@@ -55,15 +52,18 @@ const Project = () => {
                   />
                 </DeviceFrame>
 
-                <TextWithIntro variant="lead" color="surface">
+                <Text variant="lead" color="surface">
                   {p.description}
-                </TextWithIntro>
+                </Text>
 
                 <div className="text-center">
-                  <a className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]">
+                  <Link
+                    to={p.detailUrl}
+                    className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
+                  >
                     View Case Study
                     <span aria-hidden>↗</span>
-                  </a>
+                  </Link>
                 </div>
               </InViewTransition>
             </div>

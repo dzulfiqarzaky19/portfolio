@@ -7,6 +7,11 @@ export interface Experience {
   stacks: Array<string>
   highlight: Array<string>
   description?: string
+  detailUrl:
+    | '/experience/raiz'
+    | '/experience/edot'
+    | '/experience/mandiri'
+    | '/experience/consistech'
 }
 
 export const RAIZ: Experience = {
@@ -15,6 +20,7 @@ export const RAIZ: Experience = {
   time: 'Jul 2023 - Aug 2025',
   color: 'linear-gradient(116.57deg, #63de76, #29ae87)',
   imgUrl: '/images/raiz.png',
+  detailUrl: '/experience/raiz',
   highlight: [
     'Rebuilt a cross-browser extension into React and TypeScript (Chrome, Firefox, Safari).',
     'Co-delivered CRA to Vite and Bumped React 16.x to 18.x on CI server, achieving faster and stable builds.',
@@ -36,6 +42,7 @@ export const EDOT: Experience = {
   time: 'Sep 2022 – Jun 2023',
   color: '#D32422',
   imgUrl: '/images/edot.png',
+  detailUrl: '/experience/edot',
   stacks: [
     'Next.js',
     'TypeScript',
@@ -56,6 +63,7 @@ export const MANDIRI: Experience = {
   time: 'Apr – Aug 2022',
   color: '#0064b9',
   imgUrl: '/images/mandiri-kopra.png',
+  detailUrl: '/experience/mandiri',
   stacks: ['React', 'Ant Design', 'Canvas Charts', 'Maps'],
   highlight: [
     'Built custom canvas-based charts for B2B transaction dashboards.',
@@ -70,6 +78,7 @@ export const CONSISTECH: Experience = {
   stacks: ['React', 'Vue', 'Node.js'],
   color: '#714B67',
   imgUrl: '/images/consistech.png',
+  detailUrl: '/experience/consistech',
   highlight: [
     'Delivered client projects across ERP, Hospital Information System, and Payroll.',
     'shipped full-stack features.',

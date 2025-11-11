@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { InViewTransition } from './motion/InViewAnimation'
-import { TextWithIntro } from './motion/TextWithIntro'
+import { Text } from './ui/Text'
 
 interface Props {
   title: string
@@ -15,11 +15,11 @@ export const SubSection = ({ title, description, ref }: Props) => {
       className="w-full h-screen gap-20 shrink-0 flex flex-col items-center justify-center"
     >
       <InViewTransition>
-        <TextWithIntro variant="hero" color="primary">
+        <Text variant="hero" color="primary">
           {title}
-        </TextWithIntro>
+        </Text>
 
-        <TextWithIntro
+        <Text
           variant="h1"
           intent="link"
           color="primary"
@@ -29,7 +29,7 @@ export const SubSection = ({ title, description, ref }: Props) => {
             {description}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
-        </TextWithIntro>
+        </Text>
       </InViewTransition>
     </div>
   )
