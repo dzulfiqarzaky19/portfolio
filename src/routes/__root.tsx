@@ -3,6 +3,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import ReactLenis from 'lenis/react'
+import { NotFound } from '@/components/NotFound'
 
 export const Route = createRootRoute({
   component: () => (
@@ -28,4 +29,5 @@ export const Route = createRootRoute({
       />
     </>
   ),
+  notFoundComponent: NotFound,
 })
