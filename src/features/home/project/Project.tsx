@@ -3,7 +3,7 @@ import { DeviceFrame } from '@/components/DeviceFrame'
 import { InViewTransition } from '@/components/motion/InViewAnimation'
 import { Section } from '@/components/Section'
 import { cn } from '@/lib/cn'
-import { PROJECTS } from '@/lib/constant/project.constant'
+import { PROJECTS } from '@/lib/constant/home/project.constant'
 import { Text } from '@/components/ui/Text'
 
 const Project = () => {

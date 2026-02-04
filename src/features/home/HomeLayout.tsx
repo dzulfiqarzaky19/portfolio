@@ -1,9 +1,9 @@
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { cn } from '@/lib/cn'
-import { ThemeToggle } from './ThemeToggle'
 
 type Props = React.HTMLAttributes<HTMLElement>
 
-export const Layout = ({ className, children, ...rest }: Props) => (
+export const HomeLayout = ({ className, children, ...rest }: Props) => (
   <main
     role="main"
     className={cn(

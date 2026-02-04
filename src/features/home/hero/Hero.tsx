@@ -1,6 +1,6 @@
 import { ArrowDownCircleIcon } from 'lucide-react'
 import { Section } from '@/components/Section'
-import { HERO } from '@/lib/constant/hero.constant'
+import { HERO } from '@/lib/constant/home/hero.constant'
 import { InViewTransition } from '@/components/motion/InViewAnimation'
 import { Text } from '@/components/ui/Text'
 

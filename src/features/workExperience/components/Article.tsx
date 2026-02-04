@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import { Link } from '@tanstack/react-router'
-import type { Experience } from '@/lib/constant/experience.constant'
+import type { Experience } from '@/lib/constant/home/experience.constant'
 import { DeviceFrame } from '@/components/DeviceFrame'
 import { cn } from '@/lib/cn'
 import { InViewTransition } from '@/components/motion/InViewAnimation'

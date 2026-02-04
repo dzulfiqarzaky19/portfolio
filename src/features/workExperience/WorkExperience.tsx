@@ -1,5 +1,5 @@
 import { Article } from './components/Article'
-import { EXPERIENCE } from '@/lib/constant/experience.constant'
+import { EXPERIENCE } from '@/lib/constant/home/experience.constant'
 import { SubSection } from '@/components/SubSection'
 import { HorizontalScroll } from '@/components/motion/HorizontalScroll'
 
