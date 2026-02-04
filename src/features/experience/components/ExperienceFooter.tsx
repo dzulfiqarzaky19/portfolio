@@ -155,7 +155,7 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, i
       }}
     >
       <div className={cn(
-        "relative w-full md:w-[80%] rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500",
+        "relative w-full md:w-[80%] lg:w-full rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500",
         "bg-white border border-white/50",
         // Mobile Aspect Ratio vs Desktop
         "aspect-[3/4] md:aspect-video lg:aspect-2/1"
