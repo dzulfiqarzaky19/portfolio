@@ -18,7 +18,7 @@ export const WorkExperience = () => {
             />
           </div>
         ) : (
-          // <Article experience={experience} i={i} />
+          <Article experience={experience} i={i} />
         ),
       )}
     </HorizontalScroll>
