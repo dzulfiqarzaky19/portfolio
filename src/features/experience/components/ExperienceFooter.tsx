@@ -178,15 +178,15 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, i
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
             >
-                <Text variant="h2" className="text-gray-900 font-bold leading-tight mb-2 text-3xl md:text-4xl">
+                <Text variant="h2" className="text-gray-900 font-bold leading-tight mb-2 text-2xl md:text-3xl lg:text-4xl">
                 {experience.company.name}
                 </Text>
                 
-                <Text variant="h3" className="text-gray-500 font-medium text-base md:text-lg mb-4 md:mb-6">
+                <Text variant="h3" className="text-gray-500 font-medium text-sm md:text-base lg:text-lg mb-4 md:mb-6">
                 {experience.role.title}
                 </Text>
 
-                <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-sm md:text-base max-w-sm line-clamp-4 md:line-clamp-3">
+                <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-xs md:text-sm lg:text-base max-w-sm line-clamp-4 md:line-clamp-3">
                 {experience.role.description}
                 </p>
             </motion.div>
