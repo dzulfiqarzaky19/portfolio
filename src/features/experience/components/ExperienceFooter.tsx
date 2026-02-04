@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { wrap } from 'motion';
 import { Link } from '@tanstack/react-router';
@@ -17,11 +17,19 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
   
   // Ensure we have enough items for smooth infinite scrolling (padding logic)
   const experiences = otherExperiences.length >= 2 ? otherExperiences : allExperiences;
-
+  
   const total = experiences.length;
   const VISIBLE_RANGE = 1;
   
   const [index, setIndex] = useState(0);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextExperience = () => setIndex((prev) => prev + 1);
   const prevExperience = () => setIndex((prev) => prev - 1);
@@ -36,7 +44,21 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
         background: activeExperience.theme.gradient 
       }}
     >
-      <div className="relative w-full max-w-7xl h-[800px] flex items-center justify-center">
+      <motion.div 
+        className="relative w-[90%] max-w-7xl h-[600px] lg:h-[800px] flex items-center justify-center cursor-grab active:cursor-grabbing touch-none"
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={0.2}
+        onDragEnd={(_, { offset }) => {
+          const swipe = offset.y;
+
+          if (swipe < -50) {
+            nextExperience();
+          } else if (swipe > 50) {
+            prevExperience();
+          }
+        }}
+      >
         <AnimatePresence mode="popLayout" initial={false}>
           {experiences.map((experience, i) => {
             const offset = wrap(-1, total - 1, i - virtualIndex);
@@ -46,6 +68,7 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
             if (!isInsideWindow) return null;
             
             const isCenter = offset === 0;
+            const isMobile = width < 768;
 
             return (
               <SliderCard 
@@ -53,28 +76,29 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
                 experience={experience}
                 offset={offset}
                 isCenter={isCenter}
+                isMobile={isMobile}
               />
             );
           })}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
-      {/* Navigation Controls - Moved to right side for vertical feel */}
-      <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 z-50">
+      <div className="absolute z-50 flex items-center gap-6 bottom-8 left-1/2 -translate-x-1/2 flex-row md:top-1/2 md:right-12 md:bottom-auto md:left-auto md:-translate-y-1/2 md:translate-x-0 md:flex-col">
         <button 
           onClick={prevExperience}
-          className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
+          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
-          ↑
+          <span className="md:rotate-0 -rotate-90">↑</span>
         </button>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row md:flex-col gap-2">
             {experiences.map((_, i) => (
                 <div 
                     key={i} 
                     className={cn(
-                        "w-2 h-2 rounded-full transition-all duration-300", 
-                        i === virtualIndex ? "h-8 bg-white" : "bg-white/30"
+                        "rounded-full transition-all duration-300", 
+                        "w-1.5 h-1.5 md:w-2 md:h-2",
+                        i === virtualIndex ? "w-6 md:w-2 md:h-8 bg-white" : "bg-white/30"
                     )} 
                 />
             ))}
@@ -82,13 +106,13 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
 
         <button 
           onClick={nextExperience}
-          className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
+          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
-          ↓
+           <span className="md:rotate-0 -rotate-90">↓</span>
         </button>
       </div>
 
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-white/40 text-sm font-bold uppercase tracking-widest">
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-white/40 text-xs md:text-sm font-bold uppercase tracking-widest text-center px-4 w-full">
          Next Experience
       </div>
     </footer>
@@ -99,28 +123,31 @@ interface SliderCardProps {
   experience: ExperienceData;
   offset: number;
   isCenter: boolean;
+  isMobile: boolean;
 }
 
-const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter }) => {
-  const scale = isCenter ? 1.25 : 1;
-  const y = offset * 150; // Vertical spacing
+const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, isMobile }) => {
+  const scale = isCenter ? (isMobile ? 1 : 1.25) : (isMobile ? 0.9 : 1);
+
+  const responsiveY = offset * (isMobile ? 100 : 150); 
+  
   const z = isCenter ? 30 : 10;
-  const opacity = isCenter ? 1 : 0.8;
-  const rotationX = offset * -10; // Vertical rotation
+  const opacity = isCenter ? 1 : 0.4;
+  const rotationX = offset * -10; 
 
   return (
     <motion.div
-      className="absolute flex items-center justify-center w-full max-w-4xl px-4"
+      className="absolute flex items-center justify-center w-full px-4 md:px-0 max-w-[90%] md:max-w-4xl"
       style={{ zIndex: z }}
-      initial={{ opacity: 0, scale: 0.8, y: y * 1.5 }}
+      initial={{ opacity: 0, scale: 0.8, y: responsiveY * 1.5 }}
       animate={{
-        y,
+        y: responsiveY,
         scale,
         opacity,
         rotateX: rotationX,
         filter: isCenter ? 'blur(0px)' : 'blur(0px)',
       }}
-      exit={{ opacity: 0, scale: 0.5, y: -y }}
+      exit={{ opacity: 0, scale: 0.5, y: -responsiveY }}
       transition={{
         type: 'spring',
         stiffness: 150,
@@ -128,19 +155,21 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter })
       }}
     >
       <div className={cn(
-        "relative w-full aspect-video lg:aspect-2/1 rounded-[32px] p-8 md:p-12 overflow-hidden shadow-2xl transition-all duration-500",
-        "bg-white border border-white/50" // White card
+        "relative w-full md:w-[80%] rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500",
+        "bg-white border border-white/50",
+        // Mobile Aspect Ratio vs Desktop
+        "aspect-[3/4] md:aspect-video lg:aspect-2/1"
       )}>
-        <div className="flex flex-col lg:flex-row h-full relative z-10 gap-8 lg:gap-12 items-center">
+        <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
           {/* Left Content */}
-          <div className="flex flex-col flex-1 items-start text-left h-full justify-center">
+          <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
             
             <motion.div 
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.1 }}
-               className="mb-6"
+               className="mb-4 md:mb-6"
             >
-                <span className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-50 text-yellow-700 text-xs font-bold tracking-widest uppercase shadow-sm">
+                <span className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-50 text-yellow-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
                 {experience.role.type}
                 </span>
             </motion.div>
@@ -149,15 +178,15 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter })
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
             >
-                <Text variant="h2" className="text-gray-900 font-bold leading-tight mb-2">
+                <Text variant="h2" className="text-gray-900 font-bold leading-tight mb-2 text-3xl md:text-4xl">
                 {experience.company.name}
                 </Text>
                 
-                <Text variant="h3" className="text-gray-500 font-medium text-lg mb-6">
+                <Text variant="h3" className="text-gray-500 font-medium text-base md:text-lg mb-4 md:mb-6">
                 {experience.role.title}
                 </Text>
 
-                <p className="text-gray-600 leading-relaxed mb-8 max-w-sm line-clamp-3">
+                <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-sm md:text-base max-w-sm line-clamp-4 md:line-clamp-3">
                 {experience.role.description}
                 </p>
             </motion.div>
@@ -165,12 +194,12 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter })
             <motion.div
              animate={{ opacity: 1, y: 0 }}
              transition={{ delay: 0.3 }}
-             className="mt-auto"
+             className="mt-2 md:mt-auto"
             >
                 <Link
                 to="/experience/$experienceId"
                 params={{ experienceId: experience.id }}
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white text-sm md:text-base font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl"
                 >
                 View Details
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -178,7 +207,7 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter })
             </motion.div>
           </div>
 
-          {/* Right Image (Browser Mockup) */}
+          {/* Right Image (Browser Mockup) - Hidden on Mobile to save space */}
           {experience.cardImage && (
             <div className={cn(
                 "hidden lg:block w-1/2 h-full relative perspective-distant",

@@ -13,7 +13,7 @@ interface ProjectFooterProps {
 
 export const ProjectFooter: React.FC<ProjectFooterProps> = ({ currentProjectId }) => {
 
-  const uniqueProjects = Object.values(PROJECT_DETAILS) as Array<ProjectData>;
+  const uniqueProjects = Object.values(PROJECT_DETAILS);
   
   const otherProjects = uniqueProjects.filter(p => p.id !== currentProjectId);
   
@@ -45,7 +45,21 @@ export const ProjectFooter: React.FC<ProjectFooterProps> = ({ currentProjectId }
         background: activeProject.theme.gradient || 'hsl(var(--primary))'
       }}
     >
-      <div className="relative w-full max-w-7xl h-[800px] flex items-center justify-center">
+      <motion.div 
+        className="relative w-[80%] max-w-7xl h-[600px] md:h-[800px] flex items-center justify-center cursor-grab active:cursor-grabbing touch-none"
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={(_, { offset }) => {
+          const swipe = offset.x;
+
+          if (swipe < -50) {
+            nextProject();
+          } else if (swipe > 50) {
+            prevProject();
+          }
+        }}
+      >
         <AnimatePresence mode="popLayout" initial={false}>
           {projects.map((project, i) => {
             // User's requested logic
@@ -57,8 +71,7 @@ export const ProjectFooter: React.FC<ProjectFooterProps> = ({ currentProjectId }
             
             const isCenter = offset === 0;
 
-            // Simple responsive offset logic, can be tuned
-            const baseOffset = width < 768 ? 250 : 250; 
+            const baseOffset = width < 640 ? 60 : (width < 1024 ? 120 : 180);
 
             return (
               <SliderCard 
@@ -71,7 +84,7 @@ export const ProjectFooter: React.FC<ProjectFooterProps> = ({ currentProjectId }
             );
           })}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-12 z-50">
         <button 
@@ -112,19 +125,19 @@ interface SliderCardProps {
   project: ProjectData;
   offset: number;
   isCenter: boolean;
-  baseOffset: number; // Added prop
+  baseOffset: number;
 }
 
 const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, baseOffset }) => {
   const scale = isCenter ? 1 : 0.85;
-  const x = offset * baseOffset; // Use dynamic baseOffset
+  const x = offset * baseOffset;
   const z = isCenter ? 30 : 10;
   const opacity = isCenter ? 1 : 0.9;
   const rotationY = offset * 5;
 
   return (
     <motion.div
-      className="absolute flex items-center justify-center w-full max-w-2xl md:max-w-3xl"
+      className="absolute flex items-center justify-center w-full max-w-[90%] md:max-w-3xl"
       style={{ zIndex: z }}
       initial={{ opacity: 0, scale: 0.8, x: x * 1.5 }}
       animate={{
@@ -142,20 +155,21 @@ const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, base
       }}
     >
       <div className={cn(
-        "relative w-full aspect-16/10 rounded-[40px] p-10 md:p-16 overflow-hidden shadow-2xl transition-all duration-500",
-        "bg-white border border-white/50" // White card
+        "relative w-full rounded-[24px] md:rounded-[40px] p-6 md:p-16 overflow-hidden shadow-2xl transition-all duration-500",
+        "bg-white border border-white/50",
+       "aspect-11/14 sm:aspect-16/10" 
       )}>
         <div className="flex flex-col h-full relative z-10 text-left items-start">
           <motion.div 
             animate={{ opacity: 0.6 }}
-            className="mb-6"
+            className="mb-4 md:mb-6"
           >
-            <span className="inline-block px-3 py-1 rounded-full border border-blue-500/50 bg-blue-50 text-blue-700 text-xs font-bold tracking-widest uppercase shadow-sm">
+            <span className="inline-block px-3 py-1 rounded-full border border-blue-500/50 bg-blue-50 text-blue-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
              {project.tag}
             </span>
           </motion.div>
           
-          <Text variant="display" className={cn("font-display transition-all duration-500 text-gray-900", isCenter ? "mb-6 text-5xl" : "mb-0 text-3xl opacity-60")}>
+          <Text variant="display" className={cn("font-display transition-all duration-500 text-gray-900", isCenter ? "mb-4 md:mb-6 text-3xl md:text-5xl" : "mb-0 text-xl md:text-3xl opacity-60")}>
             {project.title}
           </Text>
           
@@ -163,19 +177,19 @@ const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, base
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="flex flex-col flex-1"
+                className="flex flex-col flex-1 w-full"
               >
-                <Text className="text-xl text-gray-600 mb-10 line-clamp-2 max-w-2xl leading-relaxed">
+                <Text className="text-base md:text-xl text-gray-600 mb-6 md:mb-10 line-clamp-4 md:line-clamp-2 max-w-2xl leading-relaxed">
                   {project.subtitle}
                 </Text>
 
                 <div className="flex-1" />
 
-                <div className="mt-12 flex flex-wrap gap-6">
+                <div className="mt-4 md:mt-12 grid grid-cols-1 md:flex md:flex-wrap gap-2 md:gap-6 w-full">
                   <Link
                     to="/projects/$projectId"
                     params={{ projectId: project.id }}
-                    className="px-8 py-3 rounded-full bg-gray-900 text-white font-bold hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                    className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full bg-gray-900 text-white text-xs md:text-base font-bold hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                   >
                     Read Case Study
                   </Link>
@@ -185,9 +199,9 @@ const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, base
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-8 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-bold hover:bg-gray-50 transition-all"
+                      className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-base font-bold hover:bg-gray-50 transition-all"
                     >
-                      View on Github
+                      Github
                     </a>
                   )}
 
@@ -196,7 +210,7 @@ const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, base
                       href={project.liveDemoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-8 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-bold hover:bg-gray-50 transition-all"
+                      className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-base font-bold hover:bg-gray-50 transition-all"
                     >
                       Live Demo
                     </a>
