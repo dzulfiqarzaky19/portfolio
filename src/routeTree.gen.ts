@@ -11,10 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsProjectIdRouteImport } from './routes/projects/$projectId'
-import { Route as ExperienceRaizRouteImport } from './routes/experience/raiz'
-import { Route as ExperienceMandiriRouteImport } from './routes/experience/mandiri'
-import { Route as ExperienceEdotRouteImport } from './routes/experience/edot'
-import { Route as ExperienceConsistechRouteImport } from './routes/experience/consistech'
+import { Route as ExperienceExperienceIdRouteImport } from './routes/experience/$experienceId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,85 +23,39 @@ const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
   path: '/projects/$projectId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExperienceRaizRoute = ExperienceRaizRouteImport.update({
-  id: '/experience/raiz',
-  path: '/experience/raiz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperienceMandiriRoute = ExperienceMandiriRouteImport.update({
-  id: '/experience/mandiri',
-  path: '/experience/mandiri',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperienceEdotRoute = ExperienceEdotRouteImport.update({
-  id: '/experience/edot',
-  path: '/experience/edot',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperienceConsistechRoute = ExperienceConsistechRouteImport.update({
-  id: '/experience/consistech',
-  path: '/experience/consistech',
+const ExperienceExperienceIdRoute = ExperienceExperienceIdRouteImport.update({
+  id: '/experience/$experienceId',
+  path: '/experience/$experienceId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/experience/consistech': typeof ExperienceConsistechRoute
-  '/experience/edot': typeof ExperienceEdotRoute
-  '/experience/mandiri': typeof ExperienceMandiriRoute
-  '/experience/raiz': typeof ExperienceRaizRoute
+  '/experience/$experienceId': typeof ExperienceExperienceIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/experience/consistech': typeof ExperienceConsistechRoute
-  '/experience/edot': typeof ExperienceEdotRoute
-  '/experience/mandiri': typeof ExperienceMandiriRoute
-  '/experience/raiz': typeof ExperienceRaizRoute
+  '/experience/$experienceId': typeof ExperienceExperienceIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/experience/consistech': typeof ExperienceConsistechRoute
-  '/experience/edot': typeof ExperienceEdotRoute
-  '/experience/mandiri': typeof ExperienceMandiriRoute
-  '/experience/raiz': typeof ExperienceRaizRoute
+  '/experience/$experienceId': typeof ExperienceExperienceIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/experience/consistech'
-    | '/experience/edot'
-    | '/experience/mandiri'
-    | '/experience/raiz'
-    | '/projects/$projectId'
+  fullPaths: '/' | '/experience/$experienceId' | '/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/experience/consistech'
-    | '/experience/edot'
-    | '/experience/mandiri'
-    | '/experience/raiz'
-    | '/projects/$projectId'
-  id:
-    | '__root__'
-    | '/'
-    | '/experience/consistech'
-    | '/experience/edot'
-    | '/experience/mandiri'
-    | '/experience/raiz'
-    | '/projects/$projectId'
+  to: '/' | '/experience/$experienceId' | '/projects/$projectId'
+  id: '__root__' | '/' | '/experience/$experienceId' | '/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExperienceConsistechRoute: typeof ExperienceConsistechRoute
-  ExperienceEdotRoute: typeof ExperienceEdotRoute
-  ExperienceMandiriRoute: typeof ExperienceMandiriRoute
-  ExperienceRaizRoute: typeof ExperienceRaizRoute
+  ExperienceExperienceIdRoute: typeof ExperienceExperienceIdRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
 }
 
@@ -124,32 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsProjectIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/experience/raiz': {
-      id: '/experience/raiz'
-      path: '/experience/raiz'
-      fullPath: '/experience/raiz'
-      preLoaderRoute: typeof ExperienceRaizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experience/mandiri': {
-      id: '/experience/mandiri'
-      path: '/experience/mandiri'
-      fullPath: '/experience/mandiri'
-      preLoaderRoute: typeof ExperienceMandiriRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experience/edot': {
-      id: '/experience/edot'
-      path: '/experience/edot'
-      fullPath: '/experience/edot'
-      preLoaderRoute: typeof ExperienceEdotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experience/consistech': {
-      id: '/experience/consistech'
-      path: '/experience/consistech'
-      fullPath: '/experience/consistech'
-      preLoaderRoute: typeof ExperienceConsistechRouteImport
+    '/experience/$experienceId': {
+      id: '/experience/$experienceId'
+      path: '/experience/$experienceId'
+      fullPath: '/experience/$experienceId'
+      preLoaderRoute: typeof ExperienceExperienceIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -157,10 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExperienceConsistechRoute: ExperienceConsistechRoute,
-  ExperienceEdotRoute: ExperienceEdotRoute,
-  ExperienceMandiriRoute: ExperienceMandiriRoute,
-  ExperienceRaizRoute: ExperienceRaizRoute,
+  ExperienceExperienceIdRoute: ExperienceExperienceIdRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,
 }
 export const routeTree = rootRouteImport

@@ -45,7 +45,10 @@ export const Article = ({ experience, i }: Props) => {
             </Text>
 
             <Link
-              to={experience.detailUrl || '/'}
+              to="/experience/$experienceId"
+              params={{
+                experienceId: experience.detailUrl?.split('/').pop() ?? 'raiz',
+              }}
               className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
             >
               Learn More

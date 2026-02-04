@@ -58,7 +58,10 @@ const Project = () => {
 
                 <div className="text-center">
                   <Link
-                    to={p.detailUrl}
+                    to="/projects/$projectId"
+                    params={{
+                      projectId: p.detailUrl.split('/').pop() ?? '',
+                    }}
                     className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
                   >
                     View Case Study
