@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { wrap } from 'motion';
 import { Link } from '@tanstack/react-router';
 import type { ExperienceData } from '@/lib/types/experience';
 import { Text } from '@/components/ui/Text';
@@ -14,14 +15,19 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
   const allExperiences = Object.values(EXPERIENCE_DETAILS);
   const otherExperiences = allExperiences.filter(p => p.id !== currentExperienceId);
   
+  // Ensure we have enough items for smooth infinite scrolling (padding logic)
   const experiences = otherExperiences.length >= 2 ? otherExperiences : allExperiences;
+
+  const total = experiences.length;
+  const VISIBLE_RANGE = 1;
   
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
-  const nextExperience = () => setActiveIndex((prev) => (prev + 1) % experiences.length);
-  const prevExperience = () => setActiveIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+  const nextExperience = () => setIndex((prev) => prev + 1);
+  const prevExperience = () => setIndex((prev) => prev - 1);
 
-  const activeExperience = experiences[activeIndex];
+  const virtualIndex = wrap(0, total, index);
+  const activeExperience = experiences[virtualIndex];
 
   return (
     <footer 
@@ -31,20 +37,19 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
       }}
     >
       <div className="relative w-full max-w-7xl h-[800px] flex items-center justify-center">
-        <AnimatePresence mode="popLayout">
-          {experiences.map((experience, index) => {
-            let offset = index - activeIndex;
-            if (offset > experiences.length / 2) offset -= experiences.length;
-            if (offset < -experiences.length / 2) offset += experiences.length;
+        <AnimatePresence mode="popLayout" initial={false}>
+          {experiences.map((experience, i) => {
+            const offset = wrap(-1, total - 1, i - virtualIndex);
+            
+            const isInsideWindow = Math.abs(offset) <= VISIBLE_RANGE;
 
-            const isCenter = index === activeIndex;
-            const isVisible = Math.abs(offset) <= 1;
-
-            if (!isVisible) return null;
+            if (!isInsideWindow) return null;
+            
+            const isCenter = offset === 0;
 
             return (
               <SliderCard 
-                key={experience.id}
+                key={`${experience.id}-${i}`}
                 experience={experience}
                 offset={offset}
                 isCenter={isCenter}
@@ -54,21 +59,22 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
         </AnimatePresence>
       </div>
 
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-12 z-50">
+      {/* Navigation Controls - Moved to right side for vertical feel */}
+      <div className="absolute right-12 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 z-50">
         <button 
           onClick={prevExperience}
           className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
-          ←
+          ↑
         </button>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
             {experiences.map((_, i) => (
                 <div 
                     key={i} 
                     className={cn(
                         "w-2 h-2 rounded-full transition-all duration-300", 
-                        i === activeIndex ? "w-8 bg-white" : "bg-white/30"
+                        i === virtualIndex ? "h-8 bg-white" : "bg-white/30"
                     )} 
                 />
             ))}
@@ -78,7 +84,7 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({ currentExper
           onClick={nextExperience}
           className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
-          →
+          ↓
         </button>
       </div>
 
@@ -96,25 +102,25 @@ interface SliderCardProps {
 }
 
 const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter }) => {
-  const scale = isCenter ? 1 : 0.85;
-  const x = offset * 300; // Increased spacing for wider cards
+  const scale = isCenter ? 1.25 : 1;
+  const y = offset * 150; // Vertical spacing
   const z = isCenter ? 30 : 10;
-  const opacity = isCenter ? 1 : 0.9;
-  const rotationY = offset * 5; // Reduced rotation for cleaner look
+  const opacity = isCenter ? 1 : 0.8;
+  const rotationX = offset * -10; // Vertical rotation
 
   return (
     <motion.div
       className="absolute flex items-center justify-center w-full max-w-4xl px-4"
       style={{ zIndex: z }}
-      initial={{ opacity: 0, scale: 0.8, x: x * 1.5 }}
+      initial={{ opacity: 0, scale: 0.8, y: y * 1.5 }}
       animate={{
-        x,
+        y,
         scale,
         opacity,
-        rotateY: rotationY,
+        rotateX: rotationX,
         filter: isCenter ? 'blur(0px)' : 'blur(0px)',
       }}
-      exit={{ opacity: 0, scale: 0.5, x: -x }}
+      exit={{ opacity: 0, scale: 0.5, y: -y }}
       transition={{
         type: 'spring',
         stiffness: 150,
