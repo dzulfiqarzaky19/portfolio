@@ -15,7 +15,7 @@ export const KeyTakeaways: React.FC<KeyTakeawaysProps> = ({ data }) => {
                      {data.keyTakeaways.map((item, index) => {
                          const Icon = item.icon;
                          return (
-                            <div key={index} className="flex gap-6 items-start p-6 rounded-xl hover:bg-[hsl(var(--surface-0))] transition-colors border border-transparent hover:border-[hsl(var(--border))]">
+                            <div key={index} className="flex flex-col md:flex-row gap-6 items-center md:items-start p-6 rounded-xl hover:bg-[hsl(var(--surface-0))] transition-colors border border-transparent hover:border-[hsl(var(--border))]">
                                 <div className="shrink-0 w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[hsl(var(--primary))]">
                                     {Icon && <Icon className="w-6 h-6" />}
                                 </div>
