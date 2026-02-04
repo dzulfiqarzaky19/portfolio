@@ -9,5 +9,9 @@ export const CHAT_SNAP_PROJECT: ProjectData = {
     githubUrl: "https://github.com/dzulfiqarzaky/chat-snap",
     liveDemoUrl: "https://chat-snap-demo.com",
     isShowLiveDemo: false,
-    sections: [] // Placeholder
+    sections: [], // Placeholder
+    theme: {
+        primary: "#EC4899",
+        gradient: "linear-gradient(135deg, #831843 0%, #be185d 100%)"
+    }
 };

@@ -4,11 +4,9 @@ import { LEGACY_SYSTEM_PROJECT } from "./project/legacy-system.constant";
 import { PORTFOLIO_PROJECT } from "./project/portfolio.constant";
 import type { ProjectData } from "../types/project";
 
-export const PROJECT_DETAILS: Record<string, ProjectData | undefined> = {
+export const PROJECT_DETAILS: Record<string, ProjectData> = {
     "legacy-system": LEGACY_SYSTEM_PROJECT,
     "chat-snap": CHAT_SNAP_PROJECT,
     "go-mank": GO_MANK_PROJECT,
-    "gomakn": GO_MANK_PROJECT, // Alias for typo
     "portfolio": PORTFOLIO_PROJECT,
-    "portfolio-aesthetic-v2": PORTFOLIO_PROJECT, // Alias for variation
 };

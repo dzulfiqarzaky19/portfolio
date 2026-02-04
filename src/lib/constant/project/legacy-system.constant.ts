@@ -111,5 +111,9 @@ export const LEGACY_SYSTEM_PROJECT: ProjectData = {
                 ]
             }
         }
-    ]
+    ],
+    theme: {
+        primary: "#4F46E5",
+        gradient: "linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%)"
+    }
 };

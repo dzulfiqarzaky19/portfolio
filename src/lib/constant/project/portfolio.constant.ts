@@ -9,5 +9,9 @@ export const PORTFOLIO_PROJECT: ProjectData = {
     githubUrl: "https://github.com/dzulfiqarzaky/portfolio",
     liveDemoUrl: "https://dzulfiqar.dev",
     isShowLiveDemo: true,
-    sections: [] // Placeholder
+    sections: [], // Placeholder
+    theme: {
+        primary: "#10B981",
+        gradient: "linear-gradient(135deg, #064e3b 0%, #059669 100%)"
+    }
 };

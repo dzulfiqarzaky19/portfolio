@@ -19,5 +19,9 @@ export interface ProjectData {
     githubUrl?: string;
     liveDemoUrl?: string;
     isShowLiveDemo?: boolean;
+    theme: {
+        primary: string;
+        gradient: string;
+    };
     sections: Array<ProjectSection>;
 }

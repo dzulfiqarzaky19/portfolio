@@ -9,5 +9,9 @@ export const GO_MANK_PROJECT: ProjectData = {
     githubUrl: "https://github.com/dzulfiqarzaky/go-mank",
     liveDemoUrl: "https://go-mank-demo.com",
     isShowLiveDemo: true,
-    sections: [] // Placeholder
+    sections: [], // Placeholder
+    theme: {
+        primary: "#0EA5E9",
+        gradient: "linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)"
+    }
 };
