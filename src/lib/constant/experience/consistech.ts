@@ -1,4 +1,4 @@
-import { Briefcase, Laptop, Users, Database, FileText, CheckCircle } from 'lucide-react';
+import { Briefcase, CheckCircle, Database, FileText, Laptop, Users } from 'lucide-react';
 import type { ExperienceData } from '@/lib/types/experience';
 
 export const CONSISTECH: ExperienceData = {
