@@ -41,7 +41,7 @@ export const EDOT: ExperienceData = {
         {
             title: 'Complex Ant Design Forms',
             description: 'Delivered complex Ant Design forms and aligned API contracts with backend teams.',
-            icon: Smartphone // Using Smartphone as proxy for "App-like/Form" interaction or maybe FileText
+            icon: Smartphone
         }
     ],
     businessImpact: [

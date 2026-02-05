@@ -17,9 +17,14 @@ export interface ProjectData {
     subtitle: string;
     description: string;
     tag: string;
-    githubUrl?: string;
-    liveDemoUrl?: string;
-    isShowLiveDemo?: boolean;
+    links?: Array<{
+        url: string;
+        label: string;
+        icon?: 'github' | 'live' | 'other';
+    }>;
+    githubUrl?: string; // @deprecated use links instead
+    liveDemoUrl?: string; // @deprecated use links instead
+    isShowLiveDemo?: boolean; // @deprecated use links instead
     theme: {
         primary: string;
         gradient: string;

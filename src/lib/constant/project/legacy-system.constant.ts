@@ -6,9 +6,18 @@ export const LEGACY_SYSTEM_PROJECT: ProjectData = {
     title: "Scalable Backend Architecture",
     subtitle: "A deep dive into how we transformed a legacy monolith into a high-performance, distributed system capable of handling 10x traffic spikes.",
     description: "A deep dive into how we transformed a legacy monolith into a high-performance, distributed system capable of handling 10x traffic spikes.",
-    githubUrl: "https://github.com/dzulfiqarzaky/legacy-system",
-    liveDemoUrl: "https://legacy-system-demo.com",
-    isShowLiveDemo: true,
+    links: [
+        {
+            url: "https://github.com/dzulfiqarzaky/legacy-system",
+            label: "View Source Code",
+            icon: "github"
+        },
+        {
+            url: "https://legacy-system-demo.com",
+            label: "Live Demo",
+            icon: "live"
+        }
+    ],
     sections: [
         {
             id: "challenge",

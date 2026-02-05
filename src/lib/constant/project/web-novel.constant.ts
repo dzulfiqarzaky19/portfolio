@@ -6,9 +6,18 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
     title: "Web Novel Platform",
     subtitle: "A high-performance scraping service and distraction-free reading interface for web novels.",
     description: "Designed to normalize inconsistent web novel data into a clean API using Fastify and Puppeteer, paired with a modern React frontend for an optimal reading experience.",
-    githubUrl: "https://github.com/dzulfiqarzaky19/novel_server",
-    liveDemoUrl: "https://web-novel-demo.com",
-    isShowLiveDemo: true,
+    links: [
+        {
+            url: "https://github.com/dzulfiqarzaky19/novel_server",
+            label: "View Server Code",
+            icon: "github"
+        },
+        {
+            url: "https://github.com/dzulfiqarzaky19/novel_client",
+            label: "View Client Code",
+            icon: "github"
+        },
+    ],
     sections: [
         {
             id: "challenge",
@@ -146,15 +155,18 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
                 cards: [
                     {
                         title: "Debug Artifacts",
-                        description: "Automatic capturing of screenshots and HTML on scraping failures."
+                        description: "Automatic capturing of screenshots and HTML on scraping failures.",
+                        image: "/images/novel-debug.webp"
                     },
                     {
                         title: "Real-time Logging",
-                        description: "Fastify logging for request/response cycles and error reporting."
+                        description: "Fastify logging for request/response cycles and error reporting.",
+                        image: "/images/novel-loging.webp"
                     },
                     {
                         title: "Resource Blocking",
-                        description: "Blocking images/media to reduce bandwidth and speed up scraping."
+                        description: "Blocking images/media to reduce bandwidth and speed up scraping.",
+                        image: "/images/novel-blocking.webp"
                     }
                 ]
             }

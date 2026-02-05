@@ -21,7 +21,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ section, index }
         "space-y-6 relative flex flex-col", 
         isEven ? "lg:order-1 lg:items-end lg:text-right" : "lg:order-2 lg:items-start lg:text-left"
       )}>
-        {/* Dot on the central line */}
+
         <div className={cn(
           "absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[hsl(var(--primary))] ring-4 ring-[hsl(var(--surface-1))] z-10 hidden lg:block",
           isEven ? "-right-[calc(3rem+8px)]" : "-left-[calc(3rem+8px)]"
@@ -139,7 +139,14 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 w-full">
                 {section.content.cards.map((card: any, i: number) => (
                     <div key={i} className="group relative aspect-3/4 rounded-2xl overflow-hidden bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))] hover:border-[hsl(var(--primary)/0.5)] transition-colors">
-                        <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent z-10" />
+                        {card.image && (
+                            <img 
+                                src={card.image} 
+                                alt={card.title} 
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                        )}
+                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent z-10" />
                         <div className="absolute bottom-4 left-4 right-4 z-20">
                             <p className="font-bold text-white text-sm">{card.title}</p>
                             <p className="text-white/60 text-xs mt-1">{card.description}</p>

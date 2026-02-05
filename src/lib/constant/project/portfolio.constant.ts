@@ -6,9 +6,18 @@ export const PORTFOLIO_PROJECT: ProjectData = {
     title: "Aesthetic Portfolio v2",
     subtitle: "Blending performance with high-end aesthetics. A showcase of modern web capabilities.",
     description: "Blending performance with high-end aesthetics. A showcase of modern web capabilities.",
-    githubUrl: "https://github.com/dzulfiqarzaky/portfolio",
-    liveDemoUrl: "https://dzulfiqar.dev",
-    isShowLiveDemo: true,
+    links: [
+        {
+            url: "https://github.com/dzulfiqarzaky/portfolio",
+            label: "View Source Code",
+            icon: "github"
+        },
+        {
+            url: "https://dzulfiqar.dev",
+            label: "Live Demo",
+            icon: "live"
+        }
+    ],
     sections: [], // Placeholder
     theme: {
         primary: "#10B981",

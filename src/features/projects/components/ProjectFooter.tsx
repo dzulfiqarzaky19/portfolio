@@ -193,28 +193,20 @@ const SliderCard: React.FC<SliderCardProps> = ({ project, offset, isCenter, base
                   >
                     Read Case Study
                   </Link>
-
-                  {project.githubUrl && (
-                    <a 
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-sm font-bold hover:bg-gray-50 transition-all"
-                    >
-                      Github
-                    </a>
-                  )}
-
-                  {project.isShowLiveDemo && project.liveDemoUrl && (
-                    <a 
-                      href={project.liveDemoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-sm font-bold hover:bg-gray-50 transition-all"
-                    >
-                      Live Demo
-                    </a>
-                  )}
+                  
+                  {project.links && project.links.length > 0 && (
+                    project.links.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full md:w-auto text-center px-6 py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-sm font-bold hover:bg-gray-50 transition-all"
+                      >
+                        {link.label}
+                      </a>
+                    ))
+                  )} 
                 </div>
               </motion.div>
         </div>

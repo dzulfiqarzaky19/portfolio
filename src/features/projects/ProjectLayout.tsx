@@ -42,6 +42,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ project }) => {
           tag={project.tag} 
           title={project.title} 
           subtitle={project.subtitle} 
+          links={project.links}
           githubUrl={project.githubUrl}
           liveDemoUrl={project.liveDemoUrl}
           isShowLiveDemo={project.isShowLiveDemo}

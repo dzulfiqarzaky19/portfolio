@@ -6,9 +6,18 @@ export const GO_MANK_PROJECT: ProjectData = {
     title: "GoMank",
     subtitle: "A high-performance microservices architecture for real-time data processing and analytics.",
     description: "A high-performance microservices architecture for real-time data processing and analytics.",
-    githubUrl: "https://github.com/dzulfiqarzaky/go-mank",
-    liveDemoUrl: "https://go-mank-demo.com",
-    isShowLiveDemo: true,
+    links: [
+        {
+            url: "https://github.com/dzulfiqarzaky/go-mank",
+            label: "View Source Code",
+            icon: "github"
+        },
+        {
+            url: "https://go-mank-demo.com",
+            label: "Live Demo",
+            icon: "live"
+        }
+    ],
     sections: [], // Placeholder
     theme: {
         primary: "#0EA5E9",
