@@ -13,6 +13,7 @@ export const EDOT: ExperienceData = {
     },
     role: {
         title: 'Frontend Engineer',
+        image: '/images/edot.webp',
         type: 'Contract',
         description: 'Built and optimized dashboards and mapping features for multi-role users, ensuring scalability and cost efficiency.',
         focus: [

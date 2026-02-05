@@ -24,7 +24,7 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({ data }) => {
                 <div className="w-12 h-12 bg-[hsl(var(--primary)/0.1)] rounded-full flex items-center justify-center text-[hsl(var(--primary))] mb-6">
                     <TrendingUp className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-lg mb-2 text-[hsl(var(--ink))]">Our Mission</h3>
+                <h3 className="font-bold text-lg mb-2 text-[hsl(var(--ink))]">Mission</h3>
                 <p className="text-sm text-[hsl(var(--muted))] leading-relaxed">{data.company.mission}</p>
             </div>
              <div className="p-8 rounded-2xl bg-[hsl(var(--surface-2))] text-left hover:bg-[hsl(var(--surface-3))] transition-colors">
