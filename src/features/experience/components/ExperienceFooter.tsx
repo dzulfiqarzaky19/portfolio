@@ -157,11 +157,9 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, i
       <div className={cn(
         "relative w-full md:w-[80%] lg:w-full rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500",
         "bg-white border border-white/50",
-        // Mobile Aspect Ratio vs Desktop
         "aspect-[3/4] md:aspect-video lg:aspect-2/1"
       )}>
         <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
-          {/* Left Content */}
           <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
             
             <motion.div 
@@ -207,30 +205,26 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, i
             </motion.div>
           </div>
 
-          {/* Right Image (Browser Mockup) - Hidden on Mobile to save space */}
           {experience.cardImage && (
             <div className={cn(
                 "hidden lg:block w-1/2 h-full relative perspective-distant",
                 "transition-all duration-700 delay-100",
                 "opacity-100 translate-x-0 rotate-y-0"
             )}>
-                 {/* Browser Window Frame */}
                 <div className="w-full h-full bg-gray-100 rounded-xl overflow-hidden shadow-2xl border border-gray-200/50 flex flex-col">
-                    {/* Browser Toolbar */}
                     <div className="h-8 bg-white border-b border-gray-200 flex items-center px-3 gap-2 shrink-0">
                         <div className="flex gap-1.5">
                             <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                             <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                             <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                         </div>
-                        {/* URL Bar */}
                         <div className="flex-1 mx-4 h-5 bg-gray-100 rounded flex items-center justify-center">
                             <span className="text-[10px] text-gray-400 font-medium truncate max-w-[150px]">
                                 {experience.company.name.toLowerCase().replace(/\s+/g, '')}.com
                             </span>
                         </div>
                     </div>
-                    {/* Content */}
+
                     <div className="flex-1 relative bg-gray-50 overflow-hidden group">
                         <img 
                             src={experience.cardImage} 
@@ -238,7 +232,6 @@ const SliderCard: React.FC<SliderCardProps> = ({ experience, offset, isCenter, i
                             className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
                             loading="lazy"
                         />
-                         {/* Hover Overlay */}
                          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                     </div>
                 </div>
