@@ -5,6 +5,7 @@ export interface ProjectSection {
     heading: string;
     description?: string;
     image?: string;
+    codeSnippet?: string;
     imageAlt?: string;
     isTilted?: boolean;
     content?: any; // Specific content for different section types

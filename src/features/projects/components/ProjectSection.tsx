@@ -41,7 +41,6 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ section, index }
           </Text>
         )}
 
-        {/* Specialized Content */}
         {renderContent(section, isEven)}
       </div>
 
@@ -54,11 +53,20 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ section, index }
           whileInView={{ rotate: 0, scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="relative w-full max-w-lg aspect-square lg:aspect-video rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]"
+          className={cn(
+            "relative w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]",
+            section.codeSnippet ? "h-auto" : "aspect-square lg:aspect-video"
+          )}
         >
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            {section.image ? (
-                <img src={section.image} alt={section.imageAlt || section.heading} className="w-full h-full object-cover" />
+          <div className={cn("relative", section.codeSnippet ? "" : "absolute inset-0 flex items-center justify-center p-4")}>
+            {section.codeSnippet ? (
+               <div className="w-full bg-[#1e1e1e] p-6 text-left">
+                  <pre className="font-mono text-xs sm:text-sm text-teal-500 whitespace-pre-wrap break-all">
+                    <code>{section.codeSnippet}</code>
+                  </pre>
+               </div>
+            ) : section.image ? (
+                <img src={section.image} alt={section.imageAlt || section.heading} className="w-full h-full object-cover rounded-2xl" />
             ) : (
                 <div className="w-full h-full bg-linear-to-br from-[hsl(var(--primary)/0.2)] to-[hsl(var(--accent)/0.2)] flex items-center justify-center">
                     <Text color="muted" className="text-center px-4">

@@ -20,8 +20,8 @@ const WEB_NOVEL = {
   title: 'Web Novel',
   description: `Full-Stack Web App with Puppeteer Core
 Backend: Rate Limiting, Redis Caching, Optimized Docker
-Frontend: Mobile UI, Reader Mode`,
-  imgUrl: '/images/novel.png',
+Frontend: Mobile UI, Reader Mode, Offline Support`,
+  imgUrl: '/images/novel-mobile.webp',
   detailUrl: '/projects/web-novel',
 }
 
