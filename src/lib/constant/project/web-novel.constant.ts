@@ -122,6 +122,34 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
             }
         },
         {
+            id: "full-stack-flow",
+            type: "flow",
+            heading: "Full Stack Execution Flow",
+            description: "End-to-end request lifecycle from the React client to the Puppeteer scraper.",
+            isTilted: true,
+            image: "/images/novel-flow.webp",
+            content: {
+                steps: [
+                    {
+                        title: "Client Request",
+                        description: "React client sends a request to the Fastify API Gateway."
+                    },
+                    {
+                        title: "Service Layer",
+                        description: "API Controller delegates to NovelService, which checks Redis cache first."
+                    },
+                    {
+                        title: "Scraping Engine",
+                        description: "On cache miss, Puppeteer scrapes the target site using a shared browser instance."
+                    },
+                    {
+                        title: "Data Normalization",
+                        description: "Raw HTML is parsed, normalized, and validated against Zod schemas before response."
+                    }
+                ]
+            }
+        },
+        {
             id: "caching",
             type: "caching",
             number: "04",
@@ -151,6 +179,29 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
             type: "metrics",
             heading: "Observability & Debugging",
             description: "Built-in debugging tools and extensive logging ensure system reliability.",
+            codeSnippet: `
+// Debug Artifacts
+
+const snap1 = await saveDebugArtifacts(page,
+    'goto-or-selectors-failed',
+    fastify.log.error.bind(fastify.log),
+);
+            
+// Resource Blocking
+
+if (PUPPETEER_CONFIG.assets.isBlocked) {
+    await page.setRequestInterception(true);
+
+    const block = (req: any) => {
+        if (PUPPETEER_CONFIG.assets.types.includes(req.resourceType())) {
+            req.abort();
+            return;
+        }
+        req.continue();
+    };
+    page.on('request', block);
+}
+            `,
             content: {
                 cards: [
                     {

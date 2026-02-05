@@ -155,6 +155,31 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
                 ))}
             </div>
         )
+    case 'flow':
+        return section.content?.steps && (
+            <div className={cn("space-y-6 flex flex-col w-full", alignClasses)}>
+                {section.content.steps.map((step: any, i: number) => (
+                    <div key={i} className={cn("flex gap-4 text-left relative", flexRowClasses)}>
+                         {/* Connecting Line */}
+                         {i !== section.content.steps.length - 1 && (
+                            <div className={cn(
+                                "absolute top-8 w-0.5 h-full bg-[hsl(var(--border))]",
+                                isRightAligned ? "right-[11px]" : "left-[11px]"
+                            )} />
+                         )}
+                         
+                         <span className="shrink-0 z-10 w-6 h-6 rounded-full bg-[hsl(var(--surface-2))] border-2 border-[hsl(var(--primary))] flex items-center justify-center text-[10px] font-bold text-[hsl(var(--primary))]">
+                            {i + 1}
+                         </span>
+                         
+                         <div>
+                            <p className="font-bold text-[hsl(var(--ink))]">{step.title}</p>
+                            <p className="text-sm text-[hsl(var(--muted))] leading-relaxed">{step.description}</p>
+                         </div>
+                    </div>
+                ))}
+            </div>
+        )
     case 'cta':
         return (
             <div className={cn("flex gap-4 pt-8 w-full", isRightAligned ? "justify-end" : "justify-start")}>

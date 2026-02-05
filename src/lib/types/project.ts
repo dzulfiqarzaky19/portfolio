@@ -1,6 +1,6 @@
 export interface ProjectSection {
     id: string;
-    type: 'challenge' | 'folder-structure' | 'caching' | 'metrics' | 'lessons' | 'cta';
+    type: 'challenge' | 'folder-structure' | 'caching' | 'metrics' | 'lessons' | 'cta' | 'flow';
     number?: string;
     heading: string;
     description?: string;
