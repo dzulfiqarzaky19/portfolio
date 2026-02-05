@@ -19,7 +19,7 @@ export const RAIZ: Experience = {
   role: 'Frontend Engineer',
   time: 'Jul 2023 - Aug 2025',
   color: 'linear-gradient(116.57deg, #63de76, #29ae87)',
-  imgUrl: '/images/raiz.png',
+  imgUrl: '/images/raiz.webp',
   detailUrl: '/experience/raiz',
   highlight: [
     'Rebuilt a cross-browser extension into React and TypeScript (Chrome, Firefox, Safari).',
@@ -37,7 +37,7 @@ export const RAIZ: Experience = {
 }
 
 export const EDOT: Experience = {
-  title: 'eDot Nabati',
+  title: 'Nabati Group',
   role: 'Frontend Engineer',
   time: 'Sep 2022 – Jun 2023',
   color: '#D32422',
@@ -62,7 +62,7 @@ export const MANDIRI: Experience = {
   role: 'Frontend Developer',
   time: 'Apr – Aug 2022',
   color: '#0064b9',
-  imgUrl: '/images/mandiri-kopra.png',
+  imgUrl: '/images/mandiri-kopra.webp',
   detailUrl: '/experience/mandiri',
   stacks: ['React', 'Ant Design', 'Canvas Charts', 'Maps'],
   highlight: [
@@ -77,7 +77,7 @@ export const CONSISTECH: Experience = {
   time: 'Sep 2019 – Nov 2021',
   stacks: ['React', 'Vue', 'Node.js'],
   color: '#714B67',
-  imgUrl: '/images/consistech.png',
+  imgUrl: '/images/consistech.webp',
   detailUrl: '/experience/consistech',
   highlight: [
     'Delivered client projects across ERP, Hospital Information System, and Payroll.',

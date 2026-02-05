@@ -1,4 +1,5 @@
 import type { ExperienceData } from '@/lib/types/experience';
+import { cn } from '@/lib/cn';
 
 interface TechnicalContributionsProps {
   data: ExperienceData;
@@ -32,12 +33,11 @@ export const TechnicalContributions: React.FC<TechnicalContributionsProps> = ({ 
              </div>
 
               <div className="flex-1 w-full">
-                  {/* Code Mockup or Technical Visual */}
                   {data.codeSnippet && (
                        <div className="rounded-xl bg-[#0f172a] p-6 shadow-2xl border border-[hsl(var(--border))] font-mono text-xs md:text-sm text-blue-100 overflow-hidden relative">
                             <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
                                  <span className="text-white/40">Code Snippet</span>
-                                 <span className="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">TypeScript</span>
+                                 <span className={cn(`text-xs px-2 py-0.5 rounded bg-blue-500/20`, data.codeLanguage === 'JavaScript' ? 'text-yellow-400' : 'text-blue-400')}>{data.codeLanguage}</span>
                             </div>
                             <pre className="overflow-x-auto">
                                 <code>

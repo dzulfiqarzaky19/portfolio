@@ -37,4 +37,5 @@ export interface ExperienceData {
     };
     cardImage?: string;
     codeSnippet?: string;
+    codeLanguage?: string;
 }

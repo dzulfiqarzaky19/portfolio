@@ -29,6 +29,16 @@ export const ExperienceHero: React.FC<ExperienceHeroProps> = ({ data }) => {
         transition={{ duration: 0.6 }}
         className="relative z-10 max-w-4xl mx-auto"
       >
+        {data.company.logo && (
+            <div className="mb-8">
+                <img 
+                    src={data.company.logo} 
+                    alt={`${data.company.name} Logo`} 
+                    className="w-20 h-20 md:w-24 md:h-24 object-contain mx-auto bg-white/10 rounded-2xl p-2 backdrop-blur-sm border border-white/20 shadow-xl"
+                />
+            </div>
+        )}
+
         <div className="inline-block px-3 py-1 mb-6 rounded-full bg-white/10 text-white/90 text-xs font-bold tracking-wider uppercase backdrop-blur-sm border border-white/20">
             {data.role.type}
         </div>

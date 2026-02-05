@@ -5,17 +5,19 @@ import type { ExperienceData } from '@/lib/types/experience';
 export const MANDIRI: ExperienceData = {
     id: 'mandiri',
     company: {
-        name: 'Bank Mandiri (Kopra)',
-        logo: '/images/mandiri-logo.png',
+        name: 'Bank Mandiri',
+        logo: '/images/mandiri-logo.webp',
         industry: 'Banking & Financial Services',
         mission: 'To provide innovative financial solutions and strengthen digital transformation for B2B clients.',
         scale: 'Serving millions of customers nationwide, with Kopra as its B2B transaction platform.',
         about: 'Indonesia’s largest bank, offering financial services across retail, corporate, and digital banking.',
+        website: 'https://www.bankmandiri.co.id/',
     },
     role: {
-        title: 'Mid Frontend Developer',
+        title: 'Frontend Engineer',
         type: 'Contract',
         description: 'Built custom dashboards and visualization tools for B2B clients, collaborating closely with backend teams to align API contracts.',
+        image: '/images/mandiri-kopra.webp',
         focus: [
             'B2B Transaction Dashboards',
             'Data Visualization',
@@ -77,8 +79,31 @@ export const MANDIRI: ExperienceData = {
         }
     ],
     theme: {
-        primary: '#003D79', // Mandiri Blue
+        primary: '#003D79',
         gradient: 'linear-gradient(135deg, #FFB700 0%, #003D79 100%)' // Gold to Blue
     },
-    cardImage: '/images/mandiri-kopra.png'
+    cardImage: '/images/mandiri-kopra.webp',
+    codeLanguage: 'JavaScript',
+    codeSnippet: `
+export const TransactionChart = ({ data, color }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const chart = new Chart(canvasRef.current, {
+      type: 'line',
+      data:[{
+          label: 'Volume (IDR)',
+          data: data.map(d => d.amount),
+          borderColor: color || '#003D79',
+          fill: true
+        }],
+    });
+
+    return () => chart.destroy();
+  }, [data, color]);
+
+  return <canvas ref={canvasRef} />;
+};`
 };

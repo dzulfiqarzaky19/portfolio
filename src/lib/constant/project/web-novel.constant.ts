@@ -82,6 +82,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "frontend-architecture",
             type: "folder-structure",
+            number: "03",
             heading: "Frontend Architecture",
             description: "The frontend follows a Feature-Based Architecture with enforced boundaries to prevent tight coupling between distinct features.",
             isTilted: false,
@@ -124,6 +125,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "full-stack-flow",
             type: "flow",
+            number: "04",
             heading: "Full Stack Execution Flow",
             description: "End-to-end request lifecycle from the React client to the Puppeteer scraper.",
             isTilted: true,
@@ -152,7 +154,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "caching",
             type: "caching",
-            number: "04",
+            number: "05",
             heading: "Caching Strategy",
             description: "Implemented an aggressive caching strategy using Redis to reduce load on target sites and improve response times.",
             isTilted: true,
@@ -177,6 +179,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "metrics",
             type: "metrics",
+            number: "06",
             heading: "Observability & Debugging",
             description: "Built-in debugging tools and extensive logging ensure system reliability.",
             codeSnippet: `
@@ -225,6 +228,7 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
         {
             id: "lessons",
             type: "lessons",
+            number: "07",
             heading: "Lessons Learned",
             image: "/images/novel-lesson.webp",
             content: {

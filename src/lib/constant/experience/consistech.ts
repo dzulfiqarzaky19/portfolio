@@ -5,16 +5,18 @@ export const CONSISTECH: ExperienceData = {
     id: 'consistech',
     company: {
         name: 'Consistech Solution',
-        logo: '/images/consistech-logo.png',
+        logo: '/images/consistech-logo.webp',
         industry: 'IT Consultancy (ERP, HIS, Payroll)',
         mission: 'To provide tailored software solutions that improve operational efficiency and business workflows.',
         scale: 'Serving SMEs and enterprise clients with end-to-end digital solutions.',
         about: 'IT consultancy delivering ERP, hospital information systems, and payroll solutions.',
+        website: 'https://consistechsolution.com/'
     },
     role: {
         title: 'Junior Full-Stack Engineer',
         type: 'Full-time',
         description: 'Delivered full-stack features across ERP, hospital, and payroll systems, working directly with stakeholders to gather requirements and conduct UAT.',
+        image: '/images/consistech.webp',
         focus: [
             'Full-stack features (React, Vue, Node.js)',
             'Module ownership (Attendance, Payroll)',
@@ -83,5 +85,36 @@ export const CONSISTECH: ExperienceData = {
     theme: {
         primary: '#6B46C1', // Generic Purple for Tech
         gradient: 'linear-gradient(135deg, #3B82F6 0%, #6B46C1 100%)' // Blue to Purple
-    }
+    },
+    cardImage: '/images/consistech.webp',
+    codeLanguage: 'JavaScript',
+    codeSnippet: `const express = require('express');
+const router = express.Router();
+const PayrollService = require('../services/PayrollService');
+
+router.post('/calculate', async (req, res) => {
+  try {
+    const { employeeId, month, year } = req.body;
+    
+    const salary = await PayrollService.calculateNetSalary({
+      employeeId, 
+      period: { month, year }
+    });
+
+    const payslipUrl = await PayrollService.generatePayslipPdf(salary);
+
+    res.json({
+      success: true,
+      data: {
+        netSalary: salary.total,
+        breakdown: salary.breakdown,
+        payslip: payslipUrl
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+module.exports = router;`
 };

@@ -1,40 +1,47 @@
-import { CheckCircle2, Code2, Database, Globe, Rocket, TrendingUp, Zap } from 'lucide-react';
+import { Blocks, CheckCircle2, Code2, Database, Globe, Rocket, TrendingUp, Zap } from 'lucide-react';
 import type { ExperienceData } from '@/lib/types/experience';
 
 export const RAIZ_INVEST: ExperienceData = {
     id: 'raiz',
     company: {
         name: 'Raiz Invest',
-        logo: '/images/raiz-logo.png', // Placeholder, need to check if user has assets or use text
+        logo: '/images/raiz-logo.webp',
         industry: 'Fintech',
         mission: 'To make investing simple, affordable, and accessible for everyone.',
         scale: 'Serving hundreds of thousands of users across multiple regions, managing millions in assets.',
         about: 'Empowering Australians to invest small amounts regularly.',
+        website: 'https://raizinvest.com.au/'
     },
     role: {
         title: 'Frontend Engineer',
         type: 'Contract',
-        description: 'Lead the modernization of legacy frontend systems. Focused on migrating a monolithic jQuery codebase to a modular React architecture, enhancing developer velocity and user experience simultaneously.',
+        description: 'Lead the modernization of legacy frontend systems. Focused on migrating a react class components to functional components, enhancing developer velocity and user experience simultaneously.',
+        image: '/images/raiz.webp',
         focus: [
+            'Lead the development of a cross-browser extension.',
             'Modernized frontend systems',
-            'Component Library Design',
             'Performance Optimization'
         ],
     },
     technicalContributions: [
         {
+            title: 'Cross-browser Extension',
+            description: 'Lead the development of a cross-browser extension that allows users to invest small amounts of money regularly.',
+            icon: Blocks
+        },
+        {
             title: 'React + TS Rewrite',
-            description: 'Complete migration of critical investment flows from legacy jQuery/Blade templates to React functional components with strict TypeScript typing.',
+            description: 'Complete migration of critical investment flows from legacy React Class components to React functional components with strict TypeScript typing.',
             icon: Code2
         },
         {
             title: 'CRA to Vite Migration',
-            description: 'Replaced Create React App with Vite, reducing local dev server startup time from ~40s to <500ms.',
+            description: 'Co-delivered migration from Create React App to Vite, reducing local dev server cost and improving developer experience.',
             icon: Zap
         },
         {
-            title: 'RTK Query Adoption',
-            description: 'Implemented Redux Toolkit Query for efficient data fetching, caching, and state management, removing boilerplate Redux thunks.',
+            title: 'Marketing Site maintenance',
+            description: 'Update marketing site content and SEO using Next.js and GraphQL.',
             icon: Database
         },
         {
@@ -51,9 +58,9 @@ export const RAIZ_INVEST: ExperienceData = {
             image: '/images/experience/raiz/builds.png'
         },
         {
-            title: 'Accessibility Score',
-            metric: '100% Audit Score',
-            description: 'Enhanced accessibility (a11y) across the web platform, broadening user reach.',
+            title: 'Broader Reach',
+            metric: 'Upgrading User Experience',
+            description: 'Cross-browser extension on Safari, Chrome, and Firefox opened the platform to a wider demographic.',
             image: '/images/experience/raiz/a11y.png'
         },
         {
@@ -66,17 +73,17 @@ export const RAIZ_INVEST: ExperienceData = {
     keyTakeaways: [
         {
             title: 'Reduced Tech Debt',
-            description: 'Removing legacy jQuery dependencies streamlined the codebase, making future features significantly easier to implement.',
+            description: 'Removing legacy jQuery dependencies and React Class components streamlined the codebase, making future features significantly easier to implement.',
             icon: TrendingUp
         },
         {
             title: 'Broader Reach',
-            description: 'Accessibility improvements opened the platform to a wider demographic, aligning with the company\'s mission of democratization.',
+            description: 'Cross-browser extension on Safari, Chrome, and Firefox opened the platform to a wider demographic, aligning with the company\'s mission of making investing simple, affordable, and accessible for everyone.',
             icon: Globe
         },
         {
             title: 'Improved Velocity',
-            description: 'Modern tooling (Vite, RTK Query) boosted developer confidence and deployment speed, enabling daily releases.',
+            description: 'Modern tooling, refactoring and code review process boosted developer confidence and speed, enabling smoother development and release.',
             icon: Rocket
         }
     ],
@@ -84,5 +91,35 @@ export const RAIZ_INVEST: ExperienceData = {
         primary: '#60C0A8', // Raiz green-ish
         gradient: 'linear-gradient(135deg, #1E3A8A 0%, #60C0A8 100%)' // Deep blue to teal
     },
-    cardImage: '/images/raiz.png'
+    cardImage: '/images/raiz.webp',
+    codeLanguage: 'TypeScript',
+    codeSnippet: `// Migration: Class Component -> Functional Component
+
+// ❌ BEFORE (Legacy):
+// class InvestmentPortfolio extends React.Component {
+//   componentDidMount() {
+//     this.props.fetchPortfolio(this.props.userId);
+//   }
+//   render() {
+//     return <div>{this.props.data.balance}</div>;
+//   }
+// }
+
+// ✅ AFTER (Modern React + TS):
+interface IPorfolioProps {
+  userId: string;
+}
+
+export const InvestmentPortfolio = ({ 
+  userId 
+}: IPorfolioProps) => {
+  const { data } = useGetPortfolioQuery(userId);
+
+  return (
+    <Card className="portfolio-modern">
+      <Text variant="h3">Total Balance</Text>
+      <CurrencyDisplay value={data?.balance} />
+    </Card>
+  );
+};`
 };

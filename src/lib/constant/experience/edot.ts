@@ -4,8 +4,8 @@ import type { ExperienceData } from '@/lib/types/experience';
 export const EDOT: ExperienceData = {
     id: 'edot',
     company: {
-        name: 'eDot (Nabati)',
-        logo: '/images/edot-logo.png',
+        name: 'eDOT',
+        logo: '/images/edot-logo.webp',
         industry: 'Digital solutions provider for FMCG',
         mission: 'To streamline partner and warehouse operations with scalable digital platforms.',
         scale: 'Supporting Nabati’s distribution network across Indonesia.',
@@ -92,7 +92,8 @@ export const EDOT: ExperienceData = {
         primary: '#E01E26',
         gradient: 'linear-gradient(135deg, #F8B400 0%, #E01E26 100%)'
     },
-    cardImage: '/images/edot.png',
+    cardImage: '/images/edot.webp',
+    codeLanguage: 'JavaScript',
     codeSnippet: `// Mapbox Integration with React
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
