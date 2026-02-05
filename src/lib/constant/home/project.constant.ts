@@ -1,10 +1,13 @@
-const GO_MANK = {
-  title: 'GoMank',
-  description: `Hacktiv8 Final Project
-On-demand carwash booking app
-Microservices: Chat, Maps, Admin Dashboard, Client App, Driver App`,
-  imgUrl: '/images/fit-track.png',
-  detailUrl: '/projects/go-mank',
+import { EMPLOYEES_20K_PROJECT } from '@/lib/constant/project/employees-20k.constant';
+import { WEB_NOVEL_PROJECT } from '@/lib/constant/project/web-novel.constant';
+
+const EMPLOYEES_20K = {
+  title: EMPLOYEES_20K_PROJECT.title,
+  description: `High-Performance HR Dashboard
+React 19, Virtualization (20k+ Rows)
+Node.js, BullMQ, Redis, Real-time Socket.IO`,
+  imgUrl: '/images/ems-mobile.webp',
+  detailUrl: `/projects/${EMPLOYEES_20K_PROJECT.id}`,
 }
 
 const CHAT_SNAP = {
@@ -17,12 +20,12 @@ Users: Create/Update/Delete Own Posts`,
 }
 
 const WEB_NOVEL = {
-  title: 'Web Novel',
+  title: WEB_NOVEL_PROJECT.title,
   description: `Full-Stack Web App with Puppeteer Core
 Backend: Rate Limiting, Redis Caching, Optimized Docker
 Frontend: Mobile UI, Reader Mode, Offline Support`,
   imgUrl: '/images/novel-mobile.webp',
-  detailUrl: '/projects/web-novel',
+  detailUrl: `/projects/${WEB_NOVEL_PROJECT.id}`,
 }
 
 const PRADA_CLONE = {
@@ -42,6 +45,6 @@ const OTHER_PROJECTS = {
   detailUrl: '/projects/other',
 }
 
-const PROJECTS = [GO_MANK, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, OTHER_PROJECTS]
+const PROJECTS = [EMPLOYEES_20K, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, OTHER_PROJECTS]
 
-export { GO_MANK, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, PROJECTS }
+export { EMPLOYEES_20K, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, PROJECTS }

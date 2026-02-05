@@ -17,6 +17,7 @@ export interface ExperienceData {
         mission: string;
         scale: string;
         about: string; // The "About the Company" text
+        website?: string;
     };
     role: {
         title: string;
@@ -35,4 +36,5 @@ export interface ExperienceData {
         gradient: string;
     };
     cardImage?: string;
+    codeSnippet?: string;
 }

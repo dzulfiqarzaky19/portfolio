@@ -42,12 +42,16 @@ export const ExperienceHero: React.FC<ExperienceHeroProps> = ({ data }) => {
         </p>
 
         <div className="flex gap-4 justify-center mt-8">
-            <button className="px-6 py-3 rounded-full bg-white text-[hsl(var(--primary))] font-bold hover:bg-white/90 transition-colors shadow-lg">
-                View Project
-            </button>
-             <button className="px-6 py-3 rounded-full bg-transparent border-2 border-white text-white font-bold hover:bg-white/10 transition-colors">
-                View Code
-            </button>
+            {data.company.website && (
+                <a 
+                    href={data.company.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full bg-white text-[hsl(var(--primary))] font-bold hover:bg-white/90 transition-colors shadow-lg"
+                >
+                    View Company
+                </a>
+            )}
         </div>
       </motion.div>
       

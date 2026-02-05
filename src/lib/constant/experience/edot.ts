@@ -1,4 +1,4 @@
-import { BarChart3, Box, Map, Smartphone, TrendingUp, Users } from 'lucide-react';
+import { BarChart3, Box, File, Map, ReceiptText, Smartphone, TrendingUp, Users } from 'lucide-react';
 import type { ExperienceData } from '@/lib/types/experience';
 
 export const EDOT: ExperienceData = {
@@ -10,6 +10,7 @@ export const EDOT: ExperienceData = {
         mission: 'To streamline partner and warehouse operations with scalable digital platforms.',
         scale: 'Supporting Nabati’s distribution network across Indonesia.',
         about: 'Focusing on logistics, partner management, and operational dashboards.',
+        website: 'https://edot.id/id'
     },
     role: {
         title: 'Frontend Engineer',
@@ -19,7 +20,8 @@ export const EDOT: ExperienceData = {
         focus: [
             'Built operational dashboards',
             'Implemented Mapbox tracking',
-            'Optimized large datasets'
+            'Implemented multi-level approval workflow for file management',
+            'Communicate with backend team to design API contracts'
         ],
     },
     technicalContributions: [
@@ -34,9 +36,9 @@ export const EDOT: ExperienceData = {
             icon: BarChart3
         },
         {
-            title: 'Mapbox Migration',
-            description: 'Migrated maps from Google Maps to Mapbox, reducing API costs and enabling shipment tracking.',
-            icon: Map
+            title: 'Multi-Level Approval Workflow',
+            description: 'Implemented a multi-level approval workflow for file management, ensuring proper authorization and tracking.',
+            icon: File
         },
         {
             title: 'Complex Ant Design Forms',
@@ -48,7 +50,7 @@ export const EDOT: ExperienceData = {
         {
             title: 'Cost Reduction',
             metric: 'Reduced API Costs',
-            description: 'Reduced operational costs by migrating to Mapbox.',
+            description: 'Reduced operational costs by migrating google maps to Mapbox.',
             image: '/images/experience/edot/mapbox.png'
         },
         {
@@ -79,11 +81,36 @@ export const EDOT: ExperienceData = {
             title: 'Role-Based Ops',
             description: 'Learned complexities of building secure, multi-tenant/multi-role operational systems.',
             icon: Users
+        },
+        {
+            title: 'API Contract Design',
+            description: 'Learned complexities of building secure, multi-tenant/multi-role operational API contracts.',
+            icon: ReceiptText
         }
     ],
     theme: {
-        primary: '#E01E26', // Nabati Red
-        gradient: 'linear-gradient(135deg, #F8B400 0%, #E01E26 100%)' // Yellow to Red
+        primary: '#E01E26',
+        gradient: 'linear-gradient(135deg, #F8B400 0%, #E01E26 100%)'
     },
-    cardImage: '/images/edot.png'
+    cardImage: '/images/edot.png',
+    codeSnippet: `// Mapbox Integration with React
+import React, { useRef, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+
+export const TrackingMap = ({ coordinates }) => {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+
+  useEffect(() => {
+    if (map.current) return;
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: coordinates,
+      zoom: 9
+    });
+  }, []);
+
+  return <div ref={mapContainer} className="map-container" />;
+};`
 };

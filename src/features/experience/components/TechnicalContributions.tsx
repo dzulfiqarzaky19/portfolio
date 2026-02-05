@@ -31,39 +31,27 @@ export const TechnicalContributions: React.FC<TechnicalContributionsProps> = ({ 
                  })}
              </div>
 
-             <div className="flex-1 w-full">
+              <div className="flex-1 w-full">
                   {/* Code Mockup or Technical Visual */}
-                   <div className="rounded-xl bg-[#0f172a] p-6 shadow-2xl border border-[hsl(var(--border))] font-mono text-xs md:text-sm text-blue-100 overflow-hidden">
-                        <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
-                             <span className="text-white/40">src/components/InvestmentFlow.tsx</span>
-                             <span className="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">React</span>
-                        </div>
-                        <pre className="overflow-x-auto">
-                            <code>
-{`import { usePortfolioQuery } from '@services/api';
-import { InvestmentCard } from '@components/ui';
-
-export const PortfolioGraph = () => {
-  const { data, isLoading } = usePortfolioQuery();
-  
-  if (isLoading) return <Skeleton h={300} />;
-  
-  return (
-    <div className="grid gap-4">
-       {data.investments.map(inv => (
-          <InvestmentCard 
-            key={inv.id} 
-            {...inv}
-            variant="interactive"
-          />
-       ))}
-    </div>
-  );
-};`}
-                            </code>
-                        </pre>
-                   </div>
-             </div>
+                  {data.codeSnippet && (
+                       <div className="rounded-xl bg-[#0f172a] p-6 shadow-2xl border border-[hsl(var(--border))] font-mono text-xs md:text-sm text-blue-100 overflow-hidden relative">
+                            <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
+                                 <span className="text-white/40">Code Snippet</span>
+                                 <span className="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">TypeScript</span>
+                            </div>
+                            <pre className="overflow-x-auto">
+                                <code>
+                                    {data.codeSnippet}
+                                </code>
+                            </pre>
+                            <div className="mt-4 pt-2 border-t border-white/5 text-center">
+                                <p className="text-[10px] text-white/30 italic">
+                                    Note: This is an illustrative snippet, not actual production code.
+                                </p>
+                            </div>
+                       </div>
+                  )}
+              </div>
          </div>
       </div>
     </section>
