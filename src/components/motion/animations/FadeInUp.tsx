@@ -1,6 +1,6 @@
-import {  motion } from 'motion/react'
+import { motion } from 'motion/react'
 import React from 'react'
-import type {HTMLMotionProps} from 'motion/react';
+import type { HTMLMotionProps } from 'motion/react'
 import { cn } from '@/lib/cn'
 
 interface FadeInUpProps extends HTMLMotionProps<'div'> {

@@ -1,7 +1,8 @@
 import React from 'react'
-import { motion } from 'motion/react'
 import type { ProjectSection as IProjectSection } from '@/lib/types/project'
 import { Text } from '@/components/ui/Text'
+import { FadeInUp } from '@/components/motion/animations/FadeInUp'
+import { TiltOnView } from '@/components/motion/animations/TiltOnView'
 import { cn } from '@/lib/cn'
 
 interface ProjectSectionProps {
@@ -61,55 +62,64 @@ const ProjectSectionComponent: React.FC<ProjectSectionProps> = ({
           isEven ? 'lg:order-2' : 'lg:order-1',
         )}
       >
-        <motion.div
-          initial={
-            section.isTilted
-              ? { rotate: isEven ? -5 : 5, scale: 0.95 }
-              : { opacity: 0, y: 30 }
-          }
-          whileInView={{ rotate: 0, scale: 1, opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-100px' }}
-          className={cn(
-            'relative w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]',
-            section.codeSnippet ? 'h-auto' : 'aspect-square lg:aspect-video',
-          )}
-        >
-          <div
+        {section.isTilted ? (
+          <TiltOnView
+            direction={isEven ? 'left' : 'right'}
             className={cn(
-              'relative',
-              section.codeSnippet
-                ? ''
-                : 'absolute inset-0 flex items-center justify-center p-4',
+              'w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]',
+              section.codeSnippet ? 'h-auto' : 'aspect-square lg:aspect-video',
             )}
           >
-            {section.codeSnippet ? (
-              <div className="w-full bg-[#1e1e1e] p-6 text-left">
-                <pre className="font-mono text-xs sm:text-sm text-teal-500 whitespace-pre-wrap break-all">
-                  <code>{section.codeSnippet}</code>
-                </pre>
-              </div>
-            ) : section.image ? (
-              <img
-                src={section.image}
-                alt={section.imageAlt || section.heading}
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            ) : (
-              <div className="w-full h-full bg-linear-to-br from-[hsl(var(--primary)/0.2)] to-[hsl(var(--accent)/0.2)] flex items-center justify-center">
-                <Text color="muted" className="text-center px-4">
-                  Visualizing: {section.heading}
-                </Text>
-              </div>
+            <ContentInner section={section} />
+          </TiltOnView>
+        ) : (
+          <FadeInUp
+            distance={30}
+            className={cn(
+              'relative w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]',
+              section.codeSnippet ? 'h-auto' : 'aspect-square lg:aspect-video',
             )}
-          </div>
-        </motion.div>
+          >
+            <ContentInner section={section} />
+          </FadeInUp>
+        )}
       </div>
     </section>
   )
 }
 
 export const ProjectSection = React.memo(ProjectSectionComponent)
+
+const ContentInner = ({ section }: { section: IProjectSection }) => (
+  <div
+    className={cn(
+      'relative',
+      section.codeSnippet
+        ? ''
+        : 'absolute inset-0 flex items-center justify-center p-4',
+    )}
+  >
+    {section.codeSnippet ? (
+      <div className="w-full bg-[#1e1e1e] p-6 text-left">
+        <pre className="font-mono text-xs sm:text-sm text-teal-500 whitespace-pre-wrap break-all">
+          <code>{section.codeSnippet}</code>
+        </pre>
+      </div>
+    ) : section.image ? (
+      <img
+        src={section.image}
+        alt={section.imageAlt || section.heading}
+        className="w-full h-full object-cover rounded-2xl"
+      />
+    ) : (
+      <div className="w-full h-full bg-linear-to-br from-[hsl(var(--primary)/0.2)] to-[hsl(var(--accent)/0.2)] flex items-center justify-center">
+        <Text color="muted" className="text-center px-4">
+          Visualizing: {section.heading}
+        </Text>
+      </div>
+    )}
+  </div>
+)
 
 function renderContent(section: IProjectSection, isRightAligned: boolean) {
   const alignClasses = isRightAligned
