@@ -5,9 +5,7 @@ interface VerticalProgressProps {
   sections: Array<ProjectSection>
 }
 
-export const VerticalProgress: React.FC<VerticalProgressProps> = ({
-  sections,
-}) => {
+export const VerticalProgress: React.FC<VerticalProgressProps> = () => {
   const { scrollYProgress } = useScroll()
   const lineScale = useSpring(scrollYProgress, {
     stiffness: 100,
