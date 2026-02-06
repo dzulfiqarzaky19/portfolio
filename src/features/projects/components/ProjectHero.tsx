@@ -15,7 +15,7 @@ interface ProjectHeroProps {
   }>
 }
 
-export const ProjectHero: React.FC<ProjectHeroProps> = ({
+const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
   tag,
   title,
   subtitle,
@@ -66,3 +66,5 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({
     </section>
   )
 }
+
+export const ProjectHero = React.memo(ProjectHeroComponent)

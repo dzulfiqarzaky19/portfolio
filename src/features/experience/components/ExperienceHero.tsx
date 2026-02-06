@@ -1,3 +1,4 @@
+import React from 'react'
 import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
@@ -7,7 +8,7 @@ interface ExperienceHeroProps {
   data: ExperienceData
 }
 
-export const ExperienceHero: React.FC<ExperienceHeroProps> = ({ data }) => {
+const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
   return (
     <div
       className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-20 overflow-hidden"
@@ -73,3 +74,5 @@ export const ExperienceHero: React.FC<ExperienceHeroProps> = ({ data }) => {
     </div>
   )
 }
+
+export const ExperienceHero = React.memo(ExperienceHeroComponent)
