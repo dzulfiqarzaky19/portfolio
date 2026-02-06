@@ -17,10 +17,10 @@ describe('ThemeToggle', () => {
   it('toggles theme on click', () => {
     render(<ThemeToggle />)
     const button = screen.getByRole('button', { name: /toggle theme/i })
-    
+
     // Initial state (light by default in component if no storage)
-    expect(document.documentElement.getAttribute('data-theme')).toBeNull() 
-    
+    expect(document.documentElement.getAttribute('data-theme')).toBeNull()
+
     // Click to toggle to dark
     fireEvent.click(button)
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark')

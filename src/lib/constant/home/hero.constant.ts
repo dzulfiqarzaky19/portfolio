@@ -1,4 +1,9 @@
-import { CHAT_SNAP, EMPLOYEES_20K, PRADA_CLONE, WEB_NOVEL } from './project.constant'
+import {
+  CHAT_SNAP,
+  EMPLOYEES_20K,
+  PRADA_CLONE,
+  WEB_NOVEL,
+} from './project.constant'
 
 const HERO = {
   title: "Hi, I'm Zaky",

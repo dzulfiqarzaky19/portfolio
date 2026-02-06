@@ -1,14 +1,14 @@
-import { ExperienceHero } from './components/ExperienceHero';
-import { CompanyInfo } from './components/CompanyInfo';
-import { RoleOverview } from './components/RoleOverview';
-import { TechnicalContributions } from './components/TechnicalContributions';
-import { BusinessImpact } from './components/BusinessImpact';
-import { KeyTakeaways } from './components/KeyTakeaways';
-import { ExperienceFooter } from './components/ExperienceFooter';
-import type { ExperienceData } from '@/lib/types/experience';
+import { ExperienceHero } from './components/ExperienceHero'
+import { CompanyInfo } from './components/CompanyInfo'
+import { RoleOverview } from './components/RoleOverview'
+import { TechnicalContributions } from './components/TechnicalContributions'
+import { BusinessImpact } from './components/BusinessImpact'
+import { KeyTakeaways } from './components/KeyTakeaways'
+import { ExperienceFooter } from './components/ExperienceFooter'
+import type { ExperienceData } from '@/lib/types/experience'
 
 interface ExperienceLayoutProps {
-  data: ExperienceData;
+  data: ExperienceData
 }
 
 export const ExperienceLayout: React.FC<ExperienceLayoutProps> = ({ data }) => {
@@ -20,8 +20,8 @@ export const ExperienceLayout: React.FC<ExperienceLayoutProps> = ({ data }) => {
       <TechnicalContributions data={data} />
       <BusinessImpact data={data} />
       <KeyTakeaways data={data} />
-      
+
       <ExperienceFooter currentExperienceId={data.id} />
     </div>
-  );
-};
+  )
+}

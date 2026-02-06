@@ -21,14 +21,18 @@ export const Article = ({ experience, i }: Props) => {
           i % 2 === 0 ? 'bg-[hsl(var(--primary))]' : 'bg-[hsl(var(--accent))]',
         )}
       >
-        <div className={cn(
-          "w-full max-w-7xl mx-auto flex justify-center items-center flex-col-reverse gap-16",
-           i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-        )}>
+        <div
+          className={cn(
+            'w-full max-w-7xl mx-auto flex justify-center items-center flex-col-reverse gap-16',
+            i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse',
+          )}
+        >
           <div
             className={cn(
               `w-full lg:w-1/2 flex flex-col gap-4 max-w-2xl`,
-              i % 2 === 0 ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left',
+              i % 2 === 0
+                ? 'lg:items-end lg:text-right'
+                : 'lg:items-start lg:text-left',
             )}
           >
             <InViewTransition>
@@ -47,7 +51,8 @@ export const Article = ({ experience, i }: Props) => {
               <Link
                 to="/experience/$experienceId"
                 params={{
-                  experienceId: experience.detailUrl?.split('/').pop() ?? 'raiz',
+                  experienceId:
+                    experience.detailUrl?.split('/').pop() ?? 'raiz',
                 }}
                 className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
               >

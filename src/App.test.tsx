@@ -1,6 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { RouterProvider, createRouter, createMemoryHistory } from '@tanstack/react-router'
+import {
+  RouterProvider,
+  createRouter,
+  createMemoryHistory,
+} from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
 const router = createRouter({
@@ -16,7 +20,9 @@ describe('App Integration', () => {
 
     expect(await screen.findByText(/Featured Projects/i)).toBeInTheDocument()
     expect(await screen.findByText(/Work Experience/i)).toBeInTheDocument()
-    
-    expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument()
+
+    expect(
+      screen.getByRole('button', { name: /toggle theme/i }),
+    ).toBeInTheDocument()
   })
 })

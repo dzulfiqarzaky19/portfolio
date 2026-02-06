@@ -5,7 +5,7 @@ import { ProjectLayout } from '@/features/projects/ProjectLayout'
 export const Route = createFileRoute('/projects/$projectId')({
   component: ProjectRoute,
   loader: ({ params }) => {
-    const project = PROJECT_DETAILS[params.projectId ]
+    const project = PROJECT_DETAILS[params.projectId]
 
     if (!project) {
       throw notFound()

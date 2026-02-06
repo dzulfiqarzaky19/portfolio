@@ -8,10 +8,10 @@ export interface Experience {
   highlight: Array<string>
   description?: string
   detailUrl:
-  | '/experience/raiz'
-  | '/experience/edot'
-  | '/experience/mandiri'
-  | '/experience/consistech'
+    | '/experience/raiz'
+    | '/experience/edot'
+    | '/experience/mandiri'
+    | '/experience/consistech'
 }
 
 export const RAIZ: Experience = {

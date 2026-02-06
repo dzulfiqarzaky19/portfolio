@@ -11,7 +11,9 @@ test.describe('Home Page', () => {
 
   test('renders hero section', async ({ page }) => {
     await expect(page.getByText(/Hi, I'm Zaky/i)).toBeVisible()
-    await expect(page.getByText(/I Build Scalable JavaScript Apps/i)).toBeVisible()
+    await expect(
+      page.getByText(/I Build Scalable JavaScript Apps/i),
+    ).toBeVisible()
   })
 
   test('renders projects section', async ({ page }) => {
@@ -27,7 +29,7 @@ test.describe('Home Page', () => {
     const initialTheme = await html.getAttribute('data-theme')
 
     await toggleButton.click()
-    
+
     // Wait for attribute to change
     await expect(html).not.toHaveAttribute('data-theme', initialTheme || 'none')
   })

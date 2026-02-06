@@ -1,29 +1,30 @@
-import { motion, useScroll, useSpring } from 'framer-motion';
-import type { ProjectSection } from '@/lib/types/project';
+import { motion, useScroll, useSpring } from 'framer-motion'
+import type { ProjectSection } from '@/lib/types/project'
 
 interface VerticalProgressProps {
-  sections: Array<ProjectSection>;
+  sections: Array<ProjectSection>
 }
 
-export const VerticalProgress: React.FC<VerticalProgressProps> = ({ sections }) => {
-  const { scrollYProgress } = useScroll();
+export const VerticalProgress: React.FC<VerticalProgressProps> = ({
+  sections,
+}) => {
+  const { scrollYProgress } = useScroll()
   const lineScale = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
-  });
+    restDelta: 0.001,
+  })
 
   return (
     <div className="fixed inset-y-0 left-1/2 -translate-x-1/2 pointer-events-none z-0 hidden lg:block">
       <div className="absolute inset-y-0 w-px bg-[hsl(var(--border)/0.5)]" />
-      
-      <motion.div 
+
+      <motion.div
         className="absolute top-0 w-px bg-[hsl(var(--primary))] origin-top"
         style={{ scaleY: lineScale, height: '100%' }}
       />
 
-      <div className="absolute inset-0 flex flex-col justify-between py-32">
-      </div>
+      <div className="absolute inset-0 flex flex-col justify-between py-32"></div>
     </div>
-  );
-};
+  )
+}

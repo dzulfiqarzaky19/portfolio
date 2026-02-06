@@ -1,6 +1,6 @@
-import { EMPLOYEES_20K_PROJECT } from '@/lib/constant/project/employees-20k.constant';
-import { WEB_NOVEL_PROJECT } from '@/lib/constant/project/web-novel.constant';
-import { TRELLO_CLONE_PROJECT } from '@/lib/constant/project/trello-clone.constant';
+import { EMPLOYEES_20K_PROJECT } from '@/lib/constant/project/employees-20k.constant'
+import { WEB_NOVEL_PROJECT } from '@/lib/constant/project/web-novel.constant'
+import { TRELLO_CLONE_PROJECT } from '@/lib/constant/project/trello-clone.constant'
 
 const EMPLOYEES_20K = {
   title: EMPLOYEES_20K_PROJECT.title,
@@ -47,6 +47,12 @@ const OTHER_PROJECTS = {
   detailUrl: '/projects/other',
 }
 
-const PROJECTS = [EMPLOYEES_20K, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, OTHER_PROJECTS]
+const PROJECTS = [
+  EMPLOYEES_20K,
+  WEB_NOVEL,
+  CHAT_SNAP,
+  PRADA_CLONE,
+  OTHER_PROJECTS,
+]
 
 export { EMPLOYEES_20K, WEB_NOVEL, CHAT_SNAP, PRADA_CLONE, PROJECTS }

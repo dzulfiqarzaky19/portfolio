@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import type { ReactNode} from 'react';
+import type { ReactNode } from 'react'
 import { useContainerHeight } from '@/lib/hooks/useContainerHeight'
 import { useHorizontalScroll } from '@/lib/hooks/useHorizontalScroll'
 import { cn } from '@/lib/cn'
@@ -21,11 +21,11 @@ export const HorizontalScroll = ({
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024)
     }
-    
+
     handleResize()
-    
+
     window.addEventListener('resize', handleResize)
-    
+
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -43,18 +43,15 @@ export const HorizontalScroll = ({
         height: isDesktop ? `${containerHeight}px` : 'auto',
       }}
     >
-      <div 
-        ref={containerChildRef} 
+      <div
+        ref={containerChildRef}
         className={cn(
-          "overflow-x-hidden",
-          isDesktop ? "sticky top-0" : "relative"
+          'overflow-x-hidden',
+          isDesktop ? 'sticky top-0' : 'relative',
         )}
       >
-        <motion.div 
-          className={cn(
-            "flex",
-            isDesktop ? "flex-row" : "flex-col"
-          )} 
+        <motion.div
+          className={cn('flex', isDesktop ? 'flex-row' : 'flex-col')}
           style={{ x: isDesktop ? x : 0 }}
         >
           {children}
