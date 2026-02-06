@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
-import { NotFound } from './NotFound'
+import { describe, expect, it } from 'vitest'
 import {
-  createRouter,
+  Outlet,
   RouterProvider,
+  createMemoryHistory,
   createRootRoute,
   createRoute,
-  Outlet,
-  createMemoryHistory,
+  createRouter,
 } from '@tanstack/react-router'
+import { NotFound } from './NotFound'
 
 const rootRoute = createRootRoute({
   component: Outlet,

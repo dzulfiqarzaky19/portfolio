@@ -9,7 +9,7 @@ interface ProjectSectionProps {
   index: number
 }
 
-export const ProjectSection: React.FC<ProjectSectionProps> = ({
+const ProjectSectionComponent: React.FC<ProjectSectionProps> = ({
   section,
   index,
 }) => {
@@ -108,6 +108,8 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
     </section>
   )
 }
+
+export const ProjectSection = React.memo(ProjectSectionComponent)
 
 function renderContent(section: IProjectSection, isRightAligned: boolean) {
   const alignClasses = isRightAligned

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 test('404 Page', async ({ page }) => {
   await page.goto('/some-non-existent-page')
