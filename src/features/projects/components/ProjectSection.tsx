@@ -3,6 +3,7 @@ import type { ProjectSection as IProjectSection } from '@/lib/types/project'
 import { Text } from '@/components/ui/Text'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 import { TiltOnView } from '@/components/motion/animations/TiltOnView'
+import { BrowserFrame } from '@/components/ui/BrowserFrame'
 import { cn } from '@/lib/cn'
 
 interface ProjectSectionProps {
@@ -65,22 +66,33 @@ const ProjectSectionComponent: React.FC<ProjectSectionProps> = ({
         {section.isTilted ? (
           <TiltOnView
             direction={isEven ? 'left' : 'right'}
-            className={cn(
-              'w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]',
-              section.codeSnippet ? 'h-auto' : 'aspect-square lg:aspect-video',
-            )}
+            className="w-full max-w-lg"
           >
-            <ContentInner section={section} />
+            <BrowserFrame
+              className={cn(
+                'w-full bg-[hsl(var(--surface-2))] border-[hsl(var(--border))]',
+                section.codeSnippet
+                  ? 'h-auto'
+                  : 'aspect-square lg:aspect-video',
+              )}
+              contentClassName="p-0 pt-0"
+            >
+              <ContentInner section={section} />
+            </BrowserFrame>
           </TiltOnView>
         ) : (
-          <FadeInUp
-            distance={30}
-            className={cn(
-              'relative w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))]',
-              section.codeSnippet ? 'h-auto' : 'aspect-square lg:aspect-video',
-            )}
-          >
-            <ContentInner section={section} />
+          <FadeInUp distance={30} className="relative w-full max-w-lg">
+            <BrowserFrame
+              className={cn(
+                'w-full bg-[hsl(var(--surface-2))] border-[hsl(var(--border))]',
+                section.codeSnippet
+                  ? 'h-auto'
+                  : 'aspect-square lg:aspect-video',
+              )}
+              contentClassName="p-0 pt-0"
+            >
+              <ContentInner section={section} />
+            </BrowserFrame>
           </FadeInUp>
         )}
       </div>

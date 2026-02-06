@@ -8,6 +8,7 @@ import { EXPERIENCE_DETAILS } from '@/lib/constant/experience'
 import { cn } from '@/lib/cn'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 import { Badge } from '@/components/ui/Badge'
+import { BrowserFrame } from '@/components/ui/BrowserFrame'
 
 interface ExperienceFooterProps {
   currentExperienceId?: string
@@ -170,12 +171,13 @@ const SliderCard: React.FC<SliderCardProps> = ({
         damping: 25,
       }}
     >
-      <div
+      <BrowserFrame
         className={cn(
-          'relative w-full md:w-[80%] lg:w-full rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500',
-          'bg-white border border-white/50',
+          'w-full md:w-[80%] lg:w-full transition-all duration-500',
           'aspect-3/4 md:aspect-video lg:aspect-2/1',
+          'rounded-[24px] md:rounded-[32px] bg-white border-white/50',
         )}
+        contentClassName="p-6 md:p-12 h-full"
       >
         <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
           <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
@@ -260,7 +262,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
             </div>
           )}
         </div>
-      </div>
+      </BrowserFrame>
     </motion.div>
   )
 }

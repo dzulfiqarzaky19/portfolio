@@ -7,7 +7,7 @@ export const Route = createFileRoute('/projects/$projectId')({
   loader: ({ params }) => {
     const project = PROJECT_DETAILS[params.projectId]
 
-    if (!project) {
+    if (!Object.keys(PROJECT_DETAILS).includes(params.projectId)) {
       throw notFound()
     }
     return project
