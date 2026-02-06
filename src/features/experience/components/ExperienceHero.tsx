@@ -1,8 +1,8 @@
 import React from 'react'
-import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import type { ExperienceData } from '@/lib/types/experience'
+import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 
 interface ExperienceHeroProps {
   data: ExperienceData
@@ -24,12 +24,7 @@ const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
         Back to Home
       </Link>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-10 max-w-4xl mx-auto"
-      >
+      <FadeInUp className="relative z-10 max-w-4xl mx-auto">
         {data.company.logo && (
           <div className="mb-8">
             <img
@@ -64,7 +59,7 @@ const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
             </a>
           )}
         </div>
-      </motion.div>
+      </FadeInUp>
 
       {/* Abstract Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

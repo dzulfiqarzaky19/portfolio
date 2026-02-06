@@ -6,6 +6,7 @@ import type { ExperienceData } from '@/lib/types/experience'
 import { Text } from '@/components/ui/Text'
 import { EXPERIENCE_DETAILS } from '@/lib/constant/experience'
 import { cn } from '@/lib/cn'
+import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 
 interface ExperienceFooterProps {
   currentExperienceId?: string
@@ -177,20 +178,13 @@ const SliderCard: React.FC<SliderCardProps> = ({
       >
         <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
           <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mb-4 md:mb-6"
-            >
+            <FadeInUp transition={{ delay: 0.1 }} className="mb-4 md:mb-6">
               <span className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-50 text-yellow-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
                 {experience.role.type}
               </span>
-            </motion.div>
+            </FadeInUp>
 
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            <FadeInUp transition={{ delay: 0.2 }}>
               <Text
                 variant="h2"
                 className="text-gray-900 font-bold leading-tight mb-2 text-2xl md:text-3xl lg:text-4xl"
@@ -208,13 +202,9 @@ const SliderCard: React.FC<SliderCardProps> = ({
               <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-xs md:text-sm lg:text-base max-w-sm line-clamp-4 md:line-clamp-3">
                 {experience.role.description}
               </p>
-            </motion.div>
+            </FadeInUp>
 
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-2 md:mt-auto"
-            >
+            <FadeInUp transition={{ delay: 0.3 }} className="mt-2 md:mt-auto">
               <Link
                 to="/experience/$experienceId"
                 params={{ experienceId: experience.id }}
@@ -225,7 +215,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
                   →
                 </span>
               </Link>
-            </motion.div>
+            </FadeInUp>
           </div>
 
           {experience.cardImage && (

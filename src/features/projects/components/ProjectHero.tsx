@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'motion/react'
+import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 import { Text } from '@/components/ui/Text'
 
 import { cn } from '@/lib/cn'
@@ -23,11 +23,7 @@ const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
 }) => {
   return (
     <section className="pt-32 pb-16 text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <FadeInUp>
         <span className="inline-block px-3 py-1 rounded-full bg-[hsl(var(--primary)/0.1)] text-[hsl(var(--primary))] text-xs font-bold tracking-wider uppercase mb-6">
           {tag}
         </span>
@@ -62,7 +58,7 @@ const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
               </a>
             ))}
         </div>
-      </motion.div>
+      </FadeInUp>
     </section>
   )
 }

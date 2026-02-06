@@ -6,6 +6,7 @@ import type { ProjectData } from '@/lib/types/project'
 import { Text } from '@/components/ui/Text'
 import { PROJECT_DETAILS } from '@/lib/constant/projects'
 import { cn } from '@/lib/cn'
+import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 
 interface ProjectFooterProps {
   currentProjectId: string
@@ -170,11 +171,11 @@ const SliderCard: React.FC<SliderCardProps> = ({
         )}
       >
         <div className="flex flex-col h-full relative z-10 text-left items-start">
-          <motion.div animate={{ opacity: 0.6 }} className="mb-4 md:mb-6">
+          <FadeInUp animate={{ opacity: 0.6 }} className="mb-4 md:mb-6">
             <span className="inline-block px-3 py-1 rounded-full border border-blue-500/50 bg-blue-50 text-blue-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
               {project.tag}
             </span>
-          </motion.div>
+          </FadeInUp>
 
           <Text
             variant="display"
@@ -188,11 +189,10 @@ const SliderCard: React.FC<SliderCardProps> = ({
             {project.title}
           </Text>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+          <FadeInUp
             exit={{ opacity: 0, y: 10 }}
             className="flex flex-col flex-1 w-full"
+            initial={{ opacity: 0, y: 10 }}
           >
             <Text className="text-sm md:text-lg text-gray-600 mb-6 md:mb-10 line-clamp-4 md:line-clamp-2 max-w-2xl leading-relaxed">
               {project.subtitle}
@@ -223,7 +223,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
                   </a>
                 ))}
             </div>
-          </motion.div>
+          </FadeInUp>
         </div>
       </div>
     </motion.div>
