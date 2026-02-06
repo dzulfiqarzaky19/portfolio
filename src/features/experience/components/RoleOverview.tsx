@@ -1,6 +1,7 @@
 import { CheckCircle2 } from 'lucide-react'
 import type { ExperienceData } from '@/lib/types/experience'
 import { Badge } from '@/components/ui/Badge'
+import { BrowserFrame } from '@/components/ui/BrowserFrame'
 
 interface RoleOverviewProps {
   data: ExperienceData
@@ -34,12 +35,7 @@ export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
           </div>
 
           <div className="flex-1 w-full relative">
-            <div className="aspect-video rounded-xl bg-[hsl(var(--surface-0))] shadow-2xl border border-[hsl(var(--border))] overflow-hidden relative group pt-10 pl-2">
-              <div className="absolute top-4 left-4 flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
+            <BrowserFrame className="aspect-video">
               {data.role.image ? (
                 <img
                   src={data.role.image}
@@ -47,7 +43,7 @@ export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
                   className="w-full h-full object-cover object-top"
                 />
               ) : (
-                <div className="mt-12 ml-4 p-4 rounded-tl-lg bg-[hsl(var(--surface-1))] h-full border-t border-l border-[hsl(var(--border))] opacity-50 group-hover:opacity-100 transition-opacity">
+                <div className="mt-2 ml-2 p-4 rounded-tl-lg bg-[hsl(var(--surface-1))] h-full border-t border-l border-[hsl(var(--border))] opacity-50 group-hover:opacity-100 transition-opacity">
                   <div className="space-y-2">
                     <div className="h-2 w-1/3 bg-[hsl(var(--muted))/0.2] rounded" />
                     <div className="h-2 w-1/2 bg-[hsl(var(--muted))/0.2] rounded" />
@@ -55,7 +51,7 @@ export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
                   </div>
                 </div>
               )}
-            </div>
+            </BrowserFrame>
           </div>
         </div>
       </div>

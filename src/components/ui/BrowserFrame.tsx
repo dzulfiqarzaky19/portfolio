@@ -24,7 +24,9 @@ export const BrowserFrame: React.FC<BrowserFrameProps> = ({
         <div className="w-3 h-3 rounded-full bg-yellow-400" />
         <div className="w-3 h-3 rounded-full bg-green-400" />
       </div>
-      <div className={cn('pt-10 pl-2 h-full', contentClassName)}>{children}</div>
+      <div className={cn('pt-10 pl-2 h-full', contentClassName)}>
+        {children}
+      </div>
     </div>
   )
 }
