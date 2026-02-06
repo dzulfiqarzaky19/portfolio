@@ -90,6 +90,7 @@ export const ProjectFooter: React.FC<ProjectFooterProps> = ({
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-12 z-50">
         <button
           onClick={prevProject}
+          aria-label={`View previous project: ${projects[(virtualIndex - 1 + total) % total]?.title || 'None'}`}
           className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
           ←
@@ -109,6 +110,7 @@ export const ProjectFooter: React.FC<ProjectFooterProps> = ({
 
         <button
           onClick={nextProject}
+          aria-label={`View next project: ${projects[(virtualIndex + 1) % total]?.title || 'None'}`}
           className="w-12 h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
           →

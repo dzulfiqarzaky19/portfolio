@@ -91,6 +91,7 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({
       <div className="absolute z-50 flex items-center gap-6 bottom-8 left-1/2 -translate-x-1/2 flex-row md:top-1/2 md:right-12 md:bottom-auto md:left-auto md:-translate-y-1/2 md:translate-x-0 md:flex-col">
         <button
           onClick={prevExperience}
+          aria-label={`View previous experience: ${experiences[(virtualIndex - 1 + total) % total]?.company.name || 'None'}`}
           className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
           <span className="md:rotate-0 -rotate-90">↑</span>
@@ -113,6 +114,7 @@ export const ExperienceFooter: React.FC<ExperienceFooterProps> = ({
 
         <button
           onClick={nextExperience}
+          aria-label={`View next experience: ${experiences[(virtualIndex + 1) % total]?.company.name || 'None'}`}
           className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all backdrop-blur-sm cursor-pointer z-50"
         >
           <span className="md:rotate-0 -rotate-90">↓</span>
