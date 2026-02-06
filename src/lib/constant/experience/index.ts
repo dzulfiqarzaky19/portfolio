@@ -1,7 +1,7 @@
-import { RAIZ_INVEST } from './raiz'
-import { EDOT } from './edot'
-import { MANDIRI } from './mandiri'
-import { CONSISTECH } from './consistech'
+import { RAIZ_INVEST } from './raiz.constant'
+import { EDOT } from './edot.constant'
+import { MANDIRI } from './mandiri.constant'
+import { CONSISTECH } from './consistech.constant'
 import type { ExperienceData } from '@/lib/types/experience'
 
 export const EXPERIENCE_DETAILS: Record<string, ExperienceData> = {
