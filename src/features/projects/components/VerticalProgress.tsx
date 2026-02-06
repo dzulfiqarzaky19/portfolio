@@ -23,8 +23,6 @@ export const VerticalProgress: React.FC<VerticalProgressProps> = ({
         className="absolute top-0 w-px bg-[hsl(var(--primary))] origin-top"
         style={{ scaleY: lineScale, height: '100%' }}
       />
-
-      <div className="absolute inset-0 flex flex-col justify-between py-32"></div>
     </div>
   )
 }
