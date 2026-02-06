@@ -237,13 +237,13 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.steps && (
           <div className={cn('space-y-6 flex flex-col w-full', alignClasses)}>
-            {section.content.steps.map((step, i: number) => (
+            {section.content.steps.map((step, i: number, arr) => (
               <div
                 key={i}
                 className={cn('flex gap-4 text-left relative', flexRowClasses)}
               >
                 {/* Connecting Line */}
-                {i !== (section.content.steps?.length || 0) - 1 && (
+                {i !== arr.length - 1 && (
                   <div
                     className={cn(
                       'absolute top-8 w-0.5 h-full bg-[hsl(var(--border))]',

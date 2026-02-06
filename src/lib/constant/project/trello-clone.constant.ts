@@ -284,19 +284,16 @@ const response = await client.api.projects.$post({
             type: 'Drag & Drop Kanban',
             message:
               'Intuitive drag-and-drop interface using @hello-pangea/dnd with touch device support and smooth animations.',
-            image: '/images/trello-drag-drop.webp',
           },
           {
             type: 'Multi-Workspace Support',
             message:
               'Segregate different projects/clients into separate workspaces with role-based access control.',
-            image: '/images/trello-workspace.webp',
           },
           {
             type: '3-Level Comment Threading',
             message:
               'YouTube-style comment nesting with automatic flattening after 3 levels for optimal readability.',
-            image: '/images/trello-comments.webp',
           },
         ],
       },

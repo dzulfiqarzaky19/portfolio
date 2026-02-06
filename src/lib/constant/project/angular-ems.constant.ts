@@ -326,19 +326,16 @@ employees()`,
             type: 'CSS Custom Properties',
             message:
               'Runtime theme switching capability (future dark mode) with no build step for color changes.',
-            image: '/images/angular-ems-detail.webp',
           },
           {
             type: 'Design Tokens',
             message:
               'Consistent spacing (4px grid), color palette, typography scale (12px-36px), border radius, and shadows.',
-            image: '/images/angular-ems-dashboard.webp',
           },
           {
             type: 'No Component Library',
             message:
               'Full design control, smaller bundle size, and learning opportunity with custom CVA components.',
-            image: '/images/angular-ems-detail.webp',
           },
         ],
       },

@@ -364,19 +364,16 @@ export const getDashboardMetrics = async () => {
             type: 'Parallel Queries',
             message:
               'Fetches current + previous periods simultaneously for 4 metrics (revenue, orders, AOV, rating) using Promise.all.',
-            image: '/images/magpie-parallel.webp',
           },
           {
             type: 'DRY Principle',
             message:
               'Reuses DateRangeProps interface across all metrics - centralizes date range logic in one place.',
-            image: '/images/magpie-dry.webp',
           },
           {
             type: 'Reusable Trend Logic',
             message:
               'calculateTrend() utility centralizes percentage change math for consistent trend calculations.',
-            image: '/images/magpie-trends.webp',
           },
         ],
       },
