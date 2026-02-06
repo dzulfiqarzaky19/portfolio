@@ -1,13 +1,22 @@
+export interface ProjectSectionContent {
+  highlight?: { title: string; message: string }
+  bullets?: Array<{ title: string; message: string }>
+  highlights?: Array<{ type: string; message: string }>
+  items?: Array<{ title: string; message: string }>
+  cards?: Array<{ title: string; description: string; image?: string }>
+  steps?: Array<{ title: string; description: string }>
+}
+
 export interface ProjectSection {
   id: string
   type:
-    | 'challenge'
-    | 'folder-structure'
-    | 'caching'
-    | 'metrics'
-    | 'lessons'
-    | 'cta'
-    | 'flow'
+  | 'challenge'
+  | 'folder-structure'
+  | 'caching'
+  | 'metrics'
+  | 'lessons'
+  | 'cta'
+  | 'flow'
   number?: string
   heading: string
   description?: string
@@ -15,7 +24,7 @@ export interface ProjectSection {
   codeSnippet?: string
   imageAlt?: string
   isTilted?: boolean
-  content?: any // Specific content for different section types
+  content?: ProjectSectionContent
 }
 
 export interface ProjectData {
