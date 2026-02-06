@@ -1,4 +1,3 @@
-import { motion, useScroll, useSpring } from 'motion/react';
 import { Link } from '@tanstack/react-router';
 import { ArrowLeft } from 'lucide-react';
 import { ProjectFooter } from './components/ProjectFooter.tsx';
@@ -12,20 +11,11 @@ interface ProjectLayoutProps {
 }
 
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ project }) => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+
 
   return (
     <div className="relative min-h-screen bg-[hsl(var(--surface-1))] text-[hsl(var(--ink))]">
-      {/* Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-[hsl(var(--primary))] origin-left z-50"
-        style={{ scaleX }}
-      />
+
 
       <VerticalProgress sections={project.sections} />
 
