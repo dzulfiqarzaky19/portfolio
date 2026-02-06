@@ -1,5 +1,6 @@
 import { EMPLOYEES_20K_PROJECT } from '@/lib/constant/project/employees-20k.constant';
 import { WEB_NOVEL_PROJECT } from '@/lib/constant/project/web-novel.constant';
+import { TRELLO_CLONE_PROJECT } from '@/lib/constant/project/trello-clone.constant';
 
 const EMPLOYEES_20K = {
   title: EMPLOYEES_20K_PROJECT.title,
@@ -11,12 +12,13 @@ Node.js, BullMQ, Redis, Real-time Socket.IO`,
 }
 
 const CHAT_SNAP = {
-  title: 'Chat Snap',
-  description: `Many-to-Many PostgreSQL Relationships
-Admins: Moderate/Delete Posts, Users, Hashtags
-Users: Create/Update/Delete Own Posts`,
-  imgUrl: '/images/geosense.png',
-  detailUrl: '/projects/chat-snap',
+  title: TRELLO_CLONE_PROJECT.title,
+  description: `Trello-Clone: Kanban-style Project Management
+React 19, Next.js 16, Hono RPC
+Supabase: Auth, Real-time, PostgreSQL
+Drag & Drop, Optimistic UI, Type-Safe API`,
+  imgUrl: '/images/trello-project.webp',
+  detailUrl: `/projects/${TRELLO_CLONE_PROJECT.id}`,
 }
 
 const WEB_NOVEL = {
