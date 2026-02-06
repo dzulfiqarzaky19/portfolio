@@ -145,7 +145,7 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.bullets && (
           <ul className={cn('space-y-4 flex flex-col w-full', alignClasses)}>
-            {section.content.bullets.map((bullet: any, i: number) => (
+            {section.content.bullets.map((bullet, i: number) => (
               <li
                 key={i}
                 className={cn('flex gap-3 text-left', flexRowClasses)}
@@ -168,7 +168,7 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.highlights && (
           <div className={cn('space-y-4 flex flex-col w-full', alignClasses)}>
-            {section.content.highlights.map((h: any, i: number) => (
+            {section.content.highlights.map((h, i: number) => (
               <div
                 key={i}
                 className="p-4 rounded-xl bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))] w-full max-w-md text-left"
@@ -186,7 +186,7 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.items && (
           <div className={cn('space-y-6 flex flex-col w-full', alignClasses)}>
-            {section.content.items.map((item: any, i: number) => (
+            {section.content.items.map((item, i: number) => (
               <div
                 key={i}
                 className={cn('flex gap-4 text-left', flexRowClasses)}
@@ -209,7 +209,7 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.cards && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 w-full">
-            {section.content.cards.map((card: any, i: number) => (
+            {section.content.cards.map((card, i: number) => (
               <div
                 key={i}
                 className="group relative aspect-3/4 rounded-2xl overflow-hidden bg-[hsl(var(--surface-2))] border border-[hsl(var(--border))] hover:border-[hsl(var(--primary)/0.5)] transition-colors"
@@ -237,13 +237,13 @@ function renderContent(section: IProjectSection, isRightAligned: boolean) {
       return (
         section.content?.steps && (
           <div className={cn('space-y-6 flex flex-col w-full', alignClasses)}>
-            {section.content.steps.map((step: any, i: number) => (
+            {section.content.steps.map((step, i: number) => (
               <div
                 key={i}
                 className={cn('flex gap-4 text-left relative', flexRowClasses)}
               >
                 {/* Connecting Line */}
-                {i !== section.content.steps.length - 1 && (
+                {i !== (section.content.steps?.length || 0) - 1 && (
                   <div
                     className={cn(
                       'absolute top-8 w-0.5 h-full bg-[hsl(var(--border))]',
