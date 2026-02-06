@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import React, { Children, cloneElement, forwardRef } from 'react'
 import { cn } from '@/lib/cn'
 
