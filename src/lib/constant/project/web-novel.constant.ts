@@ -275,7 +275,6 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
             description: "Comprehensive testing approach with unit tests for scrapers, integration tests for service orchestration, and E2E API contract tests.",
             isTilted: true,
             codeSnippet: `// Mock Factory Pattern (Frontend)
-// Solves Vitest hoisting issues
 
 export const routerMock = async (importOriginal) => {
   const actual = await importOriginal();
@@ -291,14 +290,11 @@ export const routerMock = async (importOriginal) => {
   };
 };
 
-// Usage in test files
 vi.mock('@tanstack/react-router', async (importOriginal) => {
   const { routerMock } = await import('lib/test/mock/router');
   return routerMock(importOriginal);
 });
 
-// Backend: HTML Fixture Testing
-// Capture real site HTML and test parsers offline
 const fixture = fs.readFileSync('./fixtures/chapter.html');
 const result = chapterParser(fixture);
 expect(result.content).toBeDefined();`,
@@ -326,14 +322,12 @@ expect(result.content).toBeDefined();`,
             heading: "Observability & Performance Metrics",
             description: "Built-in debugging tools, extensive logging, and concrete performance improvements ensure system reliability. Resource blocking reduces page load from 2-5s to <1s.",
             codeSnippet: `
-// Debug Artifacts
 
 const snap1 = await saveDebugArtifacts(page,
     'goto-or-selectors-failed',
     fastify.log.error.bind(fastify.log),
 );
             
-// Resource Blocking
 
 if (PUPPETEER_CONFIG.assets.isBlocked) {
     await page.setRequestInterception(true);
