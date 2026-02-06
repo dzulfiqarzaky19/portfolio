@@ -7,6 +7,7 @@ import { Text } from '@/components/ui/Text'
 import { PROJECT_DETAILS } from '@/lib/constant/projects'
 import { cn } from '@/lib/cn'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
+import { Badge } from '@/components/ui/Badge'
 
 interface ProjectFooterProps {
   currentProjectId: string
@@ -172,9 +173,12 @@ const SliderCard: React.FC<SliderCardProps> = ({
       >
         <div className="flex flex-col h-full relative z-10 text-left items-start">
           <FadeInUp animate={{ opacity: 0.6 }} className="mb-4 md:mb-6">
-            <span className="inline-block px-3 py-1 rounded-full border border-blue-500/50 bg-blue-50 text-blue-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
+            <Badge
+              variant="custom"
+              className="border border-blue-500/50 bg-blue-50 text-blue-700"
+            >
               {project.tag}
-            </span>
+            </Badge>
           </FadeInUp>
 
           <Text

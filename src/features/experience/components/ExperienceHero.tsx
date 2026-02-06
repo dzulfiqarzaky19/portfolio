@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import type { ExperienceData } from '@/lib/types/experience'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
+import { Badge } from '@/components/ui/Badge'
 
 interface ExperienceHeroProps {
   data: ExperienceData
@@ -35,9 +36,9 @@ const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
           </div>
         )}
 
-        <div className="inline-block px-3 py-1 mb-6 rounded-full bg-white/10 text-white/90 text-xs font-bold tracking-wider uppercase backdrop-blur-sm border border-white/20">
+        <Badge variant="white" className="mb-6">
           {data.role.type}
-        </div>
+        </Badge>
 
         <h1 className="text-4xl md:text-6xl font-black text-white mb-6 font-display tracking-tight leading-tight">
           {data.company.name}

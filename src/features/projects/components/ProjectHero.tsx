@@ -1,5 +1,6 @@
 import React from 'react'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
+import { Badge } from '@/components/ui/Badge'
 import { Text } from '@/components/ui/Text'
 
 import { cn } from '@/lib/cn'
@@ -24,9 +25,7 @@ const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
   return (
     <section className="pt-32 pb-16 text-center">
       <FadeInUp>
-        <span className="inline-block px-3 py-1 rounded-full bg-[hsl(var(--primary)/0.1)] text-[hsl(var(--primary))] text-xs font-bold tracking-wider uppercase mb-6">
-          {tag}
-        </span>
+        <Badge className="mb-6">{tag}</Badge>
         <Text variant="hero" className="mb-8 font-display">
           {title}
         </Text>

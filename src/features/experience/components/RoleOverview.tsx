@@ -1,5 +1,6 @@
 import { CheckCircle2 } from 'lucide-react'
 import type { ExperienceData } from '@/lib/types/experience'
+import { Badge } from '@/components/ui/Badge'
 
 interface RoleOverviewProps {
   data: ExperienceData
@@ -11,9 +12,7 @@ export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1">
-            <div className="inline-block px-3 py-1 mb-6 rounded-full bg-[hsl(var(--primary)/0.1)] text-[hsl(var(--primary))] text-xs font-bold tracking-wider uppercase">
-              {data.role.type}
-            </div>
+            <Badge className="mb-6">{data.role.type}</Badge>
             <h2 className="text-4xl font-bold font-display text-[hsl(var(--ink))] mb-6">
               My Role
             </h2>

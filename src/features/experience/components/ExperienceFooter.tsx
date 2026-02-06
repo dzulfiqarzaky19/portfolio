@@ -7,6 +7,7 @@ import { Text } from '@/components/ui/Text'
 import { EXPERIENCE_DETAILS } from '@/lib/constant/experience'
 import { cn } from '@/lib/cn'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
+import { Badge } from '@/components/ui/Badge'
 
 interface ExperienceFooterProps {
   currentExperienceId?: string
@@ -173,15 +174,18 @@ const SliderCard: React.FC<SliderCardProps> = ({
         className={cn(
           'relative w-full md:w-[80%] lg:w-full rounded-[24px] md:rounded-[32px] p-6 md:p-12 overflow-hidden shadow-xl transition-all duration-500',
           'bg-white border border-white/50',
-          'aspect-[3/4] md:aspect-video lg:aspect-2/1',
+          'aspect-3/4 md:aspect-video lg:aspect-2/1',
         )}
       >
         <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
           <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
             <FadeInUp transition={{ delay: 0.1 }} className="mb-4 md:mb-6">
-              <span className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-50 text-yellow-700 text-[10px] md:text-xs font-bold tracking-widest uppercase shadow-sm">
+              <Badge
+                variant="custom"
+                className="border border-yellow-500/50 bg-yellow-50 text-yellow-700"
+              >
                 {experience.role.type}
-              </span>
+              </Badge>
             </FadeInUp>
 
             <FadeInUp transition={{ delay: 0.2 }}>
