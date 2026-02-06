@@ -1,9 +1,8 @@
 import React from 'react'
-import { ArrowLeft } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
 import type { ExperienceData } from '@/lib/types/experience'
 import { FadeInUp } from '@/components/motion/animations/FadeInUp'
 import { Badge } from '@/components/ui/Badge'
+import { BackButton } from '@/components/BackButton'
 
 interface ExperienceHeroProps {
   data: ExperienceData
@@ -17,13 +16,7 @@ const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
         background: data.theme.gradient,
       }}
     >
-      <Link
-        to="/"
-        className="absolute top-8 left-6 lg:left-8 z-10 flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Home
-      </Link>
+      <BackButton variant="light" />
 
       <FadeInUp className="relative z-10 max-w-4xl mx-auto">
         {data.company.logo && (
