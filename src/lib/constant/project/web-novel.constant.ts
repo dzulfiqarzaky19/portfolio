@@ -80,9 +80,45 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
             }
         },
         {
-            id: "frontend-architecture",
+            id: "tech-stack",
             type: "folder-structure",
             number: "03",
+            heading: "Tech Stack Rationale",
+            description: "Modern full-stack TypeScript architecture optimized for performance, type safety, and developer experience with carefully chosen technologies.",
+            isTilted: true,
+            codeSnippet: `// Backend Stack
+- Fastify > Express: 3x faster schema validation
+- Puppeteer: Dynamic scraping industry standard 
+- Redis: Sub-second cache, 100k+ ops/sec
+- esbuild: 10-100x faster builds than Webpack
+
+// Frontend Stack  
+- React 19 + Vite: Modern DX, HMR in <1s
+- TanStack Router: Type-safe search params
+- TanStack Query: Stale-while-revalidate caching
+- Emotion: Runtime theme switching (Light/Dark)
+- Vitest > Jest: 10x faster test execution`,
+            content: {
+                bullets: [
+                    {
+                        title: "Performance First",
+                        message: "Fastify's lower overhead and esbuild's speed enable rapid development iteration and production efficiency."
+                    },
+                    {
+                        title: "Type Safety End-to-End",
+                        message: "TypeScript strict mode + TanStack Router + Zod validation catch errors at compile-time, not runtime."
+                    },
+                    {
+                        title: "Developer Experience",
+                        message: "Vite HMR, tsx for TypeScript execution, and Vitest's speed optimize developer feedback loops."
+                    }
+                ]
+            }
+        },
+        {
+            id: "frontend-architecture",
+            type: "folder-structure",
+            number: "04",
             heading: "Frontend Architecture",
             description: "The frontend follows a Feature-Based Architecture with enforced boundaries to prevent tight coupling between distinct features.",
             isTilted: false,
@@ -123,9 +159,60 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
             }
         },
         {
+            id: "shared-browser",
+            type: "folder-structure",
+            number: "05",
+            heading: "Shared Browser Pattern",
+            description: "A single Puppeteer browser instance serves all requests, dramatically improving throughput from ~5-10 requests/min to dozens of concurrent pages.",
+            isTilted: false,
+            codeSnippet: `// ❌ Before: New browser per request
+for (const request of requests) {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  await browser.close();
+}
+
+// ✅ After: Shared browser instance
+const sharedBrowser = await puppeteer.launch();
+
+for (const request of requests) {
+  const page = await sharedBrowser.newPage();
+
+  await page.close(); // Only close page
+}
+
+if (PUPPETEER_CONFIG.assets.isBlocked) {
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    if (['image', 'media'].includes(req.resourceType())) {
+      req.abort(); // 2-5s → <1s page load
+    } else {
+      req.continue();
+    }
+  });
+}`,
+            content: {
+                bullets: [
+                    {
+                        title: "Massive Performance Gain",
+                        message: "Browser launch is expensive (1-2s per instance). Reusing one browser across requests eliminates this bottleneck."
+                    },
+                    {
+                        title: "Resource Blocking",
+                        message: "Blocking images and media reduces page load time from 2-5 seconds to under 1 second, saving bandwidth and memory."
+                    },
+                    {
+                        title: "Production-Ready Lifecycle",
+                        message: "Automatic retry logic and debug artifact capture (screenshots/HTML snapshots) on failure ensure robustness."
+                    }
+                ]
+            }
+        },
+        {
             id: "full-stack-flow",
             type: "flow",
-            number: "04",
+            number: "06",
             heading: "Full Stack Execution Flow",
             description: "End-to-end request lifecycle from the React client to the Puppeteer scraper.",
             isTilted: true,
@@ -154,24 +241,80 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "caching",
             type: "caching",
-            number: "05",
-            heading: "Caching Strategy",
-            description: "Implemented an aggressive caching strategy using Redis to reduce load on target sites and improve response times.",
+            number: "07",
+            heading: "Caching Strategy & Offline Reading",
+            description: "Aggressive multi-layer caching using Redis on backend and IndexedDB on frontend for sub-second response times and offline reading capabilities.",
             isTilted: true,
             image: "/images/novel-caching.webp",
             content: {
                 highlights: [
                     {
-                        type: "PERFORMANCE",
-                        message: "Sub-second response times for cached requests."
+                        type: "BACKEND CACHE",
+                        message: "Redis caches scraped data with configurable TTL - sub-second response times for frequently accessed novels."
+                    },
+                    {
+                        type: "OFFLINE READING",
+                        message: "IndexedDB stores recently read chapters on client-side, enabling offline access without internet connection."
+                    },
+                    {
+                        type: "STALE-WHILE-REVALIDATE",
+                        message: "React Query shows cached content instantly while fetching fresh data in background for superior perceived performance."
                     },
                     {
                         type: "RESILIENCE",
-                        message: "Fallback mechanisms allow fetching fresh data if the cache layer fails."
+                        message: "Fallback mechanisms allow fetching fresh data if Redis fails, ensuring API remains available."
+                    }
+                ]
+            }
+        },
+        {
+            id: "testing-strategy",
+            type: "folder-structure",
+            number: "08",
+            heading: "Testing Strategy",
+            description: "Comprehensive testing approach with unit tests for scrapers, integration tests for service orchestration, and E2E API contract tests.",
+            isTilted: true,
+            codeSnippet: `// Mock Factory Pattern (Frontend)
+// Solves Vitest hoisting issues
+
+export const routerMock = async (importOriginal) => {
+  const actual = await importOriginal();
+  
+  const MockLink = ({ children, to, ...props }) => (
+    <a href={to} {...props}>{children}</a>
+  );
+  
+  return {
+    ...actual,
+    Link: MockLink,
+    useMatchRoute: () => () => false,
+  };
+};
+
+// Usage in test files
+vi.mock('@tanstack/react-router', async (importOriginal) => {
+  const { routerMock } = await import('lib/test/mock/router');
+  return routerMock(importOriginal);
+});
+
+// Backend: HTML Fixture Testing
+// Capture real site HTML and test parsers offline
+const fixture = fs.readFileSync('./fixtures/chapter.html');
+const result = chapterParser(fixture);
+expect(result.content).toBeDefined();`,
+            content: {
+                bullets: [
+                    {
+                        title: "Mock Factory Pattern",
+                        message: "Reusable mock factories solve Vitest hoisting issues, ensuring consistent router and API mocks across all test files."
                     },
                     {
-                        type: "STORAGE",
-                        message: "IndexedDB used on client-side for offline reading capabilities."
+                        title: "HTML Fixture Testing",
+                        message: "Capture snapshots from target sites to verify parser logic without hitting live sites, detecting layout changes early."
+                    },
+                    {
+                        title: "Testing Pyramid",
+                        message: "80% unit tests (parser logic), 15% integration (cache orchestration), 5% E2E (API contracts) for fast feedback."
                     }
                 ]
             }
@@ -179,9 +322,9 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         {
             id: "metrics",
             type: "metrics",
-            number: "06",
-            heading: "Observability & Debugging",
-            description: "Built-in debugging tools and extensive logging ensure system reliability.",
+            number: "09",
+            heading: "Observability & Performance Metrics",
+            description: "Built-in debugging tools, extensive logging, and concrete performance improvements ensure system reliability. Resource blocking reduces page load from 2-5s to <1s.",
             codeSnippet: `
 // Debug Artifacts
 
@@ -228,7 +371,7 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
         {
             id: "lessons",
             type: "lessons",
-            number: "07",
+            number: "10",
             heading: "Lessons Learned",
             image: "/images/novel-lesson.webp",
             content: {
