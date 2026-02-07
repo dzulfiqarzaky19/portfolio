@@ -2,7 +2,7 @@ import type { ProjectData } from '@/lib/types/project'
 
 export const TRELLO_CLONE_PROJECT: ProjectData = {
   id: 'trello-clone',
-  tag: 'FULL STACK PROJECT MANAGEMENT',
+  tag: 'FULL STACK PROJECT',
   title: 'Trello Clone',
   subtitle:
     'A collaborative Kanban-style project management platform with real-time updates and optimistic UI.',

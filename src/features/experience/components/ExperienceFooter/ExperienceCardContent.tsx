@@ -11,59 +11,58 @@ interface ExperienceCardContentProps {
 }
 
 export const ExperienceCardContent = ({ experience }: ExperienceCardContentProps) => (
-    <BrowserFrame
-      className={cn(
-        'w-full md:w-[80%] lg:w-full transition-all duration-500',
-        'aspect-3/4 md:aspect-video lg:aspect-2/1',
-        'rounded-[24px] md:rounded-[32px] bg-white border-white/50',
-      )}
-      contentClassName="p-6 md:p-12 h-full"
-      searchText={`${experience.company.name.toLowerCase().replace(/\s+/g, '')}.com`}
-    >
-      <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
-        <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
-          <FadeInUp transition={{ delay: 0.1 }} className="mb-4 md:mb-6">
-            <Badge
-              variant="custom"
-              className="border border-yellow-500/50 bg-yellow-50 text-yellow-700"
-            >
-              {experience.role.type}
-            </Badge>
-          </FadeInUp>
+  <BrowserFrame
+    className={cn(
+      'w-full md:w-[80%] lg:w-full transition-all duration-500',
+      'aspect-3/4 md:aspect-video lg:aspect-2/1',
+      'rounded-[24px] md:rounded-[32px] bg-white border-white/50',
+    )}
+    contentClassName="p-6 md:p-6 lg:p-12 h-full overflow-hidden"
+  >
+    <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
+      <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
+        <FadeInUp transition={{ delay: 0.1 }} className="mb-4 md:mb-4 lg:mb-6">
+          <Badge
+            variant="custom"
+            className="border border-yellow-500/50 bg-yellow-50 text-yellow-700"
+          >
+            {experience.role.type}
+          </Badge>
+        </FadeInUp>
 
-          <FadeInUp transition={{ delay: 0.2 }}>
-            <Text
-              variant="h2"
-              className="text-gray-900 font-bold leading-tight mb-2 text-2xl md:text-3xl lg:text-4xl"
-            >
-              {experience.company.name}
-            </Text>
+        <FadeInUp transition={{ delay: 0.2 }}>
+          <Text
+            variant="h2"
+            className="text-gray-900 font-bold leading-tight mb-2 text-2xl md:text-2xl lg:text-4xl"
+          >
+            {experience.company.name}
+          </Text>
 
-            <Text
-              variant="h3"
-              className="text-gray-500 font-medium text-sm md:text-base lg:text-lg mb-4 md:mb-6"
-            >
-              {experience.role.title}
-            </Text>
+          <Text
+            variant="h3"
+            className="text-gray-500 font-medium text-sm md:text-sm lg:text-lg mb-4 md:mb-3 lg:mb-6"
+          >
+            {experience.role.title}
+          </Text>
 
-            <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-xs md:text-sm lg:text-base max-w-sm line-clamp-4 md:line-clamp-3">
-              {experience.role.description}
-            </p>
-          </FadeInUp>
+          <p className="text-gray-600 leading-relaxed mb-6 md:mb-4 lg:mb-8 text-xs md:text-xs lg:text-base max-w-sm line-clamp-4 md:line-clamp-2 lg:line-clamp-3">
+            {experience.role.description}
+          </p>
+        </FadeInUp>
 
-          <FadeInUp transition={{ delay: 0.3 }} className="mt-2 md:mt-auto">
-            <Link
-              to="/experience/$experienceId"
-              params={{ experienceId: experience.id }}
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white text-sm md:text-base font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl"
-            >
-              View Details
-              <span className="group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </Link>
-          </FadeInUp>
-        </div>
+        <FadeInUp transition={{ delay: 0.3 }} className="mt-2 md:mt-auto shrink-0">
+          <Link
+            to="/experience/$experienceId"
+            params={{ experienceId: experience.id }}
+            className="group inline-flex items-center gap-2 px-6 py-3 md:px-4 md:py-2 lg:px-6 lg:py-3 rounded-full bg-gray-900 text-white text-sm md:text-xs lg:text-base font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl"
+          >
+            View Details
+            <span className="group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </Link>
+        </FadeInUp>
+      </div>
 
         {experience.cardImage && (
           <div
