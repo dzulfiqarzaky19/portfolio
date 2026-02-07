@@ -6,7 +6,7 @@ import { Text } from '@/components/ui/Text'
 
 const Hero = () => {
   return (
-    <Section className="gap-5">
+    <Section className="gap-5 px-6 sm:px-10">
       <InViewTransition>
         <div className="flex justify-center items-center gap-5">
           <Text variant="hero" color="primary">

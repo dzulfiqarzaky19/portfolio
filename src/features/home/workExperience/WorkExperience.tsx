@@ -9,12 +9,11 @@ export const WorkExperience = () => {
   return (
     <HorizontalScroll slides={slides}>
       {EXPERIENCE.map((experience, i) =>
-        experience.description ? (
+        experience.title === 'Work Experience' ? (
           <div className="min-w-screen">
             <SubSection
               key={experience.title}
-              title={experience.title || ''}
-              description={experience.description}
+              title={experience.title}
             />
           </div>
         ) : (

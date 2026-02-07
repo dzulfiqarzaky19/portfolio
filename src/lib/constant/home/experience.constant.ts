@@ -8,10 +8,10 @@ export interface Experience {
   highlight: Array<string>
   description?: string
   detailUrl:
-    | '/experience/raiz'
-    | '/experience/edot'
-    | '/experience/mandiri'
-    | '/experience/consistech'
+  | '/experience/raiz'
+  | '/experience/edot'
+  | '/experience/mandiri'
+  | '/experience/consistech'
 }
 
 export const RAIZ: Experience = {
@@ -85,8 +85,7 @@ export const CONSISTECH: Experience = {
   ],
 }
 
-export const EXPERIENCE_HEADER: Partial<Experience> = {
-  title: 'Work Experience ?',
-  description: `Let's Go`,
+export const EXPERIENCE_HEADER = {
+  title: 'Work Experience',
 }
 export const EXPERIENCE = [EXPERIENCE_HEADER, RAIZ, EDOT, MANDIRI, CONSISTECH]
