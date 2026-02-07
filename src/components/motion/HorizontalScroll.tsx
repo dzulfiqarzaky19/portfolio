@@ -15,7 +15,6 @@ export const HorizontalScroll = ({
 }: IHorizontalScrollProps) => {
   const { containerChildRef, containerHeight } = useContainerHeight(slides)
   
-  // Initialize based on window width to avoid hydration mismatch if possible, or default to true
   const [isDesktop, setIsDesktop] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.innerWidth >= 1024
