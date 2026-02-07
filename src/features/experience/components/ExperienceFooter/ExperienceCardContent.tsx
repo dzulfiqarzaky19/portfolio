@@ -10,10 +10,7 @@ interface ExperienceCardContentProps {
   experience: ExperienceData
 }
 
-export const ExperienceCardContent: React.FC<ExperienceCardContentProps> = ({
-  experience,
-}) => {
-  return (
+export const ExperienceCardContent = ({ experience }: ExperienceCardContentProps) => (
     <BrowserFrame
       className={cn(
         'w-full md:w-[80%] lg:w-full transition-all duration-500',
@@ -21,6 +18,7 @@ export const ExperienceCardContent: React.FC<ExperienceCardContentProps> = ({
         'rounded-[24px] md:rounded-[32px] bg-white border-white/50',
       )}
       contentClassName="p-6 md:p-12 h-full"
+      searchText={`${experience.company.name.toLowerCase().replace(/\s+/g, '')}.com`}
     >
       <div className="flex flex-col lg:flex-row h-full relative z-10 gap-6 lg:gap-12 items-center justify-center md:justify-start">
         <div className="flex flex-col flex-1 items-center md:items-start text-center md:text-left h-full justify-center">
@@ -105,4 +103,3 @@ export const ExperienceCardContent: React.FC<ExperienceCardContentProps> = ({
       </div>
     </BrowserFrame>
   )
-}

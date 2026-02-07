@@ -1,11 +1,6 @@
 import { motion, useScroll, useSpring } from 'motion/react'
-import type { ProjectSection } from '@/lib/types/project'
 
-interface VerticalProgressProps {
-  sections: Array<ProjectSection>
-}
-
-export const VerticalProgress: React.FC<VerticalProgressProps> = () => {
+export const VerticalProgress = () => {
   const { scrollYProgress } = useScroll()
   const lineScale = useSpring(scrollYProgress, {
     stiffness: 100,

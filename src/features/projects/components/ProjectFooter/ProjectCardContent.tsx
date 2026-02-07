@@ -11,11 +11,7 @@ interface ProjectCardContentProps {
   isCenter: boolean
 }
 
-export const ProjectCardContent: React.FC<ProjectCardContentProps> = ({
-  project,
-  isCenter,
-}) => {
-  return (
+export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProps) => (
     <BrowserFrame
       className={cn(
         'w-full transition-all duration-500',
@@ -84,4 +80,3 @@ export const ProjectCardContent: React.FC<ProjectCardContentProps> = ({
       </div>
     </BrowserFrame>
   )
-}

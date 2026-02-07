@@ -13,6 +13,7 @@ interface SwipeNavigatorProps<T> {
   className?: string
   itemLabel?: string
   getItemName?: (item: T) => string
+  onIndexChange?: (currentItem: T, index: number) => void
   renderItem: (props: {
     item: T
     index: number
@@ -31,6 +32,7 @@ export function SwipeNavigator<T>({
   className,
   itemLabel = 'item',
   getItemName,
+  onIndexChange,
   renderItem,
 }: SwipeNavigatorProps<T>) {
   const total = items.length
@@ -49,6 +51,12 @@ export function SwipeNavigator<T>({
 
   const virtualIndex = wrap(0, total, index)
   const isMobile = width < 768
+
+  useEffect(() => {
+    if (items.length > 0) {
+      onIndexChange?.(items[virtualIndex], virtualIndex)
+    }
+  }, [virtualIndex, items, onIndexChange])
   const isHorizontal = direction === 'x'
 
   const dragConstraints = isHorizontal

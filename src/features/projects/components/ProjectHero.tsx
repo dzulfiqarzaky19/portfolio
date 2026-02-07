@@ -16,13 +16,7 @@ interface ProjectHeroProps {
   }>
 }
 
-const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
-  tag,
-  title,
-  subtitle,
-  links,
-}) => {
-  return (
+const ProjectHeroComponent = ({ tag, title, subtitle, links }: ProjectHeroProps) => (
     <section className="pt-32 pb-16 text-center">
       <FadeInUp>
         <Badge className="mb-6">{tag}</Badge>
@@ -37,7 +31,7 @@ const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
         </Text>
 
         <div className="flex flex-wrap justify-center gap-4">
-          {/* New Links Implementation */}
+
           {links &&
             links.length > 0 &&
             links.map((link, index) => (
@@ -60,6 +54,5 @@ const ProjectHeroComponent: React.FC<ProjectHeroProps> = ({
       </FadeInUp>
     </section>
   )
-}
 
 export const ProjectHero = React.memo(ProjectHeroComponent)
