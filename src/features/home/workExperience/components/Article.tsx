@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'motion/react'
 import { Link } from '@tanstack/react-router'
 import type { Experience } from '@/lib/constant/home/experience.constant'
-import { DeviceFrame } from '@/components/DeviceFrame'
+import { BrowserFrame } from '@/components/ui/BrowserFrame'
 import { cn } from '@/lib/cn'
 import { InViewTransition } from '@/components/motion/InViewAnimation'
 import { Text } from '@/components/ui/Text'
@@ -62,15 +62,15 @@ export const Article = ({ experience, i }: Props) => {
             </InViewTransition>
           </div>
 
-          <div className="w-full lg:w-1/2">
-            <DeviceFrame>
+          <div className="w-full lg:w-1/2 max-w-xl">
+            <BrowserFrame variant="desktop" className='bg-white border-white/50'>
               <img
                 src={experience.imgUrl}
-                alt={`${experience.title} mobile app`}
-                className="h-full w-full object-top object-cover cursor-pointer "
+                alt={`${experience.title} screenshot`}
+                className="h-full w-full object-top object-cover"
                 loading="lazy"
               />
-            </DeviceFrame>
+            </BrowserFrame>
           </div>
         </div>
       </article>

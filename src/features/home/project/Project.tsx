@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { DeviceFrame } from '@/components/DeviceFrame'
+import { BrowserFrame } from '@/components/ui/BrowserFrame'
 import { InViewTransition } from '@/components/motion/InViewAnimation'
 import { Section } from '@/components/Section'
 import { cn } from '@/lib/cn'
@@ -43,14 +43,14 @@ const Project = () => {
                   {p.title}
                 </Text>
 
-                <DeviceFrame aspectRatio={(i + 1) % 3 === 0 ? '16/9' : '9/16'}>
+                <BrowserFrame variant={(i + 1) % 3 === 0 ? 'desktop' : 'mobile'} className='bg-white'>
                   <img
                     src={p.imgUrl}
-                    alt={`${p.title} mobile app`}
-                    className="h-full w-full object-top object-cover"
+                    alt={`${p.title} screenshot`}
+                    className="h-[480px] md:h-full w-full object-top object-contain md:object-cover"
                     loading="lazy"
                   />
-                </DeviceFrame>
+                </BrowserFrame>
 
                 <Text variant="lead" color="surface">
                   {p.description}
