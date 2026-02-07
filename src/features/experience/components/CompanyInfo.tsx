@@ -5,8 +5,7 @@ interface CompanyInfoProps {
   data: ExperienceData
 }
 
-export const CompanyInfo: React.FC<CompanyInfoProps> = ({ data }) => {
-  return (
+export const CompanyInfo = ({ data }: CompanyInfoProps) => (
     <section className="py-20 bg-[hsl(var(--surface-1))]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold font-display text-[hsl(var(--ink))] mb-4">
@@ -54,4 +53,3 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({ data }) => {
       </div>
     </section>
   )
-}

@@ -5,10 +5,7 @@ interface TechnicalContributionsProps {
   data: ExperienceData
 }
 
-export const TechnicalContributions: React.FC<TechnicalContributionsProps> = ({
-  data,
-}) => {
-  return (
+export const TechnicalContributions = ({ data }: TechnicalContributionsProps) => (
     <section className="py-20 bg-[hsl(var(--surface-1))]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mb-12">
@@ -74,4 +71,3 @@ export const TechnicalContributions: React.FC<TechnicalContributionsProps> = ({
       </div>
     </section>
   )
-}

@@ -4,8 +4,7 @@ interface KeyTakeawaysProps {
   data: ExperienceData
 }
 
-export const KeyTakeaways: React.FC<KeyTakeawaysProps> = ({ data }) => {
-  return (
+export const KeyTakeaways = ({ data }: KeyTakeawaysProps) =>   (
     <section className="py-20 bg-[hsl(var(--surface-1))]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="p-12 rounded-3xl bg-[hsl(var(--surface-2))]">
@@ -40,4 +39,3 @@ export const KeyTakeaways: React.FC<KeyTakeawaysProps> = ({ data }) => {
       </div>
     </section>
   )
-}

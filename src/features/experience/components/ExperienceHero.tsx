@@ -8,8 +8,7 @@ interface ExperienceHeroProps {
   data: ExperienceData
 }
 
-const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
-  return (
+const ExperienceHeroComponent = ({ data }: ExperienceHeroProps) => (
     <div
       className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-20 overflow-hidden"
       style={{
@@ -62,6 +61,5 @@ const ExperienceHeroComponent: React.FC<ExperienceHeroProps> = ({ data }) => {
       </div>
     </div>
   )
-}
 
 export const ExperienceHero = React.memo(ExperienceHeroComponent)

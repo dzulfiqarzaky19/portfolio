@@ -4,8 +4,7 @@ interface BusinessImpactProps {
   data: ExperienceData
 }
 
-export const BusinessImpact: React.FC<BusinessImpactProps> = ({ data }) => {
-  return (
+export const BusinessImpact = ({ data }: BusinessImpactProps) => (
     <section className="py-20 bg-[hsl(var(--primary))] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold font-display mb-4">
@@ -22,7 +21,7 @@ export const BusinessImpact: React.FC<BusinessImpactProps> = ({ data }) => {
               className="group relative overflow-hidden rounded-2xl bg-black/20 border border-white/10 hover:border-white/30 transition-all text-left"
             >
               <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent z-10" />
-              {/* Placeholder for Image - in real implementation this would be an img tag */}
+
               <div className="h-40 w-full bg-white/5 group-hover:bg-white/10 transition-colors" />
 
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
@@ -40,4 +39,3 @@ export const BusinessImpact: React.FC<BusinessImpactProps> = ({ data }) => {
       </div>
     </section>
   )
-}

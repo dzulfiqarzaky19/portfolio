@@ -7,8 +7,7 @@ interface RoleOverviewProps {
   data: ExperienceData
 }
 
-export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
-  return (
+export const RoleOverview = ({ data }: RoleOverviewProps) =>   (
     <section className="py-20 bg-[hsl(var(--primary)/0.05)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
@@ -57,4 +56,3 @@ export const RoleOverview: React.FC<RoleOverviewProps> = ({ data }) => {
       </div>
     </section>
   )
-}
