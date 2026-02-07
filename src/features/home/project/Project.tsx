@@ -43,7 +43,7 @@ const Project = () => {
                   {p.title}
                 </Text>
 
-                <BrowserFrame variant={(i + 1) % 3 === 0 ? 'desktop' : 'mobile'} className='bg-[hsl(var(--surface-0))]'>
+                <BrowserFrame variant={(i + 1) % 3 === 0 ? 'desktop' : 'mobile'} className='bg-[hsl(var(--surface-0))]' isHome>
                   <img
                     src={p.imgUrl}
                     alt={`${p.title} screenshot`}
