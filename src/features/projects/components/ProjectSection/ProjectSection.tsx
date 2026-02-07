@@ -74,6 +74,7 @@ const ProjectSectionComponent = ({ section, index }: ProjectSectionProps) => {
                   ? 'h-auto'
                   : 'aspect-video',
               )}
+              codeLanguage={section.codeLanguage}
               contentClassName="p-0 pt-0"
             >
               <ContentInner section={section} />
@@ -88,6 +89,7 @@ const ProjectSectionComponent = ({ section, index }: ProjectSectionProps) => {
                   ? 'h-auto'
                   : 'aspect-video',
               )}
+              codeLanguage={section.codeLanguage}
               contentClassName="p-0 pt-0"
             >
               <ContentInner section={section} />

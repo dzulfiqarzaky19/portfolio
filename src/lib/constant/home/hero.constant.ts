@@ -1,7 +1,8 @@
 import {
-  CHAT_SNAP,
-  EMPLOYEES_20K,
-  PRADA_CLONE,
+  ANGULAR_EMS,
+  BULK_IMPORT,
+  ECOMMERCE,
+  KANBAN_BOARD,
   WEB_NOVEL,
 } from './project.constant'
 
@@ -20,10 +21,11 @@ const ABOUT_ME = {
 
 const HOME_HERO = [
   ABOUT_ME,
-  EMPLOYEES_20K,
-  CHAT_SNAP,
+  BULK_IMPORT,
+  KANBAN_BOARD,
   WEB_NOVEL,
-  PRADA_CLONE,
+  ECOMMERCE,
+  ANGULAR_EMS,
   ABOUT_ME,
 ]
 

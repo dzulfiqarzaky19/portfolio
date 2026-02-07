@@ -10,18 +10,19 @@ export interface ProjectSectionContent {
 export interface ProjectSection {
   id: string
   type:
-    | 'challenge'
-    | 'folder-structure'
-    | 'caching'
-    | 'metrics'
-    | 'lessons'
-    | 'cta'
-    | 'flow'
+  | 'challenge'
+  | 'folder-structure'
+  | 'caching'
+  | 'metrics'
+  | 'lessons'
+  | 'cta'
+  | 'flow'
   number?: string
   heading: string
   description?: string
   image?: string
   codeSnippet?: string
+  codeLanguage?: string
   imageAlt?: string
   isTilted?: boolean
   content?: ProjectSectionContent

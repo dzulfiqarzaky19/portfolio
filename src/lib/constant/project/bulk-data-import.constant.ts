@@ -1,9 +1,9 @@
 import type { ProjectData } from '@/lib/types/project'
 
-export const EMPLOYEES_20K_PROJECT: ProjectData = {
-  id: 'employees-20k',
-  tag: 'FULL STACK HR DASHBOARD',
-  title: 'Employees 20k',
+export const BULK_IMPORT_PROJECT: ProjectData = {
+  id: 'bulk-data-import',
+  tag: 'HIGH VOLUME DATA PROCESSING',
+  title: 'Bulk Data Import',
   subtitle:
     'A high-performance HR dashboard designed to handle 20,000+ employee records without lag, featuring real-time updates and seamless virtualization.',
   description:
@@ -56,6 +56,7 @@ export const EMPLOYEES_20K_PROJECT: ProjectData = {
 ├── context/            # Global app state (Auth, Theme)
 ├── lib/                # Utilities
 └── pages/              # Route entry points`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -98,6 +99,7 @@ export const EMPLOYEES_20K_PROJECT: ProjectData = {
 - BullMQ: Redis queue with priority support
 - PostgreSQL 15: ACID compliance for employee data
 - Socket.IO: Bidirectional real-time updates`,
+      codeLanguage: 'Plain Text',
       content: {
         bullets: [
           {
@@ -137,6 +139,7 @@ export const EMPLOYEES_20K_PROJECT: ProjectData = {
 │   └── import.worker.ts
 ├── routes/             # API Definitions
 └── index.ts`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -183,6 +186,7 @@ export const EMPLOYEES_20K_PROJECT: ProjectData = {
     </div>
   ))}
 </div>`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -231,6 +235,7 @@ for await (const record of parser) {
     batch = [];
   }
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -347,6 +352,7 @@ it('renders only visible rows', () => {
   const rows = screen.getAllByRole('row');
   expect(rows.length).toBeLessThan(50); // Not 20k!
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {

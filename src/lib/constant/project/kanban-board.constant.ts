@@ -1,9 +1,9 @@
 import type { ProjectData } from '@/lib/types/project'
 
-export const TRELLO_CLONE_PROJECT: ProjectData = {
-  id: 'trello-clone',
+export const KANBAN_BOARD_PROJECT: ProjectData = {
+  id: 'kanban-board',
   tag: 'FULL STACK PROJECT',
-  title: 'Trello Clone',
+  title: 'Kanban Board',
   subtitle:
     'A collaborative Kanban-style project management platform with real-time updates and optimistic UI.',
   description:
@@ -54,6 +54,7 @@ export const TRELLO_CLONE_PROJECT: ProjectData = {
 - PostgreSQL: ACID compliance + RLS
 - Zod: Runtime validation + type inference
 - Vitest > Jest: 10x faster test execution`,
+      codeLanguage: 'Plain Text',
       content: {
         bullets: [
           {
@@ -111,6 +112,7 @@ export const TRELLO_CLONE_PROJECT: ProjectData = {
     ├── supabase/           # Supabase client setup
     ├── rpc.ts              # Hono RPC client
     └── session-middleware.ts`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -166,6 +168,7 @@ app.post('/', sessionMiddleware, async (c) => {
   
   return c.json({ data: result.data });
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -210,6 +213,7 @@ export const client = hc<TAppRoutes>(url);
 const response = await client.api.projects.$post({
   form: { name: 'New Project', workspaceId: '123' }
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -350,6 +354,7 @@ openModal({
   children: <WorkspaceForm />,
   config: { className: 'sm:max-w-2xl' }
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -401,6 +406,7 @@ const { mutate } = useMutation({
     queryClient.invalidateQueries({ queryKey: ['tasks', projectId] });
   },
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -455,6 +461,7 @@ it('creates project with valid input', async () => {
   expect(result.ok).toBe(true);
   expect(result.data).toHaveProperty('id');
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {

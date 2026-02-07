@@ -1,9 +1,9 @@
 import type { ProjectData } from '@/lib/types/project'
 
-export const ECOMMERCE_DASHBOARD_PROJECT: ProjectData = {
-  id: 'ecommerce-dashboard',
+export const ECOMMERCE_PROJECT: ProjectData = {
+  id: 'ecommerce',
   tag: 'FULL STACK ANALYTICS PLATFORM',
-  title: 'Magpie: E-commerce Analytics Dashboard',
+  title: 'E-commerce Analytics',
   subtitle:
     'Real-time e-commerce analytics dashboard with time-series analysis and automated data synchronization.',
   description:
@@ -53,6 +53,7 @@ export const ECOMMERCE_DASHBOARD_PROJECT: ProjectData = {
 - shadcn/ui + Tailwind CSS: Accessible, customizable components
 - recharts ^2.15.4: Declarative charting library
 - tsx ^4.21.0: Zero-config TypeScript execution`,
+      codeLanguage: 'Plain Text',
       content: {
         bullets: [
           {
@@ -81,7 +82,7 @@ export const ECOMMERCE_DASHBOARD_PROJECT: ProjectData = {
       description:
         'Service-Repository pattern adaptation with clear separation between database access, business logic, and presentation layers.',
       isTilted: false,
-      codeSnippet: `magpie/
+      codeSnippet: `ecommerce/
 ├── prisma/
 │   └── schema.prisma          # Database schema 
 ├── scripts/
@@ -119,6 +120,7 @@ export const ECOMMERCE_DASHBOARD_PROJECT: ProjectData = {
 │   │   └── product.ts         # Product CRUD + sync
 │   └── trigger/
 │       └── ecommerceSync.ts   # Hourly background job`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -214,6 +216,7 @@ model OrderItem {
   
   @@unique([orderId, productId])
 }`,
+      codeLanguage: 'Prisma',
       content: {
         bullets: [
           {
@@ -259,6 +262,7 @@ model OrderItem {
   getSalesHistory(),
   getLastSyncedTime()
 ])`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -311,6 +315,7 @@ model OrderItem {
   
   return { hourly };
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -339,7 +344,7 @@ model OrderItem {
       description:
         'Elegant DRY approach to fetching current and previous period metrics simultaneously for percentage change calculations.',
       isTilted: true,
-      image: '/images/magpie-metrics.webp',
+      image: '/images/ecommerce-metrics.webp',
       codeSnippet: `// src/services/metrics.ts
 export const getDashboardMetrics = async () => {
   const now = new Date();
@@ -358,6 +363,7 @@ export const getDashboardMetrics = async () => {
   
   return { revenue, orders, averageOrder, rating };
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         highlights: [
           {
@@ -398,6 +404,7 @@ export const getDashboardMetrics = async () => {
   
   return orders;
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -426,7 +433,7 @@ export const getDashboardMetrics = async () => {
       description:
         'Automated data synchronization using Trigger.dev to fetch from mock API, generate synthetic data, and update the database every hour.',
       isTilted: true,
-      image: '/images/magpie-trigger.webp',
+      image: '/images/ecommerce-trigger.webp',
       codeSnippet: `// src/trigger/ecommerceSync.ts
 import { task } from "@trigger.dev/sdk/v3";
 
@@ -453,6 +460,7 @@ export const scheduledSync = schedules.create({
   task: "ecommerce-sync",
   cron: "0 * * * *" // Every hour
 });`,
+      codeLanguage: 'TypeScript',
       content: {
         steps: [
           {
@@ -504,6 +512,7 @@ export const revalidate = 300; // 5 minutes
 // Bundle Size
 // - date-fns: Tree-shakeable (only imports used functions)
 // - shadcn/ui: Components copied to src/, no runtime dependency`,
+      codeLanguage: 'TypeScript',
       content: {
         highlights: [
           {
@@ -548,6 +557,7 @@ export const revalidate = 300; // 5 minutes
 // Coverage Goals
 // - Critical: services/, lib/utils/ (>80% coverage)
 // - Nice-to-have: Components (>60% coverage)`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {

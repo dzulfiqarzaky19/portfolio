@@ -70,6 +70,7 @@ export const ANGULAR_EMS_PROJECT: ProjectData = {
     │   └── typography/        # Text variants (h1-h6)
     └── models/
         └── employee.model.ts  # Type definitions`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -106,6 +107,7 @@ readonly allEmployees = this.employees.asReadonly();
 
 // Direct access, auto-tracked
 employees()`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -158,6 +160,7 @@ employees()`,
     return this.sortedList().slice(start, start + pageSize);
   });
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -235,6 +238,7 @@ employees()`,
 
 // Usage
 <app-select-input formControlName="group" [options]="groups" />`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -267,6 +271,7 @@ employees()`,
   e.username.toLowerCase().includes(s.searchTermName.toLowerCase()) ||
   \`\${e.firstName} \${e.lastName}\`.toLowerCase().includes(s.searchTermName.toLowerCase()) ||
   e.email.toLowerCase().includes(s.searchTermName.toLowerCase());`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -296,6 +301,7 @@ employees()`,
     ? true 
     : inject(Router).createUrlTree(['/login']);
 };`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -356,6 +362,7 @@ employees()`,
   "noFallthroughCasesInSwitch": true,
   "strictTemplates": true
 }`,
+      codeLanguage: 'JSON',
       content: {
         bullets: [
           {
@@ -389,6 +396,7 @@ employees()`,
 // - Search: < 5ms
 // - Filter + Sort: < 10ms
 // - Pagination: < 1ms`,
+      codeLanguage: 'TypeScript',
       content: {
         cards: [
           {
@@ -433,6 +441,7 @@ Coverage Goals:
 - Statements: > 80%
 - Branches: > 75%
 - Functions: > 80%`,
+      codeLanguage: 'Plain Text',
       content: {
         bullets: [
           {
@@ -470,6 +479,7 @@ get hasError(): boolean | null {
 // Why dirty || touched?
 // - Don't show errors immediately (scary)
 // - Show after interaction (helpful)`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -510,6 +520,7 @@ Password: admin
 # Development Workflow
 npm run format     # Prettier auto-format
 npm test           # Jasmine + Karma tests`,
+      codeLanguage: 'Bash',
       content: {
         bullets: [
           {

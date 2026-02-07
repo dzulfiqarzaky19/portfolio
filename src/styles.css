@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
 :root {
-  /* font tokens */
   --font-sans:
     'Inter var', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, 'Noto Sans';
@@ -10,13 +9,11 @@
     'Liberation Mono', 'Courier New', monospace;
   --font-display: 'Cal Sans';
 
-  /* Surfaces (layered from darkest to lightest) */
   --surface-0: 0 0% 100%;   /* Pure white - cards, modals, elevated */
   --surface-1: 0 0% 98%;    /* #fafafa - page background */
   --surface-2: 0 0% 96%;    /* #f5f5f5 - secondary/muted bg */
   --surface-3: 0 0% 92%;    /* #ebebeb - hover states */
   
-  /* Borders */
   --border: 0 0% 89%;       /* #e3e3e3 */
   --border-subtle: 0 0% 94%; /* Lighter borders */
   
@@ -39,24 +36,28 @@
 
   --color--slider: 0 0% 98%;
 
-  /* Feedback (used for traffic lights, alerts) */
+  /* Language Colors */
+  --lang-ts: 211 60% 48%;    /* TypeScript Blue */
+  --lang-js: 45 93% 47%;     /* JavaScript Yellow */
+  --lang-json: 25 95% 53%;   /* JSON Orange */
+  --lang-bash: 142 71% 45%;  /* Bash Green */
+  --lang-dir: 220 13% 65%;   /* Directory Slate */
+  --lang-prisma: 176 60% 40%; /* Prisma Teal */
+
   --success: 142 71% 45%;   /* Green */
   --warning: 38 92% 50%;    /* Yellow/Amber */
   --danger: 0 84% 60%;      /* Red */
 
-  /* Focus */
   --focus: 255 80% 48%;
   --focus-ring: 0 0% 0% / 0.2;
 }
 
 [data-theme='dark'] {
-  /* Surfaces (softer dark - layered) */
   --surface-0: 0 0% 14%;    /* #242424 - cards, modals */
   --surface-1: 0 0% 10%;    /* #1a1a1a - page background */
   --surface-2: 0 0% 18%;    /* #2e2e2e - secondary bg */
   --surface-3: 0 0% 22%;    /* #383838 - hover states */
   
-  /* Borders */
   --border: 0 0% 26%;       /* #424242 */
   --border-subtle: 0 0% 20%;
   

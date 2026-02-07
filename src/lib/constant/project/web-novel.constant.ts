@@ -71,6 +71,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
 ├── interfaces/
 ├── utils/
 └── index.ts`,
+      codeLanguage: 'Directory',
       content: {
         bullets: [
           {
@@ -106,6 +107,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
 - TanStack Query: Stale-while-revalidate caching
 - Emotion: Runtime theme switching (Light/Dark)
 - Vitest > Jest: 10x faster test execution`,
+      codeLanguage: 'Plain Text',
       content: {
         bullets: [
           {
@@ -153,6 +155,7 @@ export const WEB_NOVEL_PROJECT: ProjectData = {
         ]
     }
 ]`,
+      codeLanguage: 'JavaScript',
       content: {
         bullets: [
           {
@@ -208,6 +211,7 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
     }
   });
 }`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -328,6 +332,7 @@ vi.mock('@tanstack/react-router', async (importOriginal) => {
 const fixture = fs.readFileSync('./fixtures/chapter.html');
 const result = chapterParser(fixture);
 expect(result.content).toBeDefined();`,
+      codeLanguage: 'TypeScript',
       content: {
         bullets: [
           {
@@ -376,6 +381,7 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
     page.on('request', block);
 }
             `,
+      codeLanguage: 'TypeScript',
       content: {
         cards: [
           {

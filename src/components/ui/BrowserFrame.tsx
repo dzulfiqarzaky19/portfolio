@@ -1,5 +1,6 @@
 import { Text } from './Text'
 import { cn } from '@/lib/cn'
+import { getLanguageColor } from '@/lib/language-colors'
 
 interface BrowserFrameProps {
   children?: React.ReactNode
@@ -24,7 +25,7 @@ export const BrowserFrame = ({
     className={cn(
       'shadow-2xl overflow-hidden relative group flex flex-col',
       variant === 'mobile' && 'max-w-xs mx-auto aspect-9/16 rounded-4xl md:rounded-[2.5rem] bg-[hsl(var(--ink))] p-1 md:p-2 ring-1 ring-[hsl(var(--border))]',
-      variant === 'desktop' && 'w-full aspect-video rounded-xl bg-[hsl(var(--surface-0))] border border-[hsl(var(--border))]',
+      variant === 'desktop' && `w-full ${!codeLanguage ? 'aspect-video' : ''} rounded-xl bg-[hsl(var(--surface-0))] border border-[hsl(var(--border))]`,
       className,
     )}
   >
@@ -46,9 +47,7 @@ export const BrowserFrame = ({
           <div className="ml-auto px-4">
             <span className={cn(
               'text-xs px-2 py-0.5 rounded',
-              codeLanguage === 'JavaScript' 
-                ? 'bg-[hsl(var(--warning)/0.15)] text-[hsl(var(--warning))]' 
-                : 'bg-[hsl(var(--primary)/0.15)] text-[hsl(var(--primary))]',
+              getLanguageColor(codeLanguage)
             )}>
               {codeLanguage}
             </span>
