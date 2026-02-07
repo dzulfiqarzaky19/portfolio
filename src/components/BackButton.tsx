@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
+import { ThemeToggle } from './ThemeToggle'
 import { cn } from '@/lib/cn'
 
 interface BackButtonProps {
@@ -17,6 +18,7 @@ export const BackButton: React.FC<BackButtonProps> = ({
   className,
 }) => {
   return (
+    <>
     <Link
       to={to}
       className={cn(
@@ -30,5 +32,10 @@ export const BackButton: React.FC<BackButtonProps> = ({
       <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
       {label}
     </Link>
+    
+    <div className="absolute top-7 right-6 lg:right-8 z-10">
+      <ThemeToggle/>
+    </div>
+    </>
   )
 }

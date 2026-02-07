@@ -1,8 +1,8 @@
 import { Moon, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/Button'
+import { MotionButton } from '@/components/ui/Button'
 
-export function ThemeToggle() {
+export const ThemeToggle = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
@@ -24,17 +24,20 @@ export function ThemeToggle() {
   }
 
   return (
-    <Button
+    <MotionButton
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
       aria-label="Toggle theme"
+      className='hover:cursor-pointer'
+      whileHover={{ scale: 1.1, rotate: 10 }}
+      whileTap={{ scale: 0.9 }}
     >
       {theme === 'light' ? (
         <Sun className="h-5 w-5" />
       ) : (
         <Moon className="h-5 w-5" />
       )}
-    </Button>
+    </MotionButton>
   )
 }
