@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useContainerHeight } from '@/lib/hooks/useContainerHeight'
 import { useHorizontalScroll } from '@/lib/hooks/useHorizontalScroll'
-import { cn } from '@/lib/cn'
 
 interface IHorizontalScrollProps {
   slides: number
@@ -15,17 +14,21 @@ export const HorizontalScroll = ({
   children,
 }: IHorizontalScrollProps) => {
   const { containerChildRef, containerHeight } = useContainerHeight(slides)
-  const [isDesktop, setIsDesktop] = useState(true) // Default to true or check window
+  
+  // Initialize based on window width to avoid hydration mismatch if possible, or default to true
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 1024
+    }
+    return true
+  })
 
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024)
     }
 
-    handleResize()
-
     window.addEventListener('resize', handleResize)
-
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -35,24 +38,25 @@ export const HorizontalScroll = ({
     to: ['0%', `-${lastSlides}%`],
   })
 
+  if (!isDesktop) {
+    return <>{children}</>
+  }
+
   return (
     <div
       className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen"
       ref={scrollerRef}
       style={{
-        height: isDesktop ? `${containerHeight}px` : 'auto',
+        height: `${containerHeight}px`,
       }}
     >
       <div
         ref={containerChildRef}
-        className={cn(
-          'overflow-x-hidden',
-          isDesktop ? 'sticky top-0' : 'relative',
-        )}
+        className="overflow-x-hidden sticky top-0"
       >
         <motion.div
-          className={cn('flex', isDesktop ? 'flex-row' : 'flex-col')}
-          style={{ x: isDesktop ? x : 0 }}
+          className="flex flex-row"
+          style={{ x }}
         >
           {children}
         </motion.div>
