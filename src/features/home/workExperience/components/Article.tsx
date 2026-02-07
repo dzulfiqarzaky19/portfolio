@@ -63,7 +63,7 @@ export const Article = ({ experience, i }: Props) => {
           </div>
 
           <div className="w-full lg:w-1/2 max-w-xl">
-            <BrowserFrame variant="desktop" isHome className='bg-[hsl(var(--surface-0))] border-[hsl(var(--border-subtle))]'>
+            <BrowserFrame variant="desktop" className='bg-[hsl(var(--surface-0))] border-[hsl(var(--border-subtle))]'>
               <img
                 src={experience.imgUrl}
                 alt={`${experience.title} screenshot`}

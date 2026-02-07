@@ -74,6 +74,7 @@ const ProjectSectionComponent = ({ section, index }: ProjectSectionProps) => {
                   ? 'h-auto'
                   : 'aspect-video',
               )}
+              isZoomable
               codeLanguage={section.codeLanguage}
               contentClassName="p-0 pt-0"
             >
@@ -89,6 +90,7 @@ const ProjectSectionComponent = ({ section, index }: ProjectSectionProps) => {
                   ? 'h-auto'
                   : 'aspect-video',
               )}
+              isZoomable
               codeLanguage={section.codeLanguage}
               contentClassName="p-0 pt-0"
             >

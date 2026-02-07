@@ -11,7 +11,7 @@ interface BrowserFrameProps {
   codeLanguage?: string
   note?: string
   variant?: 'desktop' | 'mobile'
-  isHome?: boolean
+  isZoomable?: boolean
 }
 
 export const BrowserFrame = ({
@@ -22,21 +22,20 @@ export const BrowserFrame = ({
   codeLanguage,
   note,
   variant = 'desktop',
-  isHome = false,
+  isZoomable = false,
 }: BrowserFrameProps) => {
-  const Component = isHome ? 'div' : motion.div
-  const motionProps = isHome ? {} : {
+  const Component = isZoomable ? motion.div : 'div'
+  const motionProps = isZoomable ? {
     whileHover: { scale: codeLanguage ? 1.5 : 2.0, y: -100, zIndex: 100 },
     transition: { duration: 0.3 }
-  }
+  } : {}
 
   return (
-    // @ts-ignore - Dynamic component props typing is tricky
     <Component
       {...motionProps}
       className={cn(
         'shadow-2xl overflow-hidden relative group flex flex-col',
-        !isHome && 'cursor-zoom-in',
+        isZoomable && 'cursor-zoom-in',
         variant === 'mobile' && 'max-w-xs mx-auto aspect-9/16 rounded-4xl md:rounded-[2.5rem] bg-[hsl(var(--ink))] p-1 md:p-2 ring-1 ring-[hsl(var(--border))]',
         variant === 'desktop' && `w-full ${!codeLanguage ? 'aspect-video' : ''} rounded-xl bg-[hsl(var(--surface-0))] border border-[hsl(var(--border))]`,
         className,
