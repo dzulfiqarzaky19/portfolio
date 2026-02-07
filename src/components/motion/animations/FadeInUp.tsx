@@ -1,6 +1,5 @@
-import { motion } from 'motion/react'
-import React from 'react'
-import type { HTMLMotionProps } from 'motion/react'
+import { motion  } from 'motion/react'
+import type {HTMLMotionProps} from 'motion/react';
 import { cn } from '@/lib/cn'
 
 interface FadeInUpProps extends HTMLMotionProps<'div'> {
@@ -10,7 +9,7 @@ interface FadeInUpProps extends HTMLMotionProps<'div'> {
   className?: string
 }
 
-export const FadeInUp: React.FC<FadeInUpProps> = ({
+export const FadeInUp = ({
   children,
   delay = 0,
   distance = 20,
@@ -19,7 +18,7 @@ export const FadeInUp: React.FC<FadeInUpProps> = ({
   animate,
   transition,
   ...props
-}) => (
+}: FadeInUpProps) => (
   <motion.div
     initial={initial || { opacity: 0, y: distance }}
     animate={animate || { opacity: 1, y: 0 }}

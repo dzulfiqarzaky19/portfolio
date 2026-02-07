@@ -21,11 +21,9 @@ export const SliderCardMotion: React.FC<SliderCardMotionProps> = ({
 }) => {
   const isHorizontal = direction === 'x'
 
-  // Position offset based on direction
   const baseOffset = isMobile ? (isHorizontal ? 60 : 100) : isHorizontal ? 180 : 150
   const position = offset * baseOffset
 
-  // Shared animation values
   const scale = isCenter
     ? isHorizontal
       ? 1
@@ -42,7 +40,6 @@ export const SliderCardMotion: React.FC<SliderCardMotionProps> = ({
   const z = isCenter ? 30 : 10
   const rotation = offset * (isHorizontal ? 5 : -10)
 
-  // Direction-specific animation props
   const animateProps = isHorizontal
     ? { x: position, rotateY: rotation }
     : { y: position, rotateX: rotation }

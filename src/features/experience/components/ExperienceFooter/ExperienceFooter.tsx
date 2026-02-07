@@ -32,7 +32,7 @@ export const ExperienceFooter = ({ currentExperienceId }: ExperienceFooterProps)
         itemLabel="experience"
         getItemName={(exp) => exp.company.name}
         onIndexChange={(experience) => {
-          if (experience.theme?.gradient) {
+          if (experience.theme.gradient) {
             setCurrentGradient(experience.theme.gradient)
           }
         }}
