@@ -54,7 +54,7 @@ export const Article = ({ experience, i }: Props) => {
                   experienceId:
                     experience.detailUrl?.split('/').pop() ?? 'raiz',
                 }}
-                className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
+                className="inline-flex items-center gap-2 rounded-lg bg-[hsl(var(--surface-0))] px-4 py-2 text-[hsl(var(--ink))] ring-1 ring-[hsl(var(--border))] hover:bg-[hsl(var(--surface-2))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
               >
                 Learn More
                 <span aria-hidden>↗</span>
@@ -63,7 +63,7 @@ export const Article = ({ experience, i }: Props) => {
           </div>
 
           <div className="w-full lg:w-1/2 max-w-xl">
-            <BrowserFrame variant="desktop" className='bg-white border-white/50'>
+            <BrowserFrame variant="desktop" className='bg-[hsl(var(--surface-0))] border-[hsl(var(--border-subtle))]'>
               <img
                 src={experience.imgUrl}
                 alt={`${experience.title} screenshot`}

@@ -23,20 +23,20 @@ export const BrowserFrame = ({
   <div
     className={cn(
       'shadow-2xl overflow-hidden relative group flex flex-col',
-      variant === 'mobile' && 'max-w-xs mx-auto aspect-9/16 rounded-[2rem] md:rounded-[2.5rem] bg-black p-1 md:p-2 ring-1 ring-white/10',
+      variant === 'mobile' && 'max-w-xs mx-auto aspect-9/16 rounded-4xl md:rounded-[2.5rem] bg-[hsl(var(--ink))] p-1 md:p-2 ring-1 ring-[hsl(var(--border))]',
       variant === 'desktop' && 'w-full aspect-video rounded-xl bg-[hsl(var(--surface-0))] border border-[hsl(var(--border))]',
       className,
     )}
   >
     {variant === 'desktop' && (
       <div className="flex items-center gap-1.5 px-4 py-3 shrink-0 border-b border-[hsl(var(--border))]">
-        <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-        <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[hsl(var(--danger))]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[hsl(var(--warning))]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[hsl(var(--success))]" />
         
         {searchText && (
-          <div className="ml-3 h-5 px-3 bg-gray-100 rounded flex items-center justify-center">
-            <span className="text-[10px] text-gray-400 font-medium truncate max-w-[150px]">
+          <div className="ml-3 h-5 px-3 bg-[hsl(var(--surface-2))] rounded flex items-center justify-center">
+            <span className="text-[10px] text-[hsl(var(--ink-subtle))] font-medium truncate max-w-[150px]">
               {searchText}
             </span>
           </div>
@@ -47,8 +47,8 @@ export const BrowserFrame = ({
             <span className={cn(
               'text-xs px-2 py-0.5 rounded',
               codeLanguage === 'JavaScript' 
-                ? 'bg-yellow-100 text-yellow-700' 
-                : 'bg-blue-100 text-blue-700',
+                ? 'bg-[hsl(var(--warning)/0.15)] text-[hsl(var(--warning))]' 
+                : 'bg-[hsl(var(--primary)/0.15)] text-[hsl(var(--primary))]',
             )}>
               {codeLanguage}
             </span>
@@ -57,11 +57,9 @@ export const BrowserFrame = ({
       </div>
     )}
 
-    
-
     <div className={cn(
       'flex-1 overflow-hidden',
-      variant === 'mobile' && 'rounded-4xl bg-white',
+      variant === 'mobile' && 'rounded-4xl bg-[hsl(var(--surface-0))]',
       contentClassName,
     )}>
       {children}
@@ -74,4 +72,3 @@ export const BrowserFrame = ({
     </div>
   </div>
 )
-

@@ -43,7 +43,7 @@ const Project = () => {
                   {p.title}
                 </Text>
 
-                <BrowserFrame variant={(i + 1) % 3 === 0 ? 'desktop' : 'mobile'} className='bg-white'>
+                <BrowserFrame variant={(i + 1) % 3 === 0 ? 'desktop' : 'mobile'} className='bg-[hsl(var(--surface-0))]'>
                   <img
                     src={p.imgUrl}
                     alt={`${p.title} screenshot`}
@@ -62,7 +62,7 @@ const Project = () => {
                     params={{
                       projectId: p.detailUrl.split('/').pop() ?? '',
                     }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-white ring-1 ring-white/20 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
+                    className="inline-flex items-center gap-2 rounded-lg bg-[hsl(var(--surface-0))] px-4 py-2 text-[hsl(var(--ink))] ring-1 ring-[hsl(var(--border))] hover:bg-[hsl(var(--surface-2))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--focus))]"
                   >
                     View Case Study
                     <span aria-hidden>↗</span>

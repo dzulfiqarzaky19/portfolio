@@ -16,7 +16,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
     className={cn(
       'w-full transition-all duration-500',
       'aspect-10/16 sm:aspect-16/10',
-      'rounded-[24px] md:rounded-[40px] bg-white border-white/50',
+      'rounded-[24px] md:rounded-[40px] bg-[hsl(var(--surface-0))] border-[hsl(var(--border-subtle))]',
     )}
     contentClassName="p-4 sm:p-6 md:p-8 lg:p-10 h-full overflow-hidden"
   >
@@ -24,7 +24,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
       <FadeInUp animate={{ opacity: 0.6 }} className="mb-4 sm:mb-5 md:mb-6">
         <Badge
           variant="custom"
-          className="border border-blue-500/50 bg-blue-50 text-blue-700"
+          className="border border-[hsl(var(--primary)/0.5)] bg-[hsl(var(--primary)/0.1)] text-[hsl(var(--primary))]"
         >
           {project.tag}
         </Badge>
@@ -33,7 +33,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
       <Text
         variant="display"
         className={cn(
-          'font-display transition-all duration-500 text-gray-900',
+          'font-display transition-all duration-500 text-[hsl(var(--ink))]',
           isCenter
             ? 'mb-3 sm:mb-4 md:mb-6 text-xl sm:text-2xl md:text-4xl'
             : 'mb-0 text-lg md:text-2xl opacity-60',
@@ -47,7 +47,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
         className="flex flex-col flex-1 w-full min-h-0"
         initial={{ opacity: 0, y: 10 }}
       >
-        <Text className="text-xs sm:text-sm md:text-lg text-gray-600 mb-4 sm:mb-6 md:mb-8 line-clamp-2 sm:line-clamp-3 max-w-2xl leading-relaxed">
+        <Text className="text-xs sm:text-sm md:text-lg text-[hsl(var(--ink-subtle))] mb-4 sm:mb-6 md:mb-8 line-clamp-2 sm:line-clamp-3 max-w-2xl leading-relaxed">
           {project.subtitle}
         </Text>
 
@@ -57,7 +57,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
           <Link
             to="/projects/$projectId"
             params={{ projectId: project.id }}
-            className="w-full sm:w-auto text-center px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-gray-900 text-white text-xs md:text-sm font-bold hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            className="w-full sm:w-auto text-center px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-[hsl(var(--ink))] text-[hsl(var(--surface-0))] text-xs md:text-sm font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Read Case Study
           </Link>
@@ -70,7 +70,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto text-center px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full border-2 border-gray-200 text-gray-700 text-xs md:text-sm font-bold hover:bg-gray-50 transition-all"
+                className="w-full sm:w-auto text-center px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full border-2 border-[hsl(var(--border))] text-[hsl(var(--ink-muted))] text-xs md:text-sm font-bold hover:bg-[hsl(var(--surface-2))] transition-all"
               >
                 {link.label}
               </a>
@@ -80,4 +80,3 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
     </div>
   </BrowserFrame>
 )
-
