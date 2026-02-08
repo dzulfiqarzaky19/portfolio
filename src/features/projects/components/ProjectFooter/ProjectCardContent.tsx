@@ -57,6 +57,7 @@ export const ProjectCardContent = ({ project, isCenter }: ProjectCardContentProp
           <Link
             to="/projects/$projectId"
             params={{ projectId: project.id }}
+            resetScroll={false}
             className="w-full sm:w-auto text-center px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-[hsl(var(--ink))] text-[hsl(var(--surface-0))] text-xs md:text-sm font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Read Case Study

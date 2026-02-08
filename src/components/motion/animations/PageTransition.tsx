@@ -5,23 +5,25 @@ import { cn } from '@/lib/cn'
 
 interface PageTransitionProps extends MotionProps {
   children: React.ReactNode
+  duration?: number
   className?: string
 }
 
 export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(({ 
   children, 
+  duration,
   className,
   ...props 
 }, ref) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: "100%" }}
+      initial={{ opacity: 1, y: "100%" }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: "-100%" }}
       transition={{ 
-        duration: 0.5, 
-        ease: [0.7, 0.3, 0.3, 0.7] 
+        duration: duration || 1, 
+        ease: [0.4, 0, 0.2, 1] 
       }}
       className={cn('w-full', className)}
       {...props}

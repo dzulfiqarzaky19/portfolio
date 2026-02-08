@@ -42,7 +42,7 @@ function ExperienceRoute() {
         mode="wait"
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <PageTransition key={experience.id}>
+        <PageTransition key={experience.id} duration={0.3}>
           <ExperienceLayout data={experience} />
         </PageTransition>
       </AnimatePresence>
