@@ -12,7 +12,9 @@ interface ExperienceLayoutProps {
 }
 
 export const ExperienceLayout = ({ data }: ExperienceLayoutProps) =>  (
-    <div className="min-h-screen bg-[hsl(var(--surface-1))] font-sans antialiased">
+    <div 
+      className="min-h-screen font-sans antialiased bg-transparent"
+    >
       <ExperienceHero data={data} />
       <CompanyInfo data={data} />
       <RoleOverview data={data} />

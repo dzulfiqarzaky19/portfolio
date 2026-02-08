@@ -434,6 +434,6 @@ if (PUPPETEER_CONFIG.assets.isBlocked) {
   ],
   theme: {
     primary: '#10B981', // Emerald-500
-    gradient: 'linear-gradient(135deg, #064E3B 0%, #10B981 100%)', // Emerald-900 to Emerald-500
+    gradient: 'linear-gradient(90deg, #064E3B 0%, #10B981 100%)', // Emerald-900 to Emerald-500
   },
 }

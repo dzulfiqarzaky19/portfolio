@@ -13,7 +13,7 @@ export const ProjectFooter = ({ currentProjectId }: ProjectFooterProps) => {
   const projects = uniqueProjects.filter((p) => p.id !== currentProjectId)
   
   const [currentGradient, setCurrentGradient] = useState(
-    projects[0]?.theme?.gradient || 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+    projects[0]?.theme?.gradient || 'linear-gradient(90deg, #1e293b 0%, #334155 100%)'
   )
 
   return (

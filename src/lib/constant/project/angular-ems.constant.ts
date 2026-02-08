@@ -585,6 +585,6 @@ npm test           # Jasmine + Karma tests`,
   ],
   theme: {
     primary: '#DC2626', // Red-600
-    gradient: 'linear-gradient(135deg, #7F1D1D 0%, #DC2626 100%)', // Red-900 to Red-600
+    gradient: 'linear-gradient(90deg, #7F1D1D 0%, #DC2626 100%)', // Red-900 to Red-600
   },
 }

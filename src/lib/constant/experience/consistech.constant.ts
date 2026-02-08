@@ -105,7 +105,7 @@ export const CONSISTECH: ExperienceData = {
   ],
   theme: {
     primary: '#6B46C1', // Generic Purple for Tech
-    gradient: 'linear-gradient(135deg, #3B82F6 0%, #6B46C1 100%)', // Blue to Purple
+    gradient: 'linear-gradient(90deg, #3B82F6 0%, #6B46C1 100%)', // Blue to Purple
   },
   cardImage: '/images/consistech.webp',
   codeLanguage: 'JavaScript',

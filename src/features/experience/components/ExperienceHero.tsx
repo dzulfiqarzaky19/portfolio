@@ -11,9 +11,6 @@ interface ExperienceHeroProps {
 const ExperienceHeroComponent = ({ data }: ExperienceHeroProps) => (
     <div
       className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-20 overflow-hidden"
-      style={{
-        background: data.theme.gradient,
-      }}
     >
       <BackButton variant="light" />
 

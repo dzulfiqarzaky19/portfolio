@@ -99,7 +99,7 @@ export const MANDIRI: ExperienceData = {
   ],
   theme: {
     primary: '#003D79',
-    gradient: 'linear-gradient(135deg, #FFB700 0%, #003D79 100%)', // Gold to Blue
+    gradient: 'linear-gradient(90deg, #FFB700 0%, #003D79 100%)', // Gold to Blue
   },
   cardImage: '/images/mandiri-kopra.webp',
   codeLanguage: 'JavaScript',

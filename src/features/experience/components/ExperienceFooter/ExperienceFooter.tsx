@@ -18,7 +18,7 @@ export const ExperienceFooter = ({ currentExperienceId }: ExperienceFooterProps)
     otherExperiences.length >= 2 ? otherExperiences : allExperiences
 
   const [currentGradient, setCurrentGradient] = useState(
-    experiences[0]?.theme?.gradient || 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+    experiences[0]?.theme?.gradient || 'linear-gradient(90deg, #1e293b 0%, #334155 100%)'
   )
 
   return (

@@ -425,6 +425,6 @@ it('renders only visible rows', () => {
   ],
   theme: {
     primary: '#3B82F6', // Blue-500
-    gradient: 'linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%)', // Blue-900 to Blue-500
+    gradient: 'linear-gradient(90deg, #1E3A8A 0%, #3B82F6 100%)', // Blue-900 to Blue-500
   },
 }

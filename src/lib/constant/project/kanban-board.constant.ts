@@ -516,6 +516,6 @@ it('creates project with valid input', async () => {
   ],
   theme: {
     primary: '#0284C7', // Sky-600
-    gradient: 'linear-gradient(135deg, #075985 0%, #0284C7 100%)', // Sky-900 to Sky-600
+    gradient: 'linear-gradient(90deg, #075985 0%, #0284C7 100%)', // Sky-900 to Sky-600
   },
 }

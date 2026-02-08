@@ -54,6 +54,7 @@ export const ExperienceCardContent = ({ experience }: ExperienceCardContentProps
           <Link
             to="/experience/$experienceId"
             params={{ experienceId: experience.id }}
+            resetScroll={false}
             className="group inline-flex items-center gap-2 px-6 py-3 md:px-4 md:py-2 lg:px-6 lg:py-3 rounded-full bg-[hsl(var(--ink))] text-[hsl(var(--surface-0))] text-sm md:text-xs lg:text-base font-medium hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
           >
             View Details

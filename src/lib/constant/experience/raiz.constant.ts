@@ -111,7 +111,7 @@ export const RAIZ_INVEST: ExperienceData = {
   ],
   theme: {
     primary: '#60C0A8', // Raiz green-ish
-    gradient: 'linear-gradient(135deg, #1E3A8A 0%, #60C0A8 100%)', // Deep blue to teal
+    gradient: 'linear-gradient(90deg, #1E3A8A 0%, #60C0A8 100%)', // Deep blue to teal
   },
   cardImage: '/images/raiz.webp',
   codeLanguage: 'TypeScript',

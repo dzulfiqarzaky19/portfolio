@@ -113,7 +113,7 @@ export const EDOT: ExperienceData = {
   ],
   theme: {
     primary: '#E01E26',
-    gradient: 'linear-gradient(135deg, #F8B400 0%, #E01E26 100%)',
+    gradient: 'linear-gradient(90deg, #F8B400 0%, #E01E26 100%)',
   },
   cardImage: '/images/edot.webp',
   codeLanguage: 'JavaScript',

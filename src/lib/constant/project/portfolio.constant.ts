@@ -23,6 +23,6 @@ export const PORTFOLIO_PROJECT: ProjectData = {
   sections: [], // Placeholder
   theme: {
     primary: '#10B981',
-    gradient: 'linear-gradient(135deg, #064e3b 0%, #059669 100%)',
+    gradient: 'linear-gradient(90deg, #064e3b 0%, #059669 100%)',
   },
 }
